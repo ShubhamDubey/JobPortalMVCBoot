@@ -86,7 +86,7 @@ public class Job {
 		this.advertiseDate = advertiseDate;
 	}
 	public String getExpireDate() {
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("dd/MM/yy");
 		return df.format(expireDate);
 	}
 	public void setExpireDate(Date expireDate) {
