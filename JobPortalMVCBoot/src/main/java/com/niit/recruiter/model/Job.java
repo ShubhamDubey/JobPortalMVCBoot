@@ -1,5 +1,7 @@
 package com.niit.recruiter.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -76,16 +78,19 @@ public class Job {
 	public void setVacancy(String vacancy) {
 		this.vacancy = vacancy;
 	}
-	public Date getAdvertiseDate() {
-		return advertiseDate;
+	public String getAdvertiseDate() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yy");
+		return df.format(advertiseDate);
 	}
 	public void setAdvertiseDate(Date advertiseDate) {
 		this.advertiseDate = advertiseDate;
 	}
-	public Date getExpireDate() {
-		return expireDate;
+	public String getExpireDate() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		return df.format(expireDate);
 	}
 	public void setExpireDate(Date expireDate) {
+		
 		this.expireDate = expireDate;
 	}
 	public String getLogo() {
