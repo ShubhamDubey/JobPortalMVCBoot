@@ -42,19 +42,33 @@ public class JobSeekerController {
 
 	@RequestMapping(value = "/showRegisterForm") // @RequestMapping using in the method level ,it has default GET method
 	public String showFormForAdd(ModelMap theModel) {
-
+		
 		theModel.addAttribute("jobseeker", new Users());
+		theModel.addAttribute("alreadyEmailIdExistsError");
+		
 		return "register"; // return model + view name
 	}
 
 	@PostMapping(value = "/saveJobSeeker")
-	public String saveCustomer(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
-		JobSeeker theJobSeeker = new JobSeeker();
+	public ModelAndView saveCustomer(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
+		ModelAndView modelView=null;
+		
+		if(loginUsersService.findByEmail(req.getParameter("email"))==null) 
+		{
+			JobSeeker theJobSeeker = new JobSeeker();
 		theJobSeeker.setFirstName(req.getParameter("firstName"));
 		theJobSeeker.setLastName(req.getParameter("lastName"));
 		theJobSeeker.setUsers(theUsers);
 		jobSeekerService.saveJobSeeker(theJobSeeker);
-		return "success";
+		modelView=new ModelAndView("sucess");
+		}
+		else
+		{
+			modelView=new ModelAndView("register");
+			modelView.addObject("jobseeker", new Users());
+			modelView.addObject("alreadyEmailIdExistsError","Email Id already Exists");
+		}
+		return modelView;
 	}
 
 	@RequestMapping(value = "showLoginForm") // @RequestMapping using in the method level ,it has default GET method

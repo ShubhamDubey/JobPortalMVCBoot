@@ -18,6 +18,10 @@ public class LoginUsersService {
 		// TODO Auto-generated method stub
 		return loginUserRepo.findByEmailAndPassword(theLoginUsers.getEmail(),theLoginUsers.getPassword());
 	}
+	public LoginUsers findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return loginUserRepo.findByEmail(email);
+	}
 
 
 

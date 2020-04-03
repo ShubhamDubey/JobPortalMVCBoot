@@ -13,4 +13,6 @@ import com.niit.recruiter.model.LoginUsers;
 public interface LoginUserRepository extends JpaRepository<LoginUsers,Integer > {
 
 	public LoginUsers findByEmailAndPassword(String email,String password);
+
+	public LoginUsers findByEmail(String email);
 }
