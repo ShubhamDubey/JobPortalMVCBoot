@@ -14,10 +14,10 @@ public class LoginUsersService {
 
 	@Autowired 
 	private LoginUserRepository loginUserRepo;
-	public LoginUsers checkUsers(LoginUsers theLoginUsers) {
-		// TODO Auto-generated method stub
-		return loginUserRepo.findByEmailAndPassword(theLoginUsers.getEmail(),theLoginUsers.getPassword());
-	}
+//	public LoginUsers checkUsers(LoginUsers theLoginUsers) {
+//		// TODO Auto-generated method stub
+//		return loginUserRepo.findByEmailAndPassword(theLoginUsers.getEmail(),theLoginUsers.getPassword());
+//	}
 	public LoginUsers findByEmail(String email) {
 		// TODO Auto-generated method stub
 		return loginUserRepo.findByEmail(email);
