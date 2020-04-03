@@ -1,6 +1,9 @@
 package com.niit.recruiter.controller;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,40 +36,45 @@ public class JobSeekerController {
 
 	@Autowired
 	private LoginUsersService loginUsersService;
-	
+
 	@Autowired
 	private JobService jobService;
-	
+
 	@Autowired
 	private ApplicationService applicationService;
 
+	
+	@GetMapping("/")
+	public String indexView(ModelMap model) {
+		List<Job> jobList = jobService.getJobList();
+		model.addAttribute("joblist", jobList);
+		return "index";
+	}
+	
 	@RequestMapping(value = "/showRegisterForm") // @RequestMapping using in the method level ,it has default GET method
 	public String showFormForAdd(ModelMap theModel) {
-		
+
 		theModel.addAttribute("jobseeker", new Users());
 		theModel.addAttribute("alreadyEmailIdExistsError");
-		
+
 		return "register"; // return model + view name
 	}
 
 	@PostMapping(value = "/saveJobSeeker")
 	public ModelAndView saveCustomer(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
-		ModelAndView modelView=null;
-		
-		if(loginUsersService.findByEmail(req.getParameter("email"))==null) 
-		{
+		ModelAndView modelView = null;
+
+		if (loginUsersService.findByEmail(req.getParameter("email")) == null) {
 			JobSeeker theJobSeeker = new JobSeeker();
-		theJobSeeker.setFirstName(req.getParameter("firstName"));
-		theJobSeeker.setLastName(req.getParameter("lastName"));
-		theJobSeeker.setUsers(theUsers);
-		jobSeekerService.saveJobSeeker(theJobSeeker);
-		modelView=new ModelAndView("sucess");
-		}
-		else
-		{
-			modelView=new ModelAndView("register");
+			theJobSeeker.setFirstName(req.getParameter("firstName"));
+			theJobSeeker.setLastName(req.getParameter("lastName"));
+			theJobSeeker.setUsers(theUsers);
+			jobSeekerService.saveJobSeeker(theJobSeeker);
+			modelView = new ModelAndView("sucess");
+		} else {
+			modelView = new ModelAndView("register");
 			modelView.addObject("jobseeker", new Users());
-			modelView.addObject("alreadyEmailIdExistsError","Email Id already Exists");
+			modelView.addObject("alreadyEmailIdExistsError", "Email Id already Exists");
 		}
 		return modelView;
 	}
@@ -79,42 +87,61 @@ public class JobSeekerController {
 	}
 
 	@RequestMapping(value = "loginJobSeeker", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView processLogin(@ModelAttribute LoginUsers theLoginUsers) {
+	public ModelAndView processLogin(HttpServletRequest req, @ModelAttribute LoginUsers theLoginUsers) {
 
 		ModelAndView model = null;
-		LoginUsers loginUsers = loginUsersService.checkUsers(theLoginUsers);
+		StringTokenizer st = new StringTokenizer(theLoginUsers.getEmail(), "@");
+		String s2 = st.nextToken();
+		LoginUsers loginUsers = loginUsersService.findByEmail(theLoginUsers.getEmail());
 		if (loginUsers == null) {
-			System.out.println("Cont "+loginUsers);
+			// email invalid
+			System.out.println("Cont " + loginUsers);
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("error", "User name not exist");
+			model.addObject("loginusers", new LoginUsers());
+		} else if (loginUsers.getEmail().equalsIgnoreCase(theLoginUsers.getEmail())
+				&& loginUsers.getPassword().equals(theLoginUsers.getPassword())) {
+			// both are correct
+			req.getSession().setAttribute("user", s2); // Session Created
+			List<Job> jobList = jobService.getJobList();
+			model = new ModelAndView("welcome");
+			model.addObject("loginusers", loginUsers);
+			model.addObject("joblist", jobList);
+		} else {
+			// both credentials are incorrect
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("error", "Invalid User Name Or Password");
 			model.addObject("loginusers", new LoginUsers());
-		} else {
-			List<Job> jobList=jobService.getJobList();
-			model = new ModelAndView("welcome");
-			model.addObject("loginusers",loginUsers);
-			model.addObject("joblist", jobList);
+
 		}
 		return model;
 	}
-	
+
 	@GetMapping("/appliedJob")
-	public ModelAndView appliedJob(@RequestParam("jobseekerId") int theJobSeekerId,@RequestParam("jobId") int theJobId) {
-		
-		Application app=new Application();
+	public ModelAndView appliedJob(@RequestParam("jobseekerId") int theJobSeekerId,
+			@RequestParam("jobId") int theJobId) {
+
+		Application app = new Application();
 		app.setJobId(theJobId);
 		app.setJobseekerId(theJobSeekerId);
 		applicationService.saveApplication(app);
-		ModelAndView model=new ModelAndView("welcome");
+		ModelAndView model = new ModelAndView("welcome");
 		model.addObject("appliedJobmsg", "You Have Applied Job Successfully");
 		return model;
 	}
-	
-	@GetMapping("/")
-	public String indexView(ModelMap model)
-	{	List<Job> jobList=jobService.getJobList();
-		model.addAttribute("joblist",jobList);
-		return "index";
-	}
-	
 
+
+
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest req) {
+		req.getSession().invalidate();
+		return "redirect:/";
+	}
+
+	private String encryptPass(String pass) {
+		Base64.Encoder encoder = Base64.getEncoder();
+		String normalString = pass;
+		String encodedString = encoder.encodeToString(normalString.getBytes(StandardCharsets.UTF_8));
+		return encodedString;
+	}
 }
