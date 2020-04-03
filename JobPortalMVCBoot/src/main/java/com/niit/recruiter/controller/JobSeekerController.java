@@ -93,6 +93,8 @@ public class JobSeekerController {
 		StringTokenizer st = new StringTokenizer(theLoginUsers.getEmail(), "@");
 		String s2 = st.nextToken();
 		LoginUsers loginUsers = loginUsersService.findByEmail(theLoginUsers.getEmail());
+		
+		System.out.println("Id:"+theLoginUsers.getEmail());
 		if (loginUsers == null) {
 			// email invalid
 			System.out.println("Cont " + loginUsers);
@@ -102,7 +104,7 @@ public class JobSeekerController {
 		} else if (loginUsers.getEmail().equalsIgnoreCase(theLoginUsers.getEmail())
 				&& loginUsers.getPassword().equals(theLoginUsers.getPassword())) {
 			// both are correct
-			req.getSession().setAttribute("user", s2); // Session Created
+			req.getSession().setAttribute("userId", loginUsers.getId()); // Session Created
 			List<Job> jobList = jobService.getJobList();
 			model = new ModelAndView("welcome");
 			model.addObject("loginusers", loginUsers);
@@ -120,13 +122,21 @@ public class JobSeekerController {
 	@GetMapping("/appliedJob")
 	public ModelAndView appliedJob(@RequestParam("jobseekerId") int theJobSeekerId,
 			@RequestParam("jobId") int theJobId) {
-
-		Application app = new Application();
-		app.setJobId(theJobId);
-		app.setJobseekerId(theJobSeekerId);
-		applicationService.saveApplication(app);
 		ModelAndView model = new ModelAndView("welcome");
-		model.addObject("appliedJobmsg", "You Have Applied Job Successfully");
+		
+		Application checkApp=applicationService.findByJobseekerIdAndJobId(theJobSeekerId, theJobId);
+		if(checkApp==null)
+		{
+			Application app = new Application();
+			app.setJobId(theJobId);
+			app.setJobseekerId(theJobSeekerId);
+			applicationService.saveApplication(app);
+			model.addObject("appliedJobmsg", "You Have Applied Job Successfully");		
+		}
+		else {
+			model.addObject("appliedJobmsg", "You Have Already Applied This Job");
+			}
+		model.addObject("joblist", jobService.getJobList());
 		return model;
 	}
 

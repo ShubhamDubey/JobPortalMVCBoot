@@ -42,6 +42,10 @@
 </head>
 
 <body>
+<%
+		if (session.getAttribute("userId") == null) {
+	%>
+	
 	<header class="sticky-top">
 		<!--- Navbar --->
 		<nav class="navbar navbar-expand-lg">
@@ -69,3 +73,33 @@
 		</nav>
 		<!--# Navbar #-->
 	</header>
+<%
+		} else {
+	%>
+	<header class="sticky-top">
+		<!--- Navbar --->
+		<nav class="navbar navbar-expand-lg">
+			<div class="container">
+				<a class="navbar-brand text-white" href="/"><i
+					class="fa fa-graduation-cap fa-lg mr-2"></i>JobBazar</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#nvbCollapse" aria-controls="nvbCollapse">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="nvbCollapse">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item pl-1"><a class="nav-link"
+							href="about.html"><i class="fa fa-th-list fa-fw mr-1"></i>About</a>
+						</li>
+						<li class="nav-item pl-1"><a class="nav-link"
+							href="logout"><i
+								class="fa fa-sign-out fa-fw mr-1"></i>Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!--# Navbar #-->
+	</header>
+	<%
+		}
+	%>

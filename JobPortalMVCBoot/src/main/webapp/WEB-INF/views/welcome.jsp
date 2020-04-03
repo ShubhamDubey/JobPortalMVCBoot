@@ -5,11 +5,19 @@
  <title>Jobs | JobBazar | JobBazar</title>
 </head>
 
-<%@ include file="header.jsp"%>
+<%@ include file="header.jsp" %>
+
+<%
+	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+	response.setHeader("Pragma", "no-cache");//HTTP 1.0
+	response.setHeader("Expires", "0");//Proxies
+%>
 
 <!-- <h2 align="center">Welcome To JobBazar</h2>  -->
 <h4 align="center">${appliedJobmsg}</h4>
 <h4 align="center">${loginusers.email}</h4>
+
+
 
 <hr color="pink" size="3" />
 
@@ -24,7 +32,7 @@
 		<c:forEach var="tempjoblist" items="${joblist}">
 			<!-- construct an "update" link with customer id -->
 			<c:url var="appliedJobLink" value="appliedJob">
-				<c:param name="jobseekerId" value="${loginusers.id}" />
+				<c:param name="jobseekerId" value="${sessionScope['userId']}" />
 				<c:param name="jobId" value="${tempjoblist.id}" />
 			</c:url>
 			<div class="detail">

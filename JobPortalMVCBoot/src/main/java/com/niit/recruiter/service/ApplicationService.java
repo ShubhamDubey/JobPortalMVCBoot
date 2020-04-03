@@ -19,5 +19,8 @@ public class ApplicationService {
 		// TODO Auto-generated method stub
 		repo.save(app);
 	}
+	public Application findByJobseekerIdAndJobId(int jobSeekerId,int jobId) {
+		return repo.findByJobseekerIdAndJobId(jobSeekerId,jobId);
+	}
 
 }
