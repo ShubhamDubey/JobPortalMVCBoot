@@ -11,7 +11,7 @@
 
 <!--===============================================================================================-->
 <link rel="icon" type="image/png"
-	href="<c:url value="/resources/images/icons/favicon.ico" />">
+	href="<c:url value="/resources/static/images/favicon.png" />">
 <!--===============================================================================================-->
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"

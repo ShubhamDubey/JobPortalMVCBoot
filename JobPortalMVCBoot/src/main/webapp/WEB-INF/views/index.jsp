@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 
 
 
-	<%@ include file="header.jsp"%>
-	<section id="v2-resent-job-post">
+<%@ include file="header.jsp"%>
+<section id="v2-resent-job-post">
 	<div class="vertical-space-85"></div>
 	<div class="container text-center">
 		<h3 class="text-center">Recent Job Post</h3>
@@ -17,20 +17,20 @@ pageEncoding="ISO-8859-1"%>
 
 			<div class="detail">
 				<div class="media display-inline text-align-center">
-					<img class="mr-3 " height="100" width="100"
+					<img class="mr-3" style="width: 75px; height: 75px;"
+						alt="company_logo"
 						src="/resources/static/images/${tempjoblist.logo}">
 					<div class="media-body text-left  text-align-center">
 						<h6 class="large material-icon ">
 							${tempjoblist.employerEmail} looking for ${tempjoblist.name}</h6>
 						<i class="font-color-black">${tempjoblist.type}:</i> <span
 							class="text">${tempjoblist.description}</span> <br /> <i
-							class="fa fa-briefcase"> place</i> <span class="text font-size">${tempjoblist.vacancy}
+							class="fa fa-briefcase"></i> <span class="text font-size">${tempjoblist.vacancy}
 							Available Vacancy</span>
 						<div class="float-right margin-top text-align-center">
 							<a href="showLoginForm" class="part-full-time">APPLY</a>
-
-							<p class="date-time">Advertise Date:
-								${tempjoblist.advertiseDate}</p>
+							<!--  <p class="date-time">Advertise Date:
+								${tempjoblist.advertiseDate}</p>-->
 							<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
 						</div>
 					</div>
@@ -56,6 +56,6 @@ pageEncoding="ISO-8859-1"%>
 	</div>
 	<div class="vertical-space-60"></div>
 </section>
-	
 
-	<%@ include file="footer.jsp"%>
+
+<%@ include file="footer.jsp"%>

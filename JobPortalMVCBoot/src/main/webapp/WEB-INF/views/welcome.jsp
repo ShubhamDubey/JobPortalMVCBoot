@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	
+
 <head>
- <title>Jobs | JobBazar | JobBazar</title>
+<title>Jobs | JobBazar | JobBazar</title>
 </head>
 
-<%@ include file="header.jsp" %>
+<%@ include file="header.jsp"%>
 
 <%
 	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
-	response.setHeader("Pragma", "no-cache");//HTTP 1.0
-	response.setHeader("Expires", "0");//Proxies
+response.setHeader("Pragma", "no-cache");//HTTP 1.0
+response.setHeader("Expires", "0");//Proxies
 %>
 
 <!-- <h2 align="center">Welcome To JobBazar</h2>  -->
@@ -37,20 +37,20 @@
 			</c:url>
 			<div class="detail">
 				<div class="media display-inline text-align-center">
-					<img class="mr-3 " height="100" width="100"
+					<img class="mr-3" style="width: 75px; height: 75px;"
+						alt="company_logo"
 						src="/resources/static/images/${tempjoblist.logo}">
 					<div class="media-body text-left  text-align-center">
 						<h6 class="large material-icon ">
 							${tempjoblist.employerEmail} looking for ${tempjoblist.name}</h6>
 						<i class="font-color-black">${tempjoblist.type}:</i> <span
 							class="text">${tempjoblist.description}</span> <br /> <i
-							class="fa fa-briefcase"> place</i> <span class="text font-size">${tempjoblist.vacancy}
+							class="fa fa-briefcase"></i> <span class="text font-size">${tempjoblist.vacancy}
 							Available Vacancy</span>
 						<div class="float-right margin-top text-align-center">
 							<a href="${appliedJobLink}" class="part-full-time">APPLY</a>
-
-							<p class="date-time">Advertise Date:
-								${tempjoblist.advertiseDate}</p>
+							<!--  <p class="date-time">Advertise Date:
+								${tempjoblist.advertiseDate}</p>-->
 							<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
 						</div>
 					</div>
