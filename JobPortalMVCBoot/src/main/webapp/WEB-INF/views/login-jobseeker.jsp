@@ -18,8 +18,8 @@
                     <img alt="img" src="/resources/static/images/img-01.png"/>
                 </div>
 					<form:form action="loginJobSeeker" cssClass="login100-form validate-form" modelAttribute="loginusers">
-					<span class="login100-form-title">
-                       <div style="color: red"> ${error} </div>
+					<span class="login100-form-title" style="color: red">
+                        ${error} 
                         Member Login
                     </span>
 

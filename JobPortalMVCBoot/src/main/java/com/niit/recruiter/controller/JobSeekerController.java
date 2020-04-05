@@ -8,31 +8,47 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.niit.recruiter.model.Application;
 import com.niit.recruiter.model.Job;
 import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.model.LoginUsers;
+import com.niit.recruiter.model.Resume;
 import com.niit.recruiter.model.Users;
 import com.niit.recruiter.service.ApplicationService;
 import com.niit.recruiter.service.JobSeekerService;
 import com.niit.recruiter.service.JobService;
 import com.niit.recruiter.service.LoginUsersService;
+import com.niit.recruiter.service.ResumeService;
+
+
+
 
 @Controller
 public class JobSeekerController {
 
 	@Autowired
 	private JobSeekerService jobSeekerService;
+	
+	@Autowired
+	private ResumeService resumeService;
 
 	@Autowired
 	private LoginUsersService loginUsersService;
@@ -154,4 +170,26 @@ public class JobSeekerController {
 		String encodedString = encoder.encodeToString(normalString.getBytes(StandardCharsets.UTF_8));
 		return encodedString;
 	}
+	
+	@GetMapping("/showResumeForm")
+	public String showResumeForm(ModelMap model) {
+		model.addAttribute("resume", new Resume());
+		return "resume-upload";
+	}
+	@PostMapping("/uploadResume")
+    public ModelAndView uploadResume(@RequestParam("file") MultipartFile file) {
+    	resumeService.storeFile(file);
+        ModelAndView model=new ModelAndView("resume-upload");
+        model.addObject("msg", "Resume Uploaded Successfully");
+        return model;
+    }
+	 @GetMapping("/downloadResume/{fileName:.+}")
+	 public ResponseEntity<Resource> downloadFile(@PathVariable int fileName, HttpServletRequest request) {
+	        // Load file as Resource
+	        Resume resumeFile = resumeService.getFile(fileName);
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(resumeFile.getFileType()))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resumeFile.getFileName() + "\"")
+	                .body(new ByteArrayResource(resumeFile.getData()));
+	 }
 }
