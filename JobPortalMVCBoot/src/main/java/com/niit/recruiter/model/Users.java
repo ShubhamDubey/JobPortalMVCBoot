@@ -14,15 +14,18 @@ public class Users {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
+	private Integer id;
 	private String email;
 	private String password;
 	@OneToOne(mappedBy = "users")
 	private JobSeeker jobseeker;
-	public String getId() {
+
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getEmail() {
