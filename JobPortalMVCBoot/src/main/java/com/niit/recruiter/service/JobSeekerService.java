@@ -20,4 +20,9 @@ public class JobSeekerService {
 		repo.save(theJobSeeker);
 	}
 
+	public JobSeeker findById(Integer activeUser) {
+		// TODO Auto-generated method stub
+		return repo.findById(activeUser).get();
+	}
+
 }
