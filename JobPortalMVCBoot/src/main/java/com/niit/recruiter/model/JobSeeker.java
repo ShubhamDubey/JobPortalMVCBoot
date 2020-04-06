@@ -1,6 +1,6 @@
 package com.niit.recruiter.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "jobseeker")
+@Table(name = "jobseeker",uniqueConstraints= @UniqueConstraint(columnNames = {"id", "users_id"}))
+
 public class JobSeeker {
 
 	@Id
@@ -29,7 +31,22 @@ public class JobSeeker {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "users_id")
 	private Users users;
+	// cascade = CascadeType.ALL we can't use this because if we use and user delete
+	// Education details Delete our record delete
+	@OneToMany()
+	@JoinColumn(name = "jobSeeker")
+	private List<Education> educationSet;
 	
+	
+ 
+	public List<Education> getEducationSet() {
+		return educationSet;
+	}
+
+	public void setEducationSet(List<Education> educationSet) {
+		this.educationSet = educationSet;
+	}
+
 
 
 	public Integer getId() {
