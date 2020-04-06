@@ -99,6 +99,25 @@ public class Job {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
+	public Job(String employerEmail,String logo, String name, String salary, String vacancy, String type, String description ,Date advertiseDate, Date expireDate) {
+		super();
+		this.employerEmail=employerEmail;
+		this.name = name;
+		this.salary = salary;
+		this.type = type;
+		this.description = description;
+		this.vacancy = vacancy;
+		this.advertiseDate = advertiseDate;
+		this.expireDate = expireDate;
+		this.logo = logo;
+	}
+	public Job() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 	
 	
 }
