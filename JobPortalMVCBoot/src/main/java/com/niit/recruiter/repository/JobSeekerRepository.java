@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.niit.recruiter.model.JobSeeker;
 
-public interface JobSeekerRepository extends JpaRepository<JobSeeker, String> {
+public interface JobSeekerRepository extends JpaRepository<JobSeeker, Integer> {
 
 }
