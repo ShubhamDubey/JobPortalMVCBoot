@@ -23,6 +23,12 @@ public class JobService {
 		return jobRepo.findAll();
 	}
 
+
+	public List<Job> saveAll(List<Job> jobListDb) {
+	return jobRepo.saveAll(jobListDb);
+		
+	}
+
 	
 
 }
