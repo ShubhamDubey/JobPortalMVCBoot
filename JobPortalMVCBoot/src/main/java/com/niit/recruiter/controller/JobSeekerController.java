@@ -37,6 +37,7 @@ import com.niit.recruiter.service.JobSeekerService;
 import com.niit.recruiter.service.JobService;
 import com.niit.recruiter.service.LoginUsersService;
 import com.niit.recruiter.service.ResumeService;
+import com.niit.recruiter.service.UsersService;
 
 
 
@@ -58,6 +59,9 @@ public class JobSeekerController {
 
 	@Autowired
 	private ApplicationService applicationService;
+		
+	@Autowired
+	private UsersService usersService;
 
 	
 	@GetMapping("/")
@@ -98,29 +102,28 @@ public class JobSeekerController {
 	@RequestMapping(value = "showLoginForm") // @RequestMapping using in the method level ,it has default GET method
 	public String showLoginForm(ModelMap theModel) {
 
-		theModel.addAttribute("loginusers", new LoginUsers());
+		theModel.addAttribute("loginjobseeker", new Users());
 		return "login-jobseeker";
 	}
 
 	@RequestMapping(value = "loginJobSeeker", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView processLogin(HttpServletRequest req, @ModelAttribute LoginUsers theLoginUsers) {
+	public ModelAndView processLogin(HttpServletRequest req, @ModelAttribute Users theJobSeekerUser) {
 
 		ModelAndView model = null;
-		StringTokenizer st = new StringTokenizer(theLoginUsers.getEmail(), "@");
+		StringTokenizer st = new StringTokenizer(theJobSeekerUser.getEmail(), "@");
 		String s2 = st.nextToken();
-		LoginUsers loginUsers = loginUsersService.findByEmail(theLoginUsers.getEmail());
-		
-		System.out.println("Id:"+theLoginUsers.getEmail());
+		Users loginUsers = usersService.findByEmail(theJobSeekerUser.getEmail());
 		if (loginUsers == null) {
 			// email invalid
 			System.out.println("Cont " + loginUsers);
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("error", "User name not exist");
 			model.addObject("loginusers", new LoginUsers());
-		} else if (loginUsers.getEmail().equalsIgnoreCase(theLoginUsers.getEmail())
-				&& loginUsers.getPassword().equals(theLoginUsers.getPassword())) {
+		} else if (loginUsers.getEmail().equalsIgnoreCase(theJobSeekerUser.getEmail())
+				&& loginUsers.getPassword().equals(theJobSeekerUser.getPassword())) {
 			// both are correct
-			req.getSession().setAttribute("userId", loginUsers.getId()); // Session Created
+			System.out.println("userId "+ loginUsers.getJobseeker().getId());
+			req.getSession().setAttribute("userId", loginUsers.getJobseeker().getId()); // Session Created
 			List<Job> jobList = jobService.getJobList();
 			model = new ModelAndView("welcome");
 			model.addObject("loginusers", loginUsers);

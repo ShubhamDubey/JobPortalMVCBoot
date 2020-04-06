@@ -17,8 +17,6 @@ response.setHeader("Expires", "0");//Proxies
 <h4 align="center">${appliedJobmsg}</h4>
 <h4 align="center">${loginusers.email}</h4>
 
-
-
 <hr color="pink" size="3" />
 
 <section id="v2-resent-job-post">
