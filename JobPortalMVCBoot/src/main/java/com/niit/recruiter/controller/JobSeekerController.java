@@ -71,7 +71,7 @@ public class JobSeekerController {
 	@Autowired
 	private EducationCategoryService educationCategoryService;
 
-	@GetMapping("/")
+	@GetMapping("/db")
 	public String dbInitial(ModelMap model) throws ParseException {
 		// Adding Education Category
 
@@ -141,7 +141,7 @@ public class JobSeekerController {
 		return "index";
 	}
 
-	@GetMapping("/index")
+	@GetMapping("/")
 	public String indexView(ModelMap model) {
 
 		List<Job> jobList = jobService.getJobList();
@@ -272,9 +272,20 @@ public class JobSeekerController {
 	}
 
 	@GetMapping("/educationForm")
-	public String showEducationForm(ModelMap model) {
-		model.addAttribute("education", new Education());
-		return "education-form";
+	public ModelAndView showEducationForm(HttpServletRequest request) {
+		ModelAndView model = null;
+		Integer activeUser = (Integer) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		} else {
+			model = new ModelAndView("education-form");
+
+			JobSeeker jobSeeker = jobSeekerService.findById(activeUser);
+			model.addObject("education", new Education());
+		}
+		
+		return model;
 	}
 
 	@PostMapping("/saveEducation")
