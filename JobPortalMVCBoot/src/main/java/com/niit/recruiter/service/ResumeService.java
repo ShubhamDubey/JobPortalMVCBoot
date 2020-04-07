@@ -27,13 +27,11 @@ public class ResumeService {
                 System.out.println("file Name contains invalid character");
             }
 
-            resumeFile = new Resume(fileName, file.getContentType(), file.getBytes());
-
-            return resumeRepo.save(resumeFile);
+            resumeFile = new Resume(fileName, file.getContentType(), file.getBytes());   
         } catch (Exception ex) {
             System.out.println("Error: Could Not Store File "+ex.getMessage());
         }
-        return resumeFile;
+        return resumeRepo.save(resumeFile);
     }
 
     public Resume getFile(int fileId) {

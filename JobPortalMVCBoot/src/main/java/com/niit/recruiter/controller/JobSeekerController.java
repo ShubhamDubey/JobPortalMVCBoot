@@ -249,16 +249,37 @@ public class JobSeekerController {
 	}
 
 	@GetMapping("/showResumeForm")
-	public String showResumeForm(ModelMap model) {
-		model.addAttribute("resume", new Resume());
-		return "resume-upload";
+	public ModelAndView showResumeForm(HttpServletRequest request) {
+		ModelAndView model = null;
+		Integer activeUser = (Integer) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		}
+
+		else {
+			model = new ModelAndView("resume-upload");
+			model.addObject("resume", new Resume());
+		}
+		return model;
 	}
 
 	@PostMapping("/uploadResume")
-	public ModelAndView uploadResume(@RequestParam("file") MultipartFile file) {
-		resumeService.storeFile(file);
-		ModelAndView model = new ModelAndView("resume-upload");
-		model.addObject("msg", "Resume Uploaded Successfully");
+	public ModelAndView uploadResume(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
+		ModelAndView model = null;
+		Integer activeUser = (Integer) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		}
+
+		else {
+			JobSeeker jobSeeker=jobSeekerService.findById(activeUser);
+			jobSeeker.setResume(resumeService.storeFile(file));
+			jobSeekerService.saveJobSeeker(jobSeeker);
+			model = new ModelAndView("resume-upload");
+			model.addObject("msg", "Resume Uploaded Successfully");
+		}
 		return model;
 	}
 
@@ -284,7 +305,7 @@ public class JobSeekerController {
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser);
 			model.addObject("education", new Education());
 		}
-		
+
 		return model;
 	}
 

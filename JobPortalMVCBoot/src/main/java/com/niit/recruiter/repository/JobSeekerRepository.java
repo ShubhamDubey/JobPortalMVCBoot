@@ -6,4 +6,6 @@ import com.niit.recruiter.model.JobSeeker;
 
 public interface JobSeekerRepository extends JpaRepository<JobSeeker, Integer> {
 
+	
+
 }

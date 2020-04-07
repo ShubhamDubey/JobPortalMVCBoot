@@ -38,7 +38,19 @@ public class JobSeeker {
 	private List<Education> educationSet;
 	
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "resume_id")
+	private Resume resume;
  
+	
+	public Resume getResume() {
+		return resume;
+	}
+
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+
 	public List<Education> getEducationSet() {
 		return educationSet;
 	}

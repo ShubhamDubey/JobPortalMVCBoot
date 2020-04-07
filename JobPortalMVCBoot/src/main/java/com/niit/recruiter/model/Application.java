@@ -6,9 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="applied_job")
+@Table(name="applied_job",uniqueConstraints = @UniqueConstraint(columnNames= {"jobseeker_id","job_id"}))
 public class Application {
 	@Id
 	@Column(name = "id")
