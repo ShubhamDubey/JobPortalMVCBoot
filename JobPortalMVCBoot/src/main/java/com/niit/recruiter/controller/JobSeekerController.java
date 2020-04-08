@@ -278,6 +278,8 @@ public class JobSeekerController {
 			jobSeeker.setResume(resumeService.storeFile(file));
 			jobSeekerService.saveJobSeeker(jobSeeker);
 			model = new ModelAndView("resume-upload");
+			model.addObject("resumeId", jobSeeker.getResume().getId());
+			model.addObject("resumeName", jobSeeker.getResume().getFileName());
 			model.addObject("msg", "Resume Uploaded Successfully");
 		}
 		return model;

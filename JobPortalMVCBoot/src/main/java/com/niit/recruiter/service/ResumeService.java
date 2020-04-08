@@ -37,6 +37,4 @@ public class ResumeService {
     public Resume getFile(int fileId) {
         return resumeRepo.findById(fileId).get();
     }
-
-
 }

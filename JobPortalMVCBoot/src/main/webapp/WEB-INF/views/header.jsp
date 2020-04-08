@@ -42,10 +42,10 @@
 </head>
 
 <body>
-<%
+	<%
 		if (session.getAttribute("userId") == null) {
 	%>
-	
+
 	<header class="sticky-top">
 		<!--- Navbar --->
 		<nav class="navbar navbar-expand-lg">
@@ -59,21 +59,19 @@
 				<div class="collapse navbar-collapse" id="nvbCollapse">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item active pl-1"><a class="nav-link"
-							href="showRegisterForm"><i
-								class="fa fa-user-plus fa-fw mr-1"></i>Register</a></li>
+							href="showRegisterForm"><i class="fa fa-user-plus fa-fw mr-1"></i>Register</a></li>
 						<li class="nav-item pl-1"><a class="nav-link"
 							href="about.html"><i class="fa fa-th-list fa-fw mr-1"></i>About</a>
 						</li>
 						<li class="nav-item pl-1"><a class="nav-link"
-							href="showLoginForm"><i
-								class="fa fa-sign-in fa-fw mr-1"></i>Login</a></li>
+							href="showLoginForm"><i class="fa fa-sign-in fa-fw mr-1"></i>Login</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<!--# Navbar #-->
 	</header>
-<%
+	<%
 		} else {
 	%>
 	<header class="sticky-top">
@@ -92,7 +90,12 @@
 							href="about.html"><i class="fa fa-th-list fa-fw mr-1"></i>About</a>
 						</li>
 						<li class="nav-item pl-1"><a class="nav-link"
-							href="logout"><i
+							href="showResumeForm"><i class="fa fa-file-pdf-o fa-fw mr-1"></i>Resume</a>
+						</li>
+						<li class="nav-item pl-1"><a class="nav-link"
+							href="educationForm"><i class="fa fa-graduation-cap fa-fw mr-1"></i>Education</a>
+						</li>
+						<li class="nav-item pl-1"><a class="nav-link" href="logout"><i
 								class="fa fa-sign-out fa-fw mr-1"></i>Logout</a></li>
 					</ul>
 				</div>

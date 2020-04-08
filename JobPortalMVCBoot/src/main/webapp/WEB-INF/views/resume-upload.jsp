@@ -30,9 +30,11 @@
 				<div class="container-login100-form-btn">
 					<button class="login100-form-btn">Upload</button>
 				</div>
-
-
 			</form:form>
+			<br>
+			<c:if test="${resumeId!=null}">
+				<a class="part-full-time" href="downloadResume/${resumeId}">Download: ${resumeName}</a>
+			</c:if>
 		</div>
 	</div>
 </div>
