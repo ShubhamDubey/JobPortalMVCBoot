@@ -258,7 +258,10 @@ public class JobSeekerController {
 		}
 
 		else {
+			JobSeeker jobSeeker=jobSeekerService.findById(activeUser);
 			model = new ModelAndView("resume-upload");
+			model.addObject("resumeId", jobSeeker.getResume().getId());
+			model.addObject("resumeName", jobSeeker.getResume().getFileName());
 			model.addObject("resume", new Resume());
 		}
 		return model;
@@ -267,6 +270,7 @@ public class JobSeekerController {
 	@PostMapping("/uploadResume")
 	public ModelAndView uploadResume(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
 		ModelAndView model = null;
+		System.out.println("File :"+file);
 		Integer activeUser = (Integer) request.getSession().getAttribute("userId");
 		if (activeUser == null) {
 			model = new ModelAndView("login-jobseeker");
@@ -278,8 +282,6 @@ public class JobSeekerController {
 			jobSeeker.setResume(resumeService.storeFile(file));
 			jobSeekerService.saveJobSeeker(jobSeeker);
 			model = new ModelAndView("resume-upload");
-			model.addObject("resumeId", jobSeeker.getResume().getId());
-			model.addObject("resumeName", jobSeeker.getResume().getFileName());
 			model.addObject("msg", "Resume Uploaded Successfully");
 		}
 		return model;
