@@ -303,7 +303,8 @@ public class JobSeekerController {
 			model.addObject("loginusers", new LoginUsers());
 		} else {
 			model = new ModelAndView("education-form");
-
+			List<EducationCategory> eduCat=educationCategoryService.findAll();
+			model.addObject("eduCat", eduCat);
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser);
 			model.addObject("education", new Education());
 		}
