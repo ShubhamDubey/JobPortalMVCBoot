@@ -39,6 +39,8 @@
 	href="<c:url value="/resources/static/css/navstyle.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/static/css/jobliststyle.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/static/css/custom.css"/>">
 </head>
 
 <body>
@@ -93,8 +95,8 @@
 							href="showResumeForm"><i class="fa fa-file-pdf-o fa-fw mr-1"></i>Resume</a>
 						</li>
 						<li class="nav-item pl-1"><a class="nav-link"
-							href="educationForm"><i class="fa fa-graduation-cap fa-fw mr-1"></i>Education</a>
-						</li>
+							href="educationForm"><i
+								class="fa fa-graduation-cap fa-fw mr-1"></i>Education</a></li>
 						<li class="nav-item pl-1"><a class="nav-link" href="logout"><i
 								class="fa fa-sign-out fa-fw mr-1"></i>Logout</a></li>
 					</ul>

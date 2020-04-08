@@ -374,4 +374,11 @@ public class JobSeekerController {
 		return model;
 
 	}
+
+	// Shubham
+
+	@GetMapping("/profile")
+	public String showProfile() {
+		return "profile";
+	}
 }
