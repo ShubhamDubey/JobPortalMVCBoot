@@ -16,10 +16,10 @@ public class ResumeService {
 	
 	@Autowired
 	private ResumeRespository resumeRepo;
-	public Resume storeFile(MultipartFile file) {
+	public Resume storeFile(MultipartFile file,Resume resume) {
         // Normalize file name
         String fileName;
-        Resume resumeFile=null;
+       // Resume resumeFile=null;
         try {
         	fileName=StringUtils.cleanPath(file.getOriginalFilename());
             // Check if the file's name contains invalid characters
@@ -27,11 +27,14 @@ public class ResumeService {
                 System.out.println("file Name contains invalid character");
             }
 
-            resumeFile = new Resume(fileName, file.getContentType(), file.getBytes());   
+            //resumeFile = new Resume(fileName, file.getContentType(), file.getBytes()); 
+            resume.setFileName(fileName);
+            resume.setFileType(file.getContentType());
+            resume.setData(file.getBytes());
         } catch (Exception ex) {
             System.out.println("Error: Could Not Store File "+ex.getMessage());
         }
-        return resumeRepo.save(resumeFile);
+        return resumeRepo.save(resume);
     }
 
     public Resume getFile(int fileId) {

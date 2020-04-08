@@ -15,9 +15,8 @@
 			<form:form action="uploadResume"
 				cssClass="login100-form validate-form" modelAttribute="resumeFile" enctype="multipart/form-data">
 				<span class="login100-form-title" style="color: red">
-					${msg} </span>
+					${msg}  ${resume.id}</span>
 				<span class="login100-form-title"> Resume Upload </span>
-			
 				<div class="wrap-input100 validate-input"
 					data-validate="Name is required">
 					<input class="input100" type="file" name="file"
