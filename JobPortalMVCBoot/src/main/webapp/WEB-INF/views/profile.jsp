@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="java.util.List"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <head>
 <title>Jobs | JobBazar | JobBazar</title>
@@ -20,28 +21,32 @@ response.setHeader("Expires", "0");//Proxies
 	<div class="container">
 		<h3 class="text-center">User Profile</h3>
 		<div class="vertical-space-30"></div>
+
 		<!-- <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
                 suspendisse pretium dictumst inceptos mattis euismod
             </p> -->
 		<div class="vertical-space-60"></div>
 
 		<div class="card-body">
-			<form id="profile" action="" method="POST">
+			<form:form id="profile" action="" method="POST"
+				modelAttribute="jobSeeker">
 				<h6 class="heading-small text-muted mb-4">User information</h6>
 				<div class="pl-lg-4">
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label class="form-control-label" for="first_name">First
-									name</label> <input type="text" id="first_name" name="first_name"
-									class="form-control" placeholder="First name" value="">
+									name </label> <input type="text" id="first_name" name="firstName"
+									class="form-control" placeholder="First name"
+									value="${jobSeeker.firstName}">
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label class="form-control-label" for="last_name">Last
-									name</label> <input type="text" id="last_name" name="last_name"
-									class="form-control" placeholder="Last name" value="">
+									name</label> <input type="text" id="last_name" name="lastName"
+									class="form-control" placeholder="Last name"
+									value="${jobSeeker.lastName}">
 							</div>
 						</div>
 					</div>
@@ -50,7 +55,8 @@ response.setHeader("Expires", "0");//Proxies
 							<div class="form-group">
 								<label class="form-control-label" for="email">Email
 									address</label> <input type="email" id="email" name="email"
-									class="form-control" placeholder="shubham@example.com">
+									class="form-control" placeholder="shubham@example.com"
+									value="${jobSeeker.users.email}">
 							</div>
 						</div>
 					</div>
@@ -69,19 +75,35 @@ response.setHeader("Expires", "0");//Proxies
 
 				<!-- Education -->
 				<h6 class="heading-small text-muted mb-4">Education</h6>
+				<h1>${ msg}</h1>
 				<div class="pl-lg-4">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="form-group">
+								<label class="form-control-label" for="course_type">Education
+									Category</label> <select id="course_type"
+									name="education.educationCategory.educationCategoryName"
+									class="form-control">
+									<c:forEach var="tempEduCat" items="${eduCat}">
+										<option value="${tempEduCat.educationCategoryName}">${tempEduCat.educationCategoryName}</option>
+									</c:forEach>
+
+								</select>
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label class="form-control-label" for="course">Course</label> <input
-									type="text" id="course" name="course" class="form-control"
-									placeholder="B.SC" value="">
+									type="text" id="course" name="education.course"
+									class="form-control" placeholder="B.SC" value="">
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div class="form-group">
 								<label class="form-control-label" for="university">University</label>
-								<input type="text" id="university" name="university"
+								<input type="text" id="university" name="education.university"
 									class="form-control" placeholder="University of Delhi" value="">
 							</div>
 						</div>
@@ -91,21 +113,23 @@ response.setHeader("Expires", "0");//Proxies
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label class="form-control-label" for="specialization">Specialization</label>
-								<input type="text" id="specialization" name="specialization"
-									class="form-control" placeholder="B.Sc (CS)" value="">
+								<input type="text" id="specialization"
+									name="education.specialisation" class="form-control"
+									placeholder="B.Sc (CS)" value="">
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label class="form-control-label" for="p_year">Passing
-									Year</label> <input type="number" id="p_year" name="p_year"
-									class="form-control" placeholder="2020" value="">
+									Year</label> <input type="number" id="p_year"
+									name="education.passingYear" class="form-control"
+									placeholder="2020" value="">
 							</div>
 						</div>
 						<div class="col-lg-4">
 							<div class="form-group">
 								<label class="form-control-label" for="course_type">Course
-									Type</label> <select id="course_type" name="course_type"
+									Type</label> <select id="course_type" name="education.courseType"
 									class="form-control">
 									<option value="Full_time" selected>Full Time</option>
 									<option value="Part_time">Part Time</option>
@@ -124,6 +148,71 @@ response.setHeader("Expires", "0");//Proxies
 						</div>
 					</div>
 				</div>
+				<!-- <div>
+
+					<c:forEach var="tempEducationCategory" items="${jobSeeker.educationSet}">
+						<div id=1>
+							<div class="pl-lg-4">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" for="course">Course</label>
+											<input type="text" id="course" name="course"
+												class="form-control" placeholder="${tempEducationCategory.educationCategory.educationCategoryName}" value="">
+										</div>
+									</div>
+									<div class="col-lg-6">
+										<div class="form-group">
+											<label class="form-control-label" for="university">University</label>
+											<input type="text" id="university" name="university"
+												class="form-control" placeholder="Enter name of University/School"
+												value="">
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="form-control-label" for="specialization">Specialization</label>
+											<input type="text" id="specialization" name="specialization"
+												class="form-control" placeholder="General/B.sc/M.sc" value="">
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="form-control-label" for="p_year">Passing
+												Year</label> <input type="number" id="p_year" name="p_year"
+												class="form-control" placeholder="2020" value="">
+										</div>
+									</div>
+									<div class="col-lg-4">
+										<div class="form-group">
+											<label class="form-control-label" for="course_type">Course
+												Type</label> <select id="course_type" name="course_type"
+												class="form-control">
+												<option value="Full_time" selected>Full Time</option>
+												<option value="Part_time">Part Time</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-2">
+										<div class="form-group">
+											<input type="button" id="submit_education"
+												name="submit_education"
+												class="form-control btn-outline-primary"
+												value="Add Education" onclick=submitfields(this.id)>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+					</c:forEach>
+				</div>-->
 				<hr class="my-4" />
 				<!-- Certification -->
 				<h6 class="heading-small text-muted mb-4">Certifications</h6>
@@ -236,10 +325,11 @@ response.setHeader("Expires", "0");//Proxies
 						</div>
 					</div>
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 	<script>
+			var education_increment=1;
             form = document.getElementById("profile");
             function submitfields(ids) {
                 switch (ids) {
@@ -256,8 +346,8 @@ response.setHeader("Expires", "0");//Proxies
                         form.submit();
                         break;
                     case "submit_education":
-                    form.action = "addEducation";
-                        form.submit();
+                    form.action = "saveEducation";
+                    form.submit();
                     break;
                     case "submit_user_info":
                     form.action = "ids";
@@ -266,7 +356,9 @@ response.setHeader("Expires", "0");//Proxies
                     default:
                         alert("Invalid Click");
                 }
-            }             
+            }        
+            
+            
         </script>
 </section>
 
