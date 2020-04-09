@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -159,7 +160,7 @@ public class JobSeekerController {
 	}
 
 	@PostMapping(value = "/saveJobSeeker")
-	public ModelAndView saveCustomer(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
+	public ModelAndView saveJobSeeker(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
 		ModelAndView modelView = null;
 
 		if (loginUsersService.findByEmail(req.getParameter("email")) == null) {
@@ -320,7 +321,6 @@ public class JobSeekerController {
 			model = new ModelAndView("education-form");
 			List<EducationCategory> eduCat = educationCategoryService.findAll();
 			model.addObject("eduCat", eduCat);
-			JobSeeker jobSeeker = jobSeekerService.findById(activeUser);
 			model.addObject("education", new Education());
 		}
 
@@ -338,6 +338,7 @@ public class JobSeekerController {
 
 			} else {
 				model = new ModelAndView("education-form");
+				System.out.println();
 				model.addObject("msg",
 						"Sucessfully  " + education.getEducationCategory().getEducationCategoryName() + " Record");
 
@@ -351,8 +352,9 @@ public class JobSeekerController {
 				jobSeekerService.saveJobSeeker(jobSeeker);
 			}
 		} catch (Exception e) {
-			model = new ModelAndView("education-form");
-			model.addObject("msg", "Already added");
+			model = new ModelAndView("profile");
+			model.addObject("msg", "Already added"+e.getMessage()+education.getCourse()
+			);
 		}
 
 		return model;
@@ -378,7 +380,32 @@ public class JobSeekerController {
 	// Shubham
 
 	@GetMapping("/profile")
-	public String showProfile() {
-		return "profile";
+	public ModelAndView showProfile(HttpServletRequest request) {
+		ModelAndView model = null;
+		Integer activeUser = (Integer) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		} else {
+			model = new ModelAndView("profile");
+			List<EducationCategory> eduCat = educationCategoryService.findAllByOrderByEducationCategoryIdAsc();
+			model.addObject("eduCat", eduCat);
+			
+			JobSeeker jobSeeker = jobSeekerService.findById(activeUser);
+//			Integer sizeOfEducation=
+//				    jobSeeker.getEducationSet().size();
+//			if(sizeOfEducation<4)
+//			{
+//				for(int i=0;i<4-sizeOfEducation;i++)
+//				{
+//					jobSeeker.getEducationSet().add(new Education());
+//				}
+//			}
+			System.out.println(jobSeeker.getFirstName());
+			model.addObject("jobSeeker", jobSeeker);
+			model.addObject("education", new Education());
+		}
+
+		return model;
 	}
 }
