@@ -31,5 +31,10 @@ public class EducationCategoryService {
 		// TODO Auto-generated method stub
 		return educationCategoryRepo.findAll();
 	}
+
+	public List<EducationCategory> findAllByOrderByEducationCategoryIdAsc() {
+		// TODO Auto-generated method stub
+		return educationCategoryRepo.findAllByOrderByEducationCategoryIdAsc();
+	}
 	
 }
