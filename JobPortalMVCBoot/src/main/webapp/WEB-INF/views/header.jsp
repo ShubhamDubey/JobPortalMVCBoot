@@ -101,7 +101,7 @@
 						<li class="nav-item pl-1"><div class="dropdown">
 								<button class=" nav-link dropdown-toggle" type="button"
 									id="dropdownMenuButton" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">${userId}</button>
+									aria-haspopup="true" aria-expanded="false">${username}</button>
 								<div class="dropdown-menu">
 							<a class="nav-link" href="/profile"> <i
 										class="fa fa-user fa-fw mr-1"> </i>Edit Profile
