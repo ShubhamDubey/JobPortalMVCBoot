@@ -97,8 +97,21 @@
 						<li class="nav-item pl-1"><a class="nav-link"
 							href="educationForm"><i
 								class="fa fa-graduation-cap fa-fw mr-1"></i>Education</a></li>
-						<li class="nav-item pl-1"><a class="nav-link" href="logout"><i
-								class="fa fa-sign-out fa-fw mr-1"></i>Logout</a></li>
+						
+						<li class="nav-item pl-1"><div class="dropdown">
+								<button class=" nav-link dropdown-toggle" type="button"
+									id="dropdownMenuButton" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false">${userId}</button>
+								<div class="dropdown-menu">
+							<a class="nav-link" href="/profile"> <i
+										class="fa fa-user fa-fw mr-1"> </i>Edit Profile
+									</a>
+									
+									<a class="nav-link" href="logout"> <i
+										class="fa fa-sign-out fa-fw mr-1"> </i>Logout
+									</a>
+								</div>
+							</div></li>
 					</ul>
 				</div>
 			</div>
