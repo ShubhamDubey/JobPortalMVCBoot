@@ -203,6 +203,7 @@ public class JobSeekerController {
 			// both are correct
 			System.out.println("userId " + loginUsers.getJobseeker().getId());
 			req.getSession().setAttribute("userId", loginUsers.getJobseeker().getId()); // Session Created
+			req.getSession().setAttribute("username", loginUsers.getJobseeker().getFirstName());
 			List<Job> jobList = jobService.getJobList();
 			model = new ModelAndView("welcome");
 			model.addObject("loginusers", loginUsers);
@@ -352,7 +353,7 @@ public class JobSeekerController {
 				jobSeekerService.saveJobSeeker(jobSeeker);
 			}
 		} catch (Exception e) {
-			model = new ModelAndView("profile");
+			model = new ModelAndView("education-form");
 			model.addObject("msg", "Already added"+e.getMessage()+education.getCourse()
 			);
 		}
@@ -371,7 +372,7 @@ public class JobSeekerController {
 			model = new ModelAndView("education-list");
 
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser);
-			model.addObject("educationList", jobSeeker.getEducationSet());
+			model.addObject("educationList",jobSeeker.getEducationSet() );
 		}
 		return model;
 
