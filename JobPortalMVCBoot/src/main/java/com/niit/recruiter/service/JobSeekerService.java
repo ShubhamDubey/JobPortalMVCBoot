@@ -14,7 +14,7 @@ public class JobSeekerService {
 
 	@Autowired
 	private JobSeekerRepository repo;
-	
+
 	public void saveJobSeeker(JobSeeker theJobSeeker) {
 		// TODO Auto-generated method stub
 		repo.save(theJobSeeker);
@@ -24,6 +24,5 @@ public class JobSeekerService {
 		// TODO Auto-generated method stub
 		return repo.findById(activeUser).get();
 	}
-
 
 }
