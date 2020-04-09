@@ -10,19 +10,17 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="educationCategory",uniqueConstraints= {@UniqueConstraint(columnNames="educationCategoryId"),
-		@UniqueConstraint(columnNames="educationCategoryName")})
+@Table(name = "educationCategory", uniqueConstraints = { @UniqueConstraint(columnNames = "educationCategoryId"),
+		@UniqueConstraint(columnNames = "educationCategoryName") })
 public class EducationCategory {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int educationCategoryId;
 
 	private String educationCategoryName;
 //	@OneToMany(mappedBy="educationSet")
 //	private Set<Education> educationSet;
-	
-	
 
 //	public Set<Education> getEducationSet() {
 //		return educationSet;
@@ -47,7 +45,6 @@ public class EducationCategory {
 	public void setEducationCategoryName(String educationCategoryName) {
 		this.educationCategoryName = educationCategoryName;
 	}
-
 
 	public EducationCategory(String educationCategoryName, Set<Education> education) {
 		super();
@@ -77,8 +74,5 @@ public class EducationCategory {
 		return "EducationCategory [educationCategoryId=" + educationCategoryId + ", educationCategoryName="
 				+ educationCategoryName + "]";
 	}
-	
-	
-	
 
 }
