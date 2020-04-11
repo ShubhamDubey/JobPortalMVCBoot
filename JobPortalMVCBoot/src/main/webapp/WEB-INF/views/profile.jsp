@@ -25,8 +25,8 @@ response.setHeader("Expires", "0");//Proxies
 	<div class="vertical-space-85"></div>
 	<div class="container">
 		<h3 class="text-center">User Profile</h3>
-			<h1>${ msg}</h1>
-						
+		<h1>${ msg}</h1>
+
 		<div class="vertical-space-30"></div>
 
 		<!-- <p class="max-width">Lorem ipsum tempus amet conubia adipiscing fermentum viverra gravida, mollis
@@ -147,9 +147,9 @@ response.setHeader("Expires", "0");//Proxies
 									<div class="col-lg-6">
 										<div class="form-group">
 											<label class="form-control-label" for="university">University</label>
-											<input type="text" id="university"
-												name="university" class="form-control"
-												placeholder="University of Delhi" value="">
+											<input type="text" id="university" name="university"
+												class="form-control" placeholder="University of Delhi"
+												value="">
 										</div>
 									</div>
 								</div>
@@ -158,24 +158,22 @@ response.setHeader("Expires", "0");//Proxies
 									<div class="col-lg-4">
 										<div class="form-group">
 											<label class="form-control-label" for="specialization">Specialization</label>
-											<input type="text" id="specialization"
-												name="specialisation" class="form-control"
-												placeholder="B.Sc (CS)" value="">
+											<input type="text" id="specialization" name="specialisation"
+												class="form-control" placeholder="B.Sc (CS)" value="">
 										</div>
 									</div>
 									<div class="col-lg-4">
 										<div class="form-group">
 											<label class="form-control-label" for="p_year">Passing
-												Year</label> <input type="number" id="p_year"
-												name="passingYear" class="form-control"
-												placeholder="2020" value="">
+												Year</label> <input type="number" id="p_year" name="passingYear"
+												class="form-control" placeholder="2020" value="">
 										</div>
 									</div>
 									<div class="col-lg-4">
 										<div class="form-group">
 											<label class="form-control-label" for="course_type">Course
-												Type</label> <select id="course_type"
-												name="courseType" class="form-control">
+												Type</label> <select id="course_type" name="courseType"
+												class="form-control">
 												<option value="Full_time" selected>Full Time</option>
 												<option value="Part_time">Part Time</option>
 											</select>
@@ -248,7 +246,7 @@ response.setHeader("Expires", "0");//Proxies
 					</form:form>
 					<!-- RESUME -->
 					<form:form id="profile" action="" method="POST"
-						enctype="multipart/form-data" modelAttribute="jobSeeker">
+						enctype="multipart/form-data" modelAttribute="resumeFile">
 						<div id="resume">
 							<h6 class="heading-small text-muted mb-4">Resume</h6>
 							<div class="pl-lg-4">
@@ -256,88 +254,92 @@ response.setHeader("Expires", "0");//Proxies
 									<div class="col-lg-6">
 										<div class="form-group">
 											<label class="form-control-label" for="resume">Upload
-												Resume</label> <input type="file" id="resume" name="resume"
-												accept=".pdf" class="form-control" placeholder="" value="">
+												Resume</label><input class="form-control" type="file" name="file"
+												placeholder="Resume Upload" accept=".pdf">
+
 										</div>
 									</div>
-									<c:if test="${jobSeeker.resume.id!=null}">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<label class="form-control-label" for="resume"> <a
-													href="downloadResume/${jobSeeker.resume.id}">Download
-														Resume</a></label>
-											</div>
-										</div>
-									</c:if>
 								</div>
-								<div class="row">
+
+
+								<c:if test="${resume.id!=null}">
 									<div class="col-lg-6">
 										<div class="form-group">
-											<input type="button" id="submit_resume" name="submit_resume"
-												class="form-control btn-outline-primary" value="Upload"
-												onclick=submitfields(this.id)>
+											<label class="form-control-label" for="resume"> <a
+												href="downloadResume/${resume.id}">Download
+													Resume</a></label>
 										</div>
+									</div>
+								</c:if>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="button" id="submit_resume" name="submit_resume"
+											class="form-control btn-outline-primary" value="Upload"
+											onclick=submitfields(this.id)>
 									</div>
 								</div>
 							</div>
 						</div>
-					</form:form>
-					<!-- Password -->
-					<form:form id="profile" action="" method="POST"
-						enctype="multipart/form-data" modelAttribute="jobSeeker">
-						<div id="changePassword">
+				</div>
+				</form:form>
+				<!-- Password -->
+				<form:form id="profile" action="" method="POST"
+					enctype="multipart/form-data" modelAttribute="jobSeeker">
+					<div id="changePassword">
 
-							<h6 class="heading-small text-muted mb-4">Password</h6>
-							<div class="pl-lg-4">
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label class="form-control-label" for="current_password">Current
-												Password</label> <input type="password" id="current_password"
-												name="current_password" class="form-control"
-												placeholder="Enter Current-Password"
-												value="${jobSeeker.users.password}">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label class="form-control-label" for="n_password">New
-												Password</label> <input type="password" id="n_password"
-												name="n_password" class="form-control"
-												placeholder="Enter New Password" value="">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label class="form-control-label" for="re_password">Re-Enter
-												Password</label> <input type="password" id="re_password"
-												name="re_password" class="form-control"
-												placeholder="Re-Enter Password" value="">
-										</div>
+						<h6 class="heading-small text-muted mb-4">Password</h6>
+						<div class="pl-lg-4">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="form-control-label" for="current_password">Current
+											Password</label> <input type="password" id="current_password"
+											name="current_password" class="form-control"
+											placeholder="Enter Current-Password"
+											value="${jobSeeker.users.password}">
 									</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-5"">
+								<div class="col-lg-6">
 									<div class="form-group">
-										<input type="button" id="submit_password"
-											name="submit_password"
-											class="form-control btn-outline-primary"
-											value="Update Password" onclick=submitfields(this.id)>
+										<label class="form-control-label" for="n_password">New
+											Password</label> <input type="password" id="n_password"
+											name="n_password" class="form-control"
+											placeholder="Enter New Password" value="">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label class="form-control-label" for="re_password">Re-Enter
+											Password</label> <input type="password" id="re_password"
+											name="re_password" class="form-control"
+											placeholder="Re-Enter Password" value="">
 									</div>
 								</div>
 							</div>
 						</div>
-					</form:form>
-				</div>
+						<div class="row">
+							<div class="col-lg-5"">
+								<div class="form-group">
+									<input type="button" id="submit_password"
+										name="submit_password"
+										class="form-control btn-outline-primary"
+										value="Update Password" onclick=submitfields(this.id)>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form:form>
 			</div>
-
-
 		</div>
+
+
+	</div>
 	</div>
 	</div>
 	<script>
