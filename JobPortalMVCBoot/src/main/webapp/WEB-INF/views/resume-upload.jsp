@@ -21,7 +21,7 @@
 					data-validate="Name is required">
 					<input class="input100" type="file" name="file"
 						placeholder="Resume Upload"> <span class="focus-input100"></span>
-					<span class="symbol-input100"> <i class="fa fa-user"
+					<span class="symbol-input100"> <i class="fa fa-file-pdf-o"
 						aria-hidden="true"></i>
 					</span>
 				</div>

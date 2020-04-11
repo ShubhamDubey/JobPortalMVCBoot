@@ -22,7 +22,7 @@
 			
 				<div class="wrap-input100 validate-input"
 					data-validate="Name is required">
-					<input class="input100" type="text" name="firstName"
+					<input class="input100" type="text" name="firstName" 
 						placeholder="First Name"> <span class="focus-input100"></span>
 					<span class="symbol-input100"> <i class="fa fa-user"
 						aria-hidden="true"></i>

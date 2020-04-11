@@ -158,8 +158,18 @@ public class JobSeekerController {
 	@PostMapping(value = "/saveJobSeeker")
 	public ModelAndView saveJobSeeker(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
 		ModelAndView modelView = null;
-
-		if (loginUsersService.findByEmail(req.getParameter("email")) == null) {
+		JobSeeker activeUser = (JobSeeker) req.getSession().getAttribute("userId");
+		if (activeUser != null) {
+			activeUser.setFirstName(req.getParameter("firstName"));
+			activeUser.setLastName(req.getParameter("lastName"));
+			activeUser.getUsers().setEmail(req.getParameter("email"));
+			activeUser.getUsers().setPassword(req.getParameter("password"));
+			jobSeekerService.saveJobSeeker(activeUser);
+			modelView = new ModelAndView("welcome");
+			modelView.addObject("joblist", jobService.getJobList());	
+		}
+		
+		else if (loginUsersService.findByEmail(req.getParameter("email")) == null) {
 			JobSeeker theJobSeeker = new JobSeeker();
 			theJobSeeker.setFirstName(req.getParameter("firstName"));
 			theJobSeeker.setLastName(req.getParameter("lastName"));
@@ -263,11 +273,14 @@ public class JobSeekerController {
 	public ModelAndView showResumeForm(HttpServletRequest request) {
 		ModelAndView model = null;
 		try {
-
+			System.out.println("Above Session");
 			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+			System.out.println("Bellow Session "+activeUser);
 			if (activeUser == null) {
+				System.out.println("Inside If");
 				model = new ModelAndView("login-jobseeker");
 				model.addObject("loginusers", new LoginUsers());
+				return model;
 			}
 			model = new ModelAndView("resume-upload");
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
@@ -288,12 +301,13 @@ public class JobSeekerController {
 		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
 		JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
 		try {
-
+			
 			if (activeUser == null) {
 				model = new ModelAndView("login-jobseeker");
 				model.addObject("loginusers", new LoginUsers());
+				return model;
 			}
-
+			
 			model = new ModelAndView("resume-upload");
 			jobSeeker.setResume(resumeService.storeFile(file, resumeService.getFile(jobSeeker.getResume().getId())));
 			jobSeekerService.saveJobSeeker(jobSeeker);
@@ -421,4 +435,20 @@ public class JobSeekerController {
 		return model;
 
 	}
+	@GetMapping("/editProfile")
+	public ModelAndView editProfile(HttpServletRequest request) {
+		ModelAndView model=null;
+		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		} else {
+			System.out.println("name: "+activeUser.getFirstName());
+			model =new ModelAndView("jobseeker-profile");
+			model.addObject("jobseeker", activeUser);
+		}
+		
+		return model;
+	}
+	
 }
