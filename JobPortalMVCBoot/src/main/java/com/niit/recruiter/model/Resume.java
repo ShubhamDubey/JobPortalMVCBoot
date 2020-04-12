@@ -1,15 +1,19 @@
 package com.niit.recruiter.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "resume")
+@Table(name = "resume",uniqueConstraints= @UniqueConstraint(columnNames = {"jobSeeker", "fileName"}))
+
 public class Resume {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +25,9 @@ public class Resume {
 	@Lob
 	private byte[] data;
 	
-	@OneToOne(mappedBy="resume")
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "jobSeeker")
 	private JobSeeker jobSeeker;
 
 

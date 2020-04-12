@@ -1,18 +1,15 @@
 package com.niit.recruiter.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints= @UniqueConstraint(columnNames = { "cat_id","jobSeeker"}) )
+@Table(uniqueConstraints= @UniqueConstraint(columnNames = {"education_category_education_category_id","job_seeker_id"}) )
 public class Education {
 
 	@Id
@@ -24,13 +21,10 @@ public class Education {
 	private String university;
 	private String passingYear;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "cat_id")
-	@OrderColumn(name = "education_category_id")
+	@ManyToOne
 	private EducationCategory educationCategory;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "jobSeeker")
+	@ManyToOne
 	private JobSeeker jobSeeker;
 	
 

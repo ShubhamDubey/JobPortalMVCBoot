@@ -33,33 +33,21 @@ public class JobSeeker {
 	private Users users;
 	// cascade = CascadeType.ALL we can't use this because if we use and user delete
 	// Education details Delete our record delete
-	@OneToMany()
-	@JoinColumn(name = "jobSeeker")
+	@OneToMany(targetEntity=Education.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "job_seeker_id")
 	private List<Education> educationSet;
 	
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "resume_id")
+	@OneToOne(mappedBy="jobSeeker")
 	private Resume resume;
  
+	@OneToMany(targetEntity=Skills.class,cascade=CascadeType.ALL)
+	@JoinColumn(name="job_seeker_id")
+	private List<Skills> skillList;
 	
-	public Resume getResume() {
-		return resume;
-	}
-
-	public void setResume(Resume resume) {
-		this.resume = resume;
-	}
-
-	public List<Education> getEducationSet() {
-		return educationSet;
-	}
-
-	public void setEducationSet(List<Education> educationSet) {
-		this.educationSet = educationSet;
-	}
-
-
+	@OneToMany(targetEntity=Certifications.class,cascade=CascadeType.ALL)
+	@JoinColumn(name="job_seeker_id")
+	private List<Certifications> certificationsList;
 
 	public Integer getId() {
 		return id;
@@ -92,5 +80,40 @@ public class JobSeeker {
 	public void setUsers(Users users) {
 		this.users = users;
 	}
+
+	public List<Education> getEducationSet() {
+		return educationSet;
+	}
+
+	public void setEducationSet(List<Education> educationSet) {
+		this.educationSet = educationSet;
+	}
+
+	public Resume getResume() {
+		return resume;
+	}
+
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+
+	public List<Skills> getSkillList() {
+		return skillList;
+	}
+
+	public void setSkillList(List<Skills> skillList) {
+		this.skillList = skillList;
+	}
+
+	public List<Certifications> getCertificationsList() {
+		return certificationsList;
+	}
+
+	public void setCertificationsList(List<Certifications> certificationsList) {
+		this.certificationsList = certificationsList;
+	}
+	
+	
+	
 
 }

@@ -1,13 +1,18 @@
 package com.niit.recruiter.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+
 
 @Entity
 @Table(name = "educationCategory", uniqueConstraints = { @UniqueConstraint(columnNames = "educationCategoryId"),
@@ -19,17 +24,10 @@ public class EducationCategory {
 	private int educationCategoryId;
 
 	private String educationCategoryName;
-//	@OneToMany(mappedBy="educationSet")
-//	private Set<Education> educationSet;
-
-//	public Set<Education> getEducationSet() {
-//		return educationSet;
-//	}
-//
-//	public void setEducationSet(Set<Education> educationSet) {
-//		this.educationSet = educationSet;
-//	}
-
+	@OneToMany(targetEntity=Education.class)
+	@JoinColumn(name="education_category_education_category_id")
+	private List<Education> educationList;
+	
 	public int getEducationCategoryId() {
 		return educationCategoryId;
 	}
