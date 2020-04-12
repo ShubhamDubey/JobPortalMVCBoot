@@ -1,11 +1,14 @@
 package com.niit.recruiter.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.niit.recruiter.model.Education;
+import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.repository.EducationRepo;
 
 @Service
@@ -17,5 +20,21 @@ public class EducationService {
 	public Education save(Education education)
 	{
 		return educationRepo.save(education);
+	}
+	public List<Education> findByJobSeeker(JobSeeker activeUser) {
+		// TODO Auto-generated method stub
+		return educationRepo.findByJobSeeker(activeUser);
+	}
+	public List<Education> findByJobSeekerOrderByEducationCategoryAsc(JobSeeker activeUser) {
+		// TODO Auto-generated method stub
+		return educationRepo.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
+	}
+	public List<Education> updateAll(List<Education> educationList) {
+		// TODO Auto-generated method stub
+		return educationRepo.saveAll(educationList);
+	}
+	public void delete(Education education) {
+		// TODO Auto-generated method stub
+		 educationRepo.delete(education);
 	}
 }
