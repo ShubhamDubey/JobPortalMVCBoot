@@ -1,13 +1,11 @@
 package com.niit.recruiter.service;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.model.Resume;
 import com.niit.recruiter.repository.ResumeRespository;
 
@@ -31,6 +29,7 @@ public class ResumeService {
             resume.setFileName(fileName);
             resume.setFileType(file.getContentType());
             resume.setData(file.getBytes());
+           
         } catch (Exception ex) {
             System.out.println("Error: Could Not Store File "+ex.getMessage());
         }
