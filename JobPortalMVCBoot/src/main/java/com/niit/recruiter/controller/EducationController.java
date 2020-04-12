@@ -139,7 +139,7 @@ public class EducationController {
 				}
 				else {}
 				
-				jobSeeker.setEducationSet(	educationService.updateAll(educationList));
+				
 			
 				jobSeekerService.saveJobSeeker(jobSeeker);
 				 educationList=educationService.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
