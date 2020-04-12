@@ -138,22 +138,6 @@ public class JobSeekerController {
 		return "index";
 	}
 
-//	@GetMapping("/")
-//	public String indexView(ModelMap model) {
-//
-//		List<Job> jobList = jobService.getJobList();
-//		model.addAttribute("joblist", jobList);
-//		return "index";
-//	}
-
-//	@RequestMapping(value = "/showRegisterForm") // @RequestMapping using in the method level ,it has default GET method
-//	public String showFormForAdd(ModelMap theModel) {
-//
-//		theModel.addAttribute("jobseeker", new Users());
-//		theModel.addAttribute("alreadyEmailIdExistsError");
-//
-//		return "register"; // return model + view name
-//	}
 
 	@PostMapping(value = "/saveJobSeeker")
 	public ModelAndView saveJobSeeker(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
@@ -163,7 +147,8 @@ public class JobSeekerController {
 			activeUser.setFirstName(req.getParameter("firstName"));
 			activeUser.setLastName(req.getParameter("lastName"));
 			activeUser.getUsers().setEmail(req.getParameter("email"));
-			activeUser.getUsers().setPassword(req.getParameter("password"));
+			//activeUser.getUsers().setPassword(req.getParameter("password")); Change passwor for that
+			
 			jobSeekerService.saveJobSeeker(activeUser);
 			modelView = new ModelAndView("welcome");
 			modelView.addObject("joblist", jobService.getJobList());	
@@ -184,45 +169,6 @@ public class JobSeekerController {
 		return modelView;
 	}
 
-//	@RequestMapping(value = "showLoginForm") // @RequestMapping using in the method level ,it has default GET method
-//	public String showLoginForm(ModelMap theModel) {
-//
-//		theModel.addAttribute("loginjobseeker", new Users());
-//		return "login-jobseeker";
-//	}
-
-//	@RequestMapping(value = "loginJobSeeker", method = { RequestMethod.POST, RequestMethod.GET })
-//	public ModelAndView processLogin(HttpServletRequest req, @ModelAttribute Users theJobSeekerUser) {
-//
-//		ModelAndView model = null;
-//		StringTokenizer st = new StringTokenizer(theJobSeekerUser.getEmail(), "@");
-//		String s2 = st.nextToken();
-//		Users loginUsers = usersService.findByEmail(theJobSeekerUser.getEmail());
-//		if (loginUsers == null) {
-//			// email invalid
-//			System.out.println("Cont " + loginUsers);
-//			model = new ModelAndView("login-jobseeker");
-//			model.addObject("error", "User name not exist");
-//			model.addObject("loginusers", new LoginUsers());
-//		} else if (loginUsers.getEmail().equalsIgnoreCase(theJobSeekerUser.getEmail())
-//				&& loginUsers.getPassword().equals(theJobSeekerUser.getPassword())) {
-//			// both are correct
-//			System.out.println("userId " + loginUsers.getJobseeker().getId());
-//			req.getSession().setAttribute("userId", loginUsers.getJobseeker().getId()); // Session Created
-//			req.getSession().setAttribute("username", loginUsers.getJobseeker().getFirstName());
-//			List<Job> jobList = jobService.getJobList();
-//			model = new ModelAndView("welcome");
-//			model.addObject("loginusers", loginUsers);
-//			model.addObject("joblist", jobList);
-//		} else {
-//			// both credentials are incorrect
-//			model = new ModelAndView("login-jobseeker");
-//			model.addObject("error", "Invalid User Name Or Password");
-//			model.addObject("loginusers", new LoginUsers());
-//
-//		}
-//		return model;
-//	}
 
 	@GetMapping("/appliedJob")
 	public ModelAndView appliedJob(HttpServletRequest request, @RequestParam("jobId") int theJobId) {
@@ -256,11 +202,7 @@ public class JobSeekerController {
 		return model;
 	}
 
-//	@GetMapping("/logout")
-//	public String logout(HttpServletRequest req) {
-//		req.getSession().invalidate();
-//		return "redirect:/";
-//	}
+
 
 	private String encryptPass(String pass) {
 		Base64.Encoder encoder = Base64.getEncoder();
@@ -269,31 +211,7 @@ public class JobSeekerController {
 		return encodedString;
 	}
 
-	@GetMapping("/showResumeForm")
-	public ModelAndView showResumeForm(HttpServletRequest request) {
-		ModelAndView model = null;
-		try {
-			System.out.println("Above Session");
-			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-			System.out.println("Bellow Session "+activeUser);
-			if (activeUser == null) {
-				System.out.println("Inside If");
-				model = new ModelAndView("login-jobseeker");
-				model.addObject("loginusers", new LoginUsers());
-				return model;
-			}
-			model = new ModelAndView("resume-upload");
-			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-			System.out.println("above " + jobSeeker.getResume().getId());
-			System.out.println("bellow");
-			model.addObject("resumeId", jobSeeker.getResume().getId());
-			model.addObject("resumeName", jobSeeker.getResume().getFileName());
-		} catch (Exception e) {
-			System.out.println("Error: " + e.getMessage());
-			model = new ModelAndView("resume-upload");
-		}
-		return model;
-	}
+
 
 	@PostMapping("/uploadResume")
 	public ModelAndView uploadResume(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
@@ -351,90 +269,7 @@ public class JobSeekerController {
 		return model;
 	}
 
-	@PostMapping("/saveEducation")
-	public ModelAndView addEducation(HttpServletRequest request, @ModelAttribute("education") Education education) {
-		ModelAndView model = null;
-		try {
-			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-			if (activeUser == null) {
-				model = new ModelAndView("login-jobseeker");
-				model.addObject("loginusers", new LoginUsers());
-
-			} else {
-				model = new ModelAndView("profile");
-				System.out.println();
-				model.addObject("msg",
-						"Sucessfully  " + education.getEducationCategory().getEducationCategoryName() + " Record");
-
-				JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-				String submittedEducationCategory = education.getEducationCategory().getEducationCategoryName();
-				EducationCategory educationCategory = educationCategoryService
-						.findByEducationCategoryName(submittedEducationCategory);
-				education.setEducationCategory(educationCategory);
-
-				jobSeeker.getEducationSet().add(educationService.save(education));
-				jobSeekerService.saveJobSeeker(jobSeeker);
-			}
-		} catch (Exception e) {
-			model = new ModelAndView("profile");
-			model.addObject("msg", "Already added" + e.getMessage() + education.getCourse());
-		}
-
-		return model;
-	}
-
-	@GetMapping("/viewEducation")
-	public ModelAndView viewEducationRecord(HttpServletRequest request) {
-		ModelAndView model = null;
-		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-		if (activeUser == null) {
-			model = new ModelAndView("login-jobseeker");
-			model.addObject("loginusers", new LoginUsers());
-		} else {
-			model = new ModelAndView("education-list");
-
-			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-			model.addObject("educationList", jobSeeker.getEducationSet());
-		}
-		return model;
-
-	}
-
-	// Shubham
-
-	@GetMapping("/profile")
-	public ModelAndView showProfile(HttpServletRequest request) {
-		ModelAndView model = null;
-
-		try {
-			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-			if (activeUser == null) {
-				model = new ModelAndView("login-jobseeker");
-				model.addObject("loginusers", new LoginUsers());
-			} else {
-				model = new ModelAndView("profile");
-				List<EducationCategory> eduCat = educationCategoryService.findAllByOrderByEducationCategoryIdAsc();
-				model.addObject("eduCat", eduCat);
-			
-				JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-
-				System.out.println(jobSeeker.getFirstName());
-				model.addObject("jobSeeker", jobSeeker);
-
-				model.addObject("education", new Education());
-
-				System.out.println("above " + jobSeeker.getResume().getId());
-				System.out.println("bellow");
-				model.addObject("resumeId", jobSeeker.getResume().getId());
-				model.addObject("resumeName", jobSeeker.getResume().getFileName());
-			}
-		} catch (Exception e) {
-			System.out.println("Error: " + e.getMessage());
-			model = new ModelAndView("profile");
-		}
-		return model;
-
-	}
+	
 	@GetMapping("/editProfile")
 	public ModelAndView editProfile(HttpServletRequest request) {
 		ModelAndView model=null;
@@ -444,7 +279,7 @@ public class JobSeekerController {
 			model.addObject("loginusers", new LoginUsers());
 		} else {
 			System.out.println("name: "+activeUser.getFirstName());
-			model =new ModelAndView("jobseeker-profile");
+			model =new ModelAndView("edit-profile");
 			model.addObject("jobseeker", activeUser);
 		}
 		
