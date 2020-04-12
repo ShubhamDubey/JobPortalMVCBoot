@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<head>
+<style type="text/css">
 
+</style>
+<title>Jobs | JobBazar | JobBazar</title>
+</head>
 
 <%@include file="header.jsp"%>
 <section id="v2-resent-job-post">
@@ -25,7 +30,7 @@
 							 id="profile_id">Profile</a>
 					</div>
 					<div class="row">
-						<a href="#changePassword"
+						<a href="changePassword"
 							class="btn btn-block btn-outline-primary"
 							 id="password_id">Change
 							Password</a>
