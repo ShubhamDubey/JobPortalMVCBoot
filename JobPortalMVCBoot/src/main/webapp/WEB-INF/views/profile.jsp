@@ -33,7 +33,7 @@ response.setHeader("Expires", "0");//Proxies
                 suspendisse pretium dictumst inceptos mattis euismod
             </p> -->
 		<div class="vertical-space-60"></div>
-		<div class="row">
+	<div class="row">
 			<div class="col-lg-4">
 				<div class="container card-body">
 					<div class="row ">
@@ -47,12 +47,12 @@ response.setHeader("Expires", "0");//Proxies
 							Password</a>
 					</div>
 					<div class="row ">
-						<a href="#resume" class="btn btn-block btn-outline-primary"
-							onclick=show_content(this.id) id="resume_id">Resume</a>
+						<a href="#" class="btn btn-block btn-outline-primary"
+							>Resume</a>
 					</div>
 					<div class="row ">
-						<a href="#education" class="btn btn-block btn-outline-primary"
-							onclick=show_content(this.id) id="education_id">Education</a>
+						<a href="showEducationForm" class="btn btn-block btn-outline-primary"
+							>Education</a>
 					</div>
 					<div class="row ">
 						<a href="#certificate" class="btn btn-block btn-outline-primary"
