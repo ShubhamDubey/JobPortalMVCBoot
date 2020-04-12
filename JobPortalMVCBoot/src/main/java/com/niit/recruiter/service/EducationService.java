@@ -29,10 +29,7 @@ public class EducationService {
 		// TODO Auto-generated method stub
 		return educationRepo.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
 	}
-	public List<Education> updateAll(List<Education> educationList) {
-		// TODO Auto-generated method stub
-		return educationRepo.saveAll(educationList);
-	}
+	
 	public void delete(Education education) {
 		// TODO Auto-generated method stub
 		 educationRepo.delete(education);
