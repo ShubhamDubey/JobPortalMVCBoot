@@ -94,31 +94,42 @@ ${message}
 				<th>passing year</th>
 		</thead>
 		<tbody>
-			<c:forEach var="tempEducationList" items="${educationList}">
-				<c:url var="deleteLink" value="deleteEducation">
-					<c:param name="educationId" value="${education.educationId}" />
-				</c:url>
-				<tr>
-					<td>
-						${tempEducationList.educationCategory.educationCategoryName}</td>
-					<td>${tempEducationList.course}</td>
-					<td id="course"><input type="text" id="course" name="course"
-						class="form-control" placeholder="B.SC"
-						value="${tempEducationList.course}"></td>
-					<td>${tempEducationList.courseType}</td>
+			<c:set var="count" value="0" scope="page" />
+				<c:forEach var="tempEducationList" items="${educationList}">
+					<c:url var="deleteLink" value="deleteEducation">
+						<c:param name="educationId"
+							value="${count}" />
+					</c:url>
+					<c:url var="updateLink" value="update">
+						<c:param name="educationId"
+							value="${count}" />
+					</c:url>
+					<tr id="${tempEducationList.educationId}1">
+						<td>
+							${tempEducationList.educationCategory.educationCategoryName}</td>
+						<td contenteditable="true">${tempEducationList.course}</td>
 
-					<td>${tempEducationList.university}</td>
-					<td>${tempEducationList.passingYear}</td>
-				<%-- 	<td><a href="#" onclick="hideButton">Edit</a>
-					<td><a href="${deleteLink }">Delete</a></td> --%>
-				</tr>
-			</c:forEach>
+						<td>${tempEducationList.courseType}</td>
+
+						<td contenteditable="true">${tempEducationList.university}</td>
+						<td contenteditable="true">${tempEducationList.passingYear}</td>
+						<td><a href="${updateLink }">Update</a></td>
+						<td><a href="${deleteLink }">Delete</a></td>
+					</tr>
+					
+
+
+		<c:set var="count" value="${count + 1}" scope="page"/>
+				</c:forEach>
+		
 		</tbody>
 	</table>
 </div>
 </div>
 
-
 </div>
 </section>
+
+
+
 <%@include file="footer.jsp"%>
