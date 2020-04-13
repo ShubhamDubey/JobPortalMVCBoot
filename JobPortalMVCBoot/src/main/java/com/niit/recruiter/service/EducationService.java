@@ -30,8 +30,9 @@ public class EducationService {
 		return educationRepo.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
 	}
 	
-	public void delete(Education education) {
+
+	public void deleteById(int educationId) {
 		// TODO Auto-generated method stub
-		 educationRepo.delete(education);
+		 educationRepo.deleteById(educationId);
 	}
 }
