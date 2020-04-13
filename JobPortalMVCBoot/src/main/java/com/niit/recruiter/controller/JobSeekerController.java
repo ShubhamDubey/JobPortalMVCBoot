@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -252,22 +253,7 @@ public class JobSeekerController {
 				.body(new ByteArrayResource(resumeFile.getData()));
 	}
 
-	@GetMapping("/educationForm")
-	public ModelAndView showEducationForm(HttpServletRequest request) {
-		ModelAndView model = null;
-		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-		if (activeUser == null) {
-			model = new ModelAndView("login-jobseeker");
-			model.addObject("loginusers", new LoginUsers());
-		} else {
-			model = new ModelAndView("education-form");
-			List<EducationCategory> eduCat = educationCategoryService.findAll();
-			model.addObject("eduCat", eduCat);
-			model.addObject("education", new Education());
-		}
 
-		return model;
-	}
 
 	
 	@GetMapping("/editProfile")
@@ -286,4 +272,48 @@ public class JobSeekerController {
 		return model;
 	}
 	
+	@GetMapping("/changePassword")
+	public ModelAndView changePassword(HttpServletRequest request)
+	{
+		ModelAndView model=null;
+		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		}
+		else {
+			model=new ModelAndView("change-password");
+			model.addObject("jobSeeker", activeUser);
+		}
+		return model;
+	}
+	@PostMapping("updatePassword")
+	public ModelAndView updatePassword(HttpServletRequest request)
+	{
+		ModelAndView model=null;
+		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		}
+		else {
+			model=new ModelAndView("change-password");
+			activeUser=jobSeekerService.findById(activeUser.getId());
+			model.addObject("jobSeeker", activeUser);
+			
+			if(activeUser.getUsers().getPassword().equals(request.getParameter("current_password")) && request.getParameter("n_password").equals(request.getParameter("re_password")))
+			{
+				activeUser.getUsers().setPassword(request.getParameter("n_password"));
+			jobSeekerService.saveJobSeeker(activeUser);
+			model.addObject("msg","SuccessFully Updated");
+			}
+			else
+			{
+				model.addObject("msg","password mismatch");
+			}
+			
+		}
+		
+		return model;
+	}
 }
