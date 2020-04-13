@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,14 +17,9 @@ import com.niit.recruiter.model.Education;
 import com.niit.recruiter.model.EducationCategory;
 import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.model.LoginUsers;
-import com.niit.recruiter.service.ApplicationService;
 import com.niit.recruiter.service.EducationCategoryService;
 import com.niit.recruiter.service.EducationService;
 import com.niit.recruiter.service.JobSeekerService;
-import com.niit.recruiter.service.JobService;
-import com.niit.recruiter.service.LoginUsersService;
-import com.niit.recruiter.service.ResumeService;
-import com.niit.recruiter.service.UsersService;
 
 @Controller
 public class EducationController {
@@ -80,7 +75,7 @@ public class EducationController {
 						.findByEducationCategoryName(submittedEducationCategory);
 
 				education.setEducationCategory(educationCategory);
-				List<EducationCategory> eduCat = educationCategoryService.findAll();
+				List<EducationCategory> eduCat = educationCategoryService.findAllByOrderByEducationCategoryIdAsc();
 				model.addObject("eduCat", eduCat);
 				jobSeeker.getEducationSet().add(educationService.save(education));
 				jobSeekerService.saveJobSeeker(jobSeeker);
@@ -89,7 +84,7 @@ public class EducationController {
 			}
 		} catch (Exception e) {
 			model = new ModelAndView("education-form");
-			List<EducationCategory> eduCat = educationCategoryService.findAll();
+			List<EducationCategory> eduCat = educationCategoryService.findAllByOrderByEducationCategoryIdAsc();
 			model.addObject("eduCat", eduCat);
 			List<Education> educationList=educationService.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
 			model.addObject("educationList", educationList);
@@ -99,22 +94,7 @@ public class EducationController {
 		return model;
 	}
 
-//	@GetMapping("/viewEducation")
-//	public ModelAndView viewEducationRecord(HttpServletRequest request) {
-//		ModelAndView model = null;
-//		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-//		if (activeUser == null) {
-//			model = new ModelAndView("login-jobseeker");
-//			model.addObject("loginusers", new LoginUsers());
-//		} else {
-//			model = new ModelAndView("education-list");
-//
-//			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-//			model.addObject("educationList", jobSeeker.getEducationSet());
-//		}
-//		return model;
-//
-//	}
+
 	
 	
 	@RequestMapping("/deleteEducation")
@@ -131,31 +111,50 @@ public class EducationController {
 			} else {
 				model = new ModelAndView("education-form");
 				JobSeeker jobSeeker=jobSeekerService.findById(activeUser.getId());
-				List<Education> educationList=jobSeeker.getEducationSet();
+				List<Education> educationList=educationService.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
+				
 				Education education=educationList.get(Id);
 				if(educationList.remove(Id))
-				{	educationService.delete(education);
-				System.out.println("Block Executed");
+				{
+					System.out.println("Updated List Set");
+					jobSeeker.setEducationSet(educationList);	
 				}
-				else {}
+				educationService.deleteById(education.getEducationId());
 				
-				
-			
 				jobSeekerService.saveJobSeeker(jobSeeker);
 				 educationList=educationService.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
 				model.addObject("educationList", educationList);
-				List<EducationCategory> eduCat = educationCategoryService.findAll();
+				List<EducationCategory> eduCat = educationCategoryService.findAllByOrderByEducationCategoryIdAsc();
 				model.addObject("eduCat", eduCat);
 			}
 		} catch (Exception e) {
 			model = new ModelAndView("education-form");
 			List<Education> educationList=educationService.findByJobSeekerOrderByEducationCategoryAsc(activeUser);
 				model.addObject("educationList", educationList);
-				List<EducationCategory> eduCat = educationCategoryService.findAll();
+				List<EducationCategory> eduCat = educationCategoryService.findAllByOrderByEducationCategoryIdAsc();
 				model.addObject("eduCat", eduCat);
 					}
 
 		return model;
 		
+	}
+	
+	@RequestMapping("/update")
+	public ModelAndView updateEducation(@RequestBody Education education,HttpServletRequest request)
+	{
+		ModelAndView model=null;
+		JobSeeker jobSeeker=(JobSeeker)request.getSession().getAttribute("userId");
+		if(jobSeeker==null)
+		{
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+
+		}
+		else
+		{
+			model=new ModelAndView("education-form");
+			System.out.println(education.getPassingYear());
+		}			
+		return model;
 	}
 }
