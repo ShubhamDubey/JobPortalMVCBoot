@@ -21,13 +21,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.niit.recruiter.model.Application;
-import com.niit.recruiter.model.Education;
 import com.niit.recruiter.model.EducationCategory;
 import com.niit.recruiter.model.Job;
 import com.niit.recruiter.model.JobSeeker;
@@ -171,38 +169,38 @@ public class JobSeekerController {
 	}
 
 
-	@GetMapping("/appliedJob")
-	public ModelAndView appliedJob(HttpServletRequest request, @RequestParam("jobId") int theJobId) {
-		ModelAndView model = null;
-		try {
-
-			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-			if (activeUser == null) {
-				model = new ModelAndView("login-jobseeker");
-				model.addObject("loginusers", new LoginUsers());
-			} else {
-
-				Application checkApp = applicationService.findByJobseekerIdAndJobId(activeUser.getId(), theJobId);
-				if (checkApp == null) {
-					model = new ModelAndView("welcome");
-					Application app = new Application();
-					app.setJobId(theJobId);
-					app.setJobseekerId(activeUser.getId());
-					applicationService.saveApplication(app);
-					model.addObject("appliedJobmsg", "You Have Applied Job Successfully");
-				} else {
-
-					model = new ModelAndView("welcome");
-					model.addObject("appliedJobmsg", "You Have Already Applied This Job");
-				}
-				model.addObject("joblist", jobService.getJobList());
-			}
-		} catch (Exception e) {
-
-		}
-		return model;
-	}
-
+//	@GetMapping("/appliedJob")
+//	public ModelAndView appliedJob(HttpServletRequest request, @RequestParam("jobId") int theJobId) {
+//		ModelAndView model = null;
+//		try {
+//
+//			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+//			if (activeUser == null) {
+//				model = new ModelAndView("login-jobseeker");
+//				model.addObject("loginusers", new LoginUsers());
+//			} else {
+//
+//				Application checkApp = applicationService.findByJobSeekerAndJob(activeUser.getId(), theJobId);
+//				if (checkApp == null) {
+//					model = new ModelAndView("welcome");
+//					Application app = new Application();
+//					app.setJobId(theJobId);
+//					app.setJobseekerId(activeUser.getId());
+//					applicationService.saveApplication(app);
+//					model.addObject("appliedJobmsg", "You Have Applied Job Successfully");
+//				} else {
+//
+//					model = new ModelAndView("welcome");
+//					model.addObject("appliedJobmsg", "You Have Already Applied This Job");
+//				}
+//				model.addObject("joblist", jobService.getJobList());
+//			}
+//		} catch (Exception e) {
+//
+//		}
+//		return model;
+//	}
+//
 
 
 	private String encryptPass(String pass) {
@@ -314,6 +312,23 @@ public class JobSeekerController {
 			
 		}
 		
+		return model;
+	}
+	@RequestMapping("/welcome")
+	public ModelAndView welcomePage(HttpServletRequest request)
+	{
+		ModelAndView model=null;
+		
+		JobSeeker activeUser=(JobSeeker)request.getSession().getAttribute("userId");
+		if(activeUser!=null) {
+			JobSeeker jobSeeker=jobSeekerService.findById(activeUser.getId());
+		List<Job> jobList = jobService.getJobList();
+			model = new ModelAndView("welcome");
+			model.addObject("loginusers", jobSeeker.getUsers());
+			model.addObject("joblist", jobList);
+		}
+		else
+		{}
 		return model;
 	}
 }
