@@ -50,17 +50,19 @@ public class CertificationsController {
 		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
 		
 		if (activeUser != null) {
-			List<Certifications> certificationList = new ArrayList<Certifications>();
-			certificationList.add(certificate);
-			activeUser.setCertificationsList(certificationList);
-			jobSeekerService.saveJobSeeker(activeUser);
+			
+		
+			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+			
+			jobSeeker.getCertificationsList().add(certificate);
+			jobSeekerService.saveJobSeeker(jobSeeker);
 			model = new ModelAndView("certification");
 			model.addObject("msg", certificate.getCertificationName() + " sucessfully Added");
 			model.addObject("certification", new Certifications());
 			if (activeUser.getCertificationsList() == null) {
 				model.addObject("certificationList", null);
 			} else {
-				JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+				 jobSeeker = jobSeekerService.findById(activeUser.getId());
 				model.addObject("certificationList", jobSeeker.getCertificationsList());
 			}
 		} else {
