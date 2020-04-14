@@ -115,6 +115,14 @@ public class JobSeeker {
 	public void setCertificationsList(List<Certifications> certificationsList) {
 		this.certificationsList = certificationsList;
 	}
+
+	public List<Application> getAppliedJobs() {
+		return appliedJobs;
+	}
+
+	public void setAppliedJobs(List<Application> appliedJobs) {
+		this.appliedJobs = appliedJobs;
+	}
 	
 	
 	

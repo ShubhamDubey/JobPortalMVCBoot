@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="applied_job",uniqueConstraints= @UniqueConstraint(columnNames = {"job_id_id","job_seeker_id"}))
+@Table(name="applied_job",uniqueConstraints= @UniqueConstraint(columnNames = {"job_id","job_seeker_id"}))
 public class Application {
 	@Id
 	@Column(name = "id")
@@ -25,7 +25,7 @@ public class Application {
 	private Date appliedDate;
 	
 	@ManyToOne()
-	private Job jobId;
+	private Job job;
 
 	@ManyToOne()
 	private JobSeeker jobSeeker;
@@ -46,11 +46,11 @@ public class Application {
 	}
 
 	
-	public Job getJobId() {
-		return jobId;
+	public Job getJob() {
+		return job;
 	}
-	public void setJobId(Job jobId) {
-		this.jobId = jobId;
+	public void setJob(Job jobId) {
+		this.job = jobId;
 	}
 	public JobSeeker getJobSeeker() {
 		return jobSeeker;
@@ -59,6 +59,12 @@ public class Application {
 		this.jobSeeker = jobSeeker;
 	}
 	public Application() {}
+	public Date getAppliedDate() {
+		return appliedDate;
+	}
+	public void setAppliedDate(Date appliedDate) {
+		this.appliedDate = appliedDate;
+	}
 	
 	
 	

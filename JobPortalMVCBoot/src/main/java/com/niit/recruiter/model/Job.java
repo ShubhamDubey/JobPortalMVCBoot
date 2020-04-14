@@ -42,7 +42,7 @@ public class Job {
 	private String logo;
 
 	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
-	@JoinColumn(name="job_id_id")
+	@JoinColumn(name="job_id")
 	private List<Application> applicaionsList;  
 	public int getId() {
 		return id;
@@ -122,6 +122,12 @@ public class Job {
 	public Job() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public List<Application> getApplicaionsList() {
+		return applicaionsList;
+	}
+	public void setApplicaionsList(List<Application> applicaionsList) {
+		this.applicaionsList = applicaionsList;
 	}
 	
 	
