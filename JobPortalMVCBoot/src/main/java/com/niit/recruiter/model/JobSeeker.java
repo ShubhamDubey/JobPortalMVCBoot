@@ -49,6 +49,9 @@ public class JobSeeker {
 	@JoinColumn(name="job_seeker_id")
 	private List<Certifications> certificationsList;
 
+	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
+	@JoinColumn(name="job_seeker_id")
+	private List<Application> appliedJobs;
 	public Integer getId() {
 		return id;
 	}

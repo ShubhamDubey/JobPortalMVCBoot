@@ -3,12 +3,16 @@ package com.niit.recruiter.model;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +40,10 @@ public class Job {
 	private Date expireDate;
 	@Column(name = "logo")
 	private String logo;
+
+	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
+	@JoinColumn(name="job_id_id")
+	private List<Application> applicaionsList;  
 	public int getId() {
 		return id;
 	}
