@@ -92,6 +92,7 @@ ${message}
 
 				<th>University</th>
 				<th>passing year</th>
+				<th colspan=2>Action</th>
 		</thead>
 		<tbody>
 			<c:set var="count" value="0" scope="page" />
@@ -113,8 +114,8 @@ ${message}
 
 						<td contenteditable="true">${tempEducationList.university}</td>
 						<td contenteditable="true">${tempEducationList.passingYear}</td>
-						<td><a href="${updateLink }">Update</a></td>
-						<td><a href="${deleteLink }">Delete</a></td>
+					<%-- <td><a href="${updateLink }" class="btn btn-primary">Update</a></td>  --%>
+						<td><a href="${deleteLink }" class="btn btn-danger">Delete</a></td>
 					</tr>
 					
 

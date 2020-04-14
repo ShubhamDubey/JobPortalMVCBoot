@@ -24,6 +24,10 @@
 		<div class="vertical-space-60"></div>
 	<div class="row">
 			<div class="col-lg-2">
+				<div class="">
+						<a href="welcome" class="btn btn-block btn-outline-primary"
+							 id="profile_id">Back</a>
+					</div>
 				<div class="container card-body">
 					<div class="row ">
 						<a href="editProfile" class="btn btn-block btn-outline-primary"

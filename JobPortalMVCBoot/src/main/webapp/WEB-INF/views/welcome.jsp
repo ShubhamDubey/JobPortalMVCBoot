@@ -30,7 +30,7 @@ response.setHeader("Expires", "0");//Proxies
 		<c:forEach var="tempjoblist" items="${joblist}">
 			<!-- construct an "update" link with customer id -->
 			<c:url var="appliedJobLink" value="appliedJob">
-				<c:param name="jobseekerId" value="${sessionScope['userId']}" />
+			
 				<c:param name="jobId" value="${tempjoblist.id}" />
 			</c:url>
 			<div class="detail">

@@ -91,7 +91,9 @@
 						<li class="nav-item pl-1"><a class="nav-link"
 							href="about.html"><i class="fa fa-th-list fa-fw mr-1"></i>About</a>
 						</li>
-					
+					<li class="nav-item pl-1"><a class="nav-link"
+							href="appliedJobListing"><i class="fa fa-th-list fa-fw mr-1"></i>View applied Job</a>
+						</li>
 						<li class="nav-item pl-1"><div class="dropdown">
 								<button class=" nav-link dropdown-toggle" type="button"
 									id="dropdownMenuButton" data-toggle="dropdown"
