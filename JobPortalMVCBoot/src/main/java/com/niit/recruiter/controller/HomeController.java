@@ -72,6 +72,11 @@ public class HomeController {
 			// both are correct
 			System.out.println("userId " + loginUsers.getJobseeker().getId());
 			req.getSession().setAttribute("userId", loginUsers.getJobseeker()); // Session Created
+			/**
+			 * loginUsers.getJobseeker().getResume();
+			 * loginUsers.getJobseeker().getEducationList();
+			 * 
+			 */
 			req.getSession().setAttribute("username", loginUsers.getJobseeker().getFirstName());
 			List<Job> jobList = jobService.getJobList();
 			model = new ModelAndView("welcome");
