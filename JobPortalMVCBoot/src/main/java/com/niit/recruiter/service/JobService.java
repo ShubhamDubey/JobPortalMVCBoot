@@ -1,6 +1,7 @@
 package com.niit.recruiter.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -27,6 +28,12 @@ public class JobService {
 	public List<Job> saveAll(List<Job> jobListDb) {
 	return jobRepo.saveAll(jobListDb);
 		
+	}
+
+
+	public  Optional<Job> findById(int theJobId) {
+		// TODO Auto-generated method stub
+		return jobRepo.findById(theJobId);
 	}
 
 	
