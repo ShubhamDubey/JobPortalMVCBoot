@@ -29,6 +29,14 @@ public class Certifications {
 		return url;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}

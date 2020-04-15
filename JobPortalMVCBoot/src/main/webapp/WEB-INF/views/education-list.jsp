@@ -18,7 +18,7 @@
 						<th>Category</th>
 						<th>Degree</th>
 						<th>Course Type</th>
-						<th>specialisation</th>
+						<th>specialization</th>
 						<th>University</th>
 						<th>passing year</th>
 				</thead>

@@ -10,7 +10,7 @@ ${message}
 				<div class="col-lg-6">
 					<div class="form-group">
 						<label class="form-control-label" for="resume">Upload
-							Resume</label><input class="form-control" type="file" name="file"
+							Resume</label><input class="form-control" type="file" name="file" required="required"
 							placeholder="Resume Upload" accept=".pdf">
 
 					</div>

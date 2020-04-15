@@ -20,6 +20,7 @@
 		<tr>
 			<th>Applied Date</th>
 			<th>Job</th>
+			<th>Company Name</th>
 			<th>Description</th>
 	</thead>
 	<tbody>
@@ -27,8 +28,8 @@
 		<c:forEach var="tempApplicationList" items="${appliedJobList}">
 			<tr>
 				<td>${tempApplicationList.appliedDate}</td>
-
 				<td>${tempApplicationList.job.name}</td>
+				<td>${tempApplicationList.job.employerEmail}</td>
 				<td>${tempApplicationList.job.description}</td>
 			</tr>
 
