@@ -18,6 +18,8 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 
 	List<Application> findByJobSeekerAndJobAndStatus(JobSeeker jobSeeker, Job job, boolean b);
 
+	List<Application> findByJobSeekerAndStatus(JobSeeker jobSeeker, boolean b);
+
 
 
 }

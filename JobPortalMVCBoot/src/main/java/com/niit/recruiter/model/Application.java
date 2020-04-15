@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="applied_job",uniqueConstraints= @UniqueConstraint(columnNames = {"job_id","job_seeker_id"}))
+@Table(name="applied_job",uniqueConstraints= @UniqueConstraint(columnNames = {"job_id","job_seeker_id","status"}))
 public class Application {
 	@Id
 	@Column(name = "id")

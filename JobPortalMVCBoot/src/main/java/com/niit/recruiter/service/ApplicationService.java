@@ -19,9 +19,9 @@ public class ApplicationService {
 
 	@Autowired
 	private ApplicationRepository repo;
-	public void saveApplication(Application app) {
+	public Application saveApplication(Application app) {
 		// TODO Auto-generated method stub
-		repo.save(app);
+		return repo.save(app);
 	}
 
 	public List<Application> findByJobSeekerAndJob(JobSeeker jobSeeker, Job job) {
@@ -38,6 +38,13 @@ public class ApplicationService {
 		// TODO Auto-generated method stub
 		return repo.findByJobSeekerAndJobAndStatus(jobSeeker,job,b);
 	}
+
+	public List<Application> findByJobSeekerAndStatus(JobSeeker jobSeeker, boolean b) {
+		// TODO Auto-generated method stub
+		return repo.findByJobSeekerAndStatus(jobSeeker, b);
+	}
+
+
 
 
 }

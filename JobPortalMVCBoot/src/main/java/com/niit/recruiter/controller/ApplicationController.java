@@ -48,7 +48,7 @@ public class ApplicationController {
 				System.out.println(job.getName());
 				JobSeeker jobSeeker=jobSeekerService.findById(activeUser.getId());
 				System.out.println(jobSeeker.getFirstName());
-				List<Application> checkApp = applicationService.findByJobSeekerAndJob(jobSeeker,job);
+				List<Application> checkApp = applicationService.findByJobSeekerAndJobAndStatus(jobSeeker,job,false);
 			    if (checkApp.isEmpty()) {
 			    	// new Job
 					model = new ModelAndView("welcome");
@@ -85,7 +85,7 @@ public class ApplicationController {
 		{
 			model=new ModelAndView("applied-jobs");
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-			model.addObject("appliedJobList", jobSeeker.getAppliedJobs());
+			model.addObject("appliedJobList",applicationService.findByJobSeekerAndStatus(jobSeeker,false));
 		}
 		else
 		{
@@ -95,4 +95,32 @@ public class ApplicationController {
 		return model;
 	}
 	
+	@RequestMapping("deleteApplication")
+	public ModelAndView deleteApplication(HttpServletRequest request,@RequestParam("applicationId") Integer id)
+	{
+
+		ModelAndView model=null;
+		
+		JobSeeker activeUser=(JobSeeker)request.getSession().getAttribute("userId");
+		if(activeUser==null)
+		{
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		}
+		else
+		{
+			
+			model=new ModelAndView("applied-jobs");
+		JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+		
+		Application application=applicationService.findByJobSeekerAndStatus(jobSeeker,false).get(id);
+		application.setStatus(true);
+		System.out.println(application.getStatus()+"Status");
+		applicationService.saveApplication(application);
+		
+		model.addObject("appliedJobList",applicationService.findByJobSeekerAndStatus(jobSeeker,false));
+		
+		}
+		return model;
+	}
 }
