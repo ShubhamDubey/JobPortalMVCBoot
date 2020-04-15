@@ -100,7 +100,6 @@ public class CertificationsController {
 				certificationService.deleteById(certificate.getId());
 				
 				jobSeekerService.saveJobSeeker(jobSeeker);
-				jobSeeker = jobSeekerService.findById(activeUser.getId());
 				model.addObject("certificationList", jobSeeker.getCertificationsList());
 			}
 		} catch (Exception e) {
