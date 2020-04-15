@@ -29,7 +29,7 @@ ${message}
 	</form:form>
 
 </div>
-<div class="col-lg-6">
+<div class="col-lg-2">
 <table class="table table-striped">
 				<c:set var="count" value="0" scope="page" />
 				<thead>
