@@ -52,7 +52,7 @@
 							 id="certification_id">Certifications</a>
 					</div>
 					<div class="row ">
-						<a href="#skill" class="btn btn-block btn-outline-primary"
+						<a href="showSkillsForm" class="btn btn-block btn-outline-primary"
 							 id="skill_id">Skills</a>
 					</div>
 				</div>

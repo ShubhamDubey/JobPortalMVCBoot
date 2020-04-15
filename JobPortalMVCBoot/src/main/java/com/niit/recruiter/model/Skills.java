@@ -20,6 +20,16 @@ public class Skills {
 	@ManyToOne
 	private JobSeeker jobSeeker;
 
+	
+	public Skills(String name) {
+		super();
+		this.name = name;
+	}
+
+	public Skills() {
+		super();
+	}
+
 	public Integer getId() {
 		return id;
 	}
