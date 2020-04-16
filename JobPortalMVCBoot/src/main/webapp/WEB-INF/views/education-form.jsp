@@ -1,7 +1,6 @@
 <%@include file="edit-profile-header.jsp"%>
 ${message}
 <div class="col-lg-4">
-
 	<form:form id="profile" action="saveEducation" method="POST"
 		modelAttribute="education">
 		<div id="education">
@@ -26,18 +25,25 @@ ${message}
 				</div>
 
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="course">Course</label> <input
 								type="text" id="course" name="course" class="form-control"
 								placeholder="B.SC" value="">
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="university">University</label>
 							<input type="text" id="university" name="university"
 								class="form-control" placeholder="University of Delhi" value="">
+						</div>
+					</div>
+						<div class="col-lg-4">
+						<div class="form-group">
+							<label class="form-control-label" for="university">University</label>
+							<input type="text" id="percentage" name="percentage"
+								class="form-control" placeholder="Enter your CGP/Percentage" value="">
 						</div>
 					</div>
 				</div>
@@ -91,30 +97,31 @@ ${message}
 				<th>Course Type</th>
 
 				<th>University</th>
+				<th>Percentage</th>
 				<th>passing year</th>
 				<th colspan=2>Action</th>
 		</thead>
 		<tbody>
+		
 			<c:set var="count" value="0" scope="page" />
 				<c:forEach var="tempEducationList" items="${educationList}">
 					<c:url var="deleteLink" value="deleteEducation">
 						<c:param name="educationId"
 							value="${count}" />
 					</c:url>
-					<c:url var="updateLink" value="update">
-						<c:param name="educationId"
-							value="${count}" />
-					</c:url>
+			
 					<tr id="${tempEducationList.educationId}1">
 						<td>
 							${tempEducationList.educationCategory.educationCategoryName}</td>
-						<td contenteditable="true">${tempEducationList.course}</td>
+						<td>${tempEducationList.course}</td>
+						
 
 						<td>${tempEducationList.courseType}</td>
 
-						<td contenteditable="true">${tempEducationList.university}</td>
-						<td contenteditable="true">${tempEducationList.passingYear}</td>
-					<%-- <td><a href="${updateLink }" class="btn btn-primary">Update</a></td>  --%>
+						<td>${tempEducationList.university}  </td>
+						<td>${tempEducationList.percentage }</td>
+						<td>${tempEducationList.passingYear}</td>
+				<%-- 	<td><button id="${count}" type="button" onclick="buttonClick(this.id)" class="btn btn-primary"   name="selectedRow">Update</button></td>  --%>
 						<td><a href="${deleteLink }" class="btn btn-danger">Delete</a></td>
 					</tr>
 					
@@ -122,7 +129,7 @@ ${message}
 
 		<c:set var="count" value="${count + 1}" scope="page"/>
 				</c:forEach>
-		
+	
 		</tbody>
 	</table>
 </div>
