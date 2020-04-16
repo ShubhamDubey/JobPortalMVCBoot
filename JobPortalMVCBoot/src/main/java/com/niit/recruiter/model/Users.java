@@ -20,8 +20,16 @@ public class Users {
 	@OneToOne(mappedBy = "users")
 	private JobSeeker jobseeker;
 
+	@OneToOne(mappedBy = "users")
+	private Recruiter recruiter;
 	
 	
+	public Recruiter getRecruiter() {
+		return recruiter;
+	}
+	public void setRecruiter(Recruiter recruiter) {
+		this.recruiter = recruiter;
+	}
 	public Integer getId() {
 		return id;
 	}
