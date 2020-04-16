@@ -20,11 +20,13 @@ public class Education {
 	private String specialisation;
 	private String university;
 	private String passingYear;
-
-	@ManyToOne
+	
+	
+	private Float percentage;
+	@ManyToOne()
 	private EducationCategory educationCategory;
 	
-	@ManyToOne
+	@ManyToOne()
 	private JobSeeker jobSeeker;
 	
 
@@ -34,6 +36,14 @@ public class Education {
 
 	public void setJobSeeker(JobSeeker jobSeeker) {
 		this.jobSeeker = jobSeeker;
+	}
+
+	public Float getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(Float percentage) {
+		this.percentage = percentage;
 	}
 
 	public EducationCategory getEducationCategory() {
@@ -117,4 +127,5 @@ public class Education {
 	public void setPassingYear(String passingYear) {
 		this.passingYear = passingYear;
 	}
+	
 }
