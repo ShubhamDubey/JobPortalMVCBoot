@@ -26,7 +26,7 @@ public class Job {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name="employer_email")
+	@Column(name="company_name")
 	private String employerEmail;
 	@Column(name="name")
 	private String name;
