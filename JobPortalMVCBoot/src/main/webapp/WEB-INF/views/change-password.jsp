@@ -12,13 +12,13 @@ ${message}
 			<div class="pl-lg-4">
 				<div class="row">
 					<div class="col-lg-6">
-						<div class="form-group">
+						<%-- <div class="form-group">
 							<label class="form-control-label" for="current_password">Current
 								Password</label> <input type="password" id="current_password"
 								name="current_password" class="form-control"
 								placeholder="Enter Current-Password"
 								value="${jobSeeker.users.password}">
-						</div>
+						</div> --%>
 					</div>
 				</div>
 				<div class="row">

@@ -30,7 +30,7 @@ response.setHeader("Expires", "0");//Proxies
 		<c:forEach var="tempjoblist" items="${joblist}">
 			<!-- construct an "update" link with customer id -->
 			<c:url var="appliedJobLink" value="appliedJob">
-			
+
 				<c:param name="jobId" value="${tempjoblist.id}" />
 			</c:url>
 			<div class="detail">
@@ -45,12 +45,61 @@ response.setHeader("Expires", "0");//Proxies
 							class="text">${tempjoblist.description}</span> <br /> <i
 							class="fa fa-briefcase"></i> <span class="text font-size">${tempjoblist.vacancy}
 							Available Vacancy</span>
-						<div class="float-right margin-top text-align-center">
-							<a href="${appliedJobLink}" class="part-full-time">APPLY</a>
-							<!--  <p class="date-time">Advertise Date:
-								${tempjoblist.advertiseDate}</p>-->
-							<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
-						</div>
+						<p>id ${ appList.id }</p>
+						<c:choose>
+							<c:when test="${tempjoblist.applicaionsList.isEmpty()}">
+								<div class="float-right margin-top text-align-center">
+									<a href="${appliedJobLink}" class="part-full-time">APPLY1</a>
+									<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
+
+								</div>
+							</c:when>
+							<c:otherwise>
+
+								<c:forEach var="applications"
+									items="${tempjoblist.applicaionsList }">
+									<c:choose>
+										<c:when
+											test="${applications.jobSeeker.id==loginusers.jobseeker.id }">
+											<c:choose>
+												<c:when test="applications.status">
+													<div class="float-right margin-top text-align-center">
+														<a href="${appliedJobLink }" class="part-full-time">APPLY2</a>
+														<p class="date-time">Deadline:
+															${tempjoblist.expireDate}</p>
+
+													</div>
+												</c:when>
+												<c:otherwise>
+													<div class="float-right margin-top text-align-center">
+														<a class="part-full-time">APPLIED</a>
+														<p class="date-time">Deadline:
+															${tempjoblist.expireDate}</p>
+
+													</div>
+												</c:otherwise>
+											</c:choose>
+
+										</c:when>
+										
+										<c:otherwise>
+											<div class="float-right margin-top text-align-center">
+												<a class="part-full-time" href="${appliedJobLink }">APPLY3</a>
+												<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
+
+											</div>
+										</c:otherwise>
+
+									</c:choose>
+
+
+								</c:forEach>
+
+
+							</c:otherwise>
+						</c:choose>
+						<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
+
 					</div>
 				</div>
 			</div>

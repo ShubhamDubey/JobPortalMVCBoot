@@ -44,6 +44,11 @@ public class ApplicationService {
 		return repo.findByJobSeekerAndStatus(jobSeeker, b);
 	}
 
+	public Application findByJobSeekerAndJobAndStatus(JobSeeker jobSeeker, boolean b) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 

@@ -41,9 +41,9 @@ ${message}
 					</div>
 						<div class="col-lg-4">
 						<div class="form-group">
-							<label class="form-control-label" for="university">University</label>
+							<label class="form-control-label" for="percentage">Percentage</label>
 							<input type="text" id="percentage" name="percentage"
-								class="form-control" placeholder="Enter your CGP/Percentage" value="">
+								class="form-control" placeholder="CGPA / %" value="">
 						</div>
 					</div>
 				</div>

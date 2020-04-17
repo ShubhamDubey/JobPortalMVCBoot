@@ -49,24 +49,20 @@ public class ApplicationController {
 				JobSeeker jobSeeker=jobSeekerService.findById(activeUser.getId());
 				System.out.println(jobSeeker.getFirstName());
 				List<Application> checkApp = applicationService.findByJobSeekerAndJobAndStatus(jobSeeker,job,false);
-			    if (checkApp.isEmpty()) {
-			    	// new Job
-					model = new ModelAndView("welcome");
-					Application app = new Application();
-					System.out.println("Runningdalsjflkadsjflasd");
-					app.setJob(job);
-					app.setStatus(false);
-					app.setAppliedDate(new Date());
-
-					app.setJobSeeker(jobSeeker);
-					applicationService.saveApplication(app);
-					model.addObject("appliedJobmsg", "You Have Applied Job Successfully");
-				} else {
 				
-					model = new ModelAndView("welcome");
-					model.addObject("appliedJobmsg", "You Have Already Applied This Job");
-				}
-				model.addObject("joblist", jobService.getJobList());
+				/*
+				 * if (checkApp.isEmpty()) { // new Job model = new ModelAndView("welcome");
+				 * Application app = new Application();
+				 * System.out.println("Runningdalsjflkadsjflasd"); app.setJob(job);
+				 * app.setStatus(false); app.setAppliedDate(new Date());
+				 * 
+				 * app.setJobSeeker(jobSeeker); applicationService.saveApplication(app);
+				 * model.addObject("appliedJobmsg", "You Have Applied Job Successfully"); } else
+				 * {
+				 * 
+				 * model = new ModelAndView("welcome"); model.addObject("appliedJobmsg",
+				 * "You Have Already Applied This Job"); }
+				 */				model.addObject("joblist", jobService.getJobList());
 			}
 		} catch (Exception e) {
 				

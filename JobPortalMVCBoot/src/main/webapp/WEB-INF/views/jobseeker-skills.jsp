@@ -10,7 +10,7 @@ ${message}
 					
 					<div class="col-lg-6">
 						<div class="form-group">
-							<label class="form-control-label" for="input-country">Skills</label> <textarea class="form-control" name="name" rows="4" cols="50"></textarea>
+							<label class="form-control-label" for="input-country">Skills (write seprate by comma eg. skill1,skill2)</label> <textarea class="form-control" name="name" rows="4" cols="50"></textarea>
 						</div>
 					</div>
 				</div>
