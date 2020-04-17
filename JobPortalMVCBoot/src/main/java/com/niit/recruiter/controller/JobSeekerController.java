@@ -154,6 +154,7 @@ public class JobSeekerController {
 		}
 		
 		else if (loginUsersService.findByEmail(req.getParameter("email")) == null) {
+			theUsers.setRole("JobSeeeker");
 			JobSeeker theJobSeeker = new JobSeeker();
 			theJobSeeker.setFirstName(req.getParameter("firstName"));
 			theJobSeeker.setLastName(req.getParameter("lastName"));

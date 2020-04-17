@@ -45,6 +45,8 @@ public class UsersController {
 
 	@PostMapping("/addRecruiter")
 	public Users registrationRecruiter(@RequestBody Users user) {
+		System.out.println("Registration Recruiter");
+//		System.out.println(user.getRole());
 		Recruiter recruiter = user.getRecruiter();
 		recruiter.setUsers(user);
 		user.setRecruiter(recruiter);
