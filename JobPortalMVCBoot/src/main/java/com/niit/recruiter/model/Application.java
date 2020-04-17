@@ -13,6 +13,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="applied_job",uniqueConstraints= @UniqueConstraint(columnNames = {"job_id","job_seeker_id","status"}))
 public class Application {
@@ -25,9 +27,11 @@ public class Application {
 	private Date appliedDate;
 	
 	@ManyToOne()
+	@JsonIgnore
 	private Job job;
 
 	@ManyToOne()
+	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 	private Boolean status;

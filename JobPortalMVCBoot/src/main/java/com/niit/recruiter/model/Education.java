@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(uniqueConstraints= @UniqueConstraint(columnNames = {"education_category_education_category_id","job_seeker_id"}) )
 public class Education {
@@ -27,6 +29,7 @@ public class Education {
 	private EducationCategory educationCategory;
 	
 	@ManyToOne()
+	@JsonIgnore
 	private JobSeeker jobSeeker;
 	
 

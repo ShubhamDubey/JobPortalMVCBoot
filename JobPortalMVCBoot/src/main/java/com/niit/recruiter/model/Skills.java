@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(uniqueConstraints= @UniqueConstraint(columnNames = {"job_seeker_id", "name"}))
 
@@ -18,6 +20,7 @@ public class Skills {
 	private String name;
 	
 	@ManyToOne
+	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 	

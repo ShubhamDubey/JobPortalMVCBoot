@@ -12,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="job")
@@ -22,6 +25,7 @@ public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
 	@Column(name="employer_email")
 	private String employerEmail;
 	@Column(name="name")
@@ -40,7 +44,9 @@ public class Job {
 	private Date expireDate;
 	@Column(name = "logo")
 	private String logo;
-
+	@ManyToOne()
+	@JsonIgnore
+	private Recruiter recruiter;
 	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="job_id")
 	private List<Application> applicaionsList;  
@@ -55,6 +61,13 @@ public class Job {
 	}
 	public void setEmployerEmail(String employerEmail) {
 		this.employerEmail = employerEmail;
+	}
+	
+	public Recruiter getRecruiter() {
+		return recruiter;
+	}
+	public void setRecruiter(Recruiter recruiter) {
+		this.recruiter = recruiter;
 	}
 	public String getName() {
 		return name;

@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(uniqueConstraints= @UniqueConstraint(columnNames = {"job_seeker_id", "url"}))
 
@@ -23,6 +25,7 @@ public class Certifications {
 	private Date expireDate;
 	
 	@ManyToOne
+	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 	public String getUrl() {

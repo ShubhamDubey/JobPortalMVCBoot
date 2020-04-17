@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "resume",uniqueConstraints= @UniqueConstraint(columnNames = {"jobSeeker", "fileName"}))
 
@@ -28,6 +30,7 @@ public class Resume {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "jobSeeker")
+	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 

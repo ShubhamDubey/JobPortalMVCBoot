@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "jobseeker",uniqueConstraints= @UniqueConstraint(columnNames = {"id", "users_id"}))
 
@@ -30,6 +32,7 @@ public class JobSeeker {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "users_id")
+	@JsonIgnore
 	private Users users;
 	// cascade = CascadeType.ALL we can't use this because if we use and user delete
 	// Education details Delete our record delete

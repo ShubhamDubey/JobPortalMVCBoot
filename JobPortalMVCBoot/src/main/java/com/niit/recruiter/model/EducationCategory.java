@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -25,6 +27,7 @@ public class EducationCategory {
 
 	private String educationCategoryName;
 	@OneToMany(targetEntity=Education.class)
+	@JsonIgnore
 	@JoinColumn(name="education_category_education_category_id")
 	private List<Education> educationList;
 	
