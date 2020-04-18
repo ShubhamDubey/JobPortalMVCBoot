@@ -35,12 +35,5 @@ public class JobController {
 		List<Job> jobList=jobRepo.findByRecruiter(recruiter);
 		return jobList;
 	}
-	
-	@PostMapping("/applyJob")
-	public List<Application> applyJob(@RequestBody JobSeeker jobSeeker) {
-		System.out.println(jobSeeker.getFirstName());
-			
-		return applicationRepo.findByJobSeeker(jobSeekerRepo.save(jobSeeker));
-	}
 
 }
