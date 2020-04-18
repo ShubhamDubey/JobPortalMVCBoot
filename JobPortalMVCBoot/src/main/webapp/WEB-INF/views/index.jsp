@@ -19,7 +19,7 @@
 				<div class="media display-inline text-align-center">
 					<img class="mr-3" style="width: 75px; height: 75px;"
 						alt="company_logo"
-						src="/JobBazar/resources/static/images/${tempjoblist.logo}">
+						src="/resources/static/images/${tempjoblist.logo}">
 					<div class="media-body text-left  text-align-center">
 						<h6 class="large material-icon ">
 							${tempjoblist.employerEmail} looking for ${tempjoblist.name}</h6>
