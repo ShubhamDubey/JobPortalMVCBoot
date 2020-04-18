@@ -19,7 +19,7 @@ import com.niit.recruiter.repository.JobSeekerRepository;
 @CrossOrigin(origins = {"http://localhost:4200","http://localHost:8080"})
 @RestController
 @RequestMapping("/api/application")
-public class ApplicationController {
+public class ApplicationRestController {
 
 	@Autowired
 	private JobRepository jobRepo;
