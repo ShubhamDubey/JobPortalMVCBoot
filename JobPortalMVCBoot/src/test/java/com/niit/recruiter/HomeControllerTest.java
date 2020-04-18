@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -58,9 +59,34 @@ public class HomeControllerTest {
 	public void init() {
 		MockitoAnnotations.initMocks(this);
 	}
+	@Test
+	public void processLoginEmailInvalidAndPasswordTest() {
+		Users theJobSeekerUser = mock(Users.class);
+		model = null;
+		String email = "nitesh123@gmail.com";
+		String password = "redhat";
+		theJobSeekerUser.setEmail("nitesh1234@gmail.com");
+		theJobSeekerUser.setPassword("123");
+		when(request.getSession()).thenReturn(session);
+		session.setAttribute("userId", theJobSeekerUser);
+		when(usersService.findByEmail(email)).thenReturn(theJobSeekerUser);
+		Users loginUsers = mock(Users.class);
+		if (!(email.equals(theJobSeekerUser.getEmail()) && password.equals(theJobSeekerUser.getPassword())))
+			model = new ModelAndView("login-jobseeker");
+		model.addObject("error", "Invalid User Name Or Password");
+		model.addObject("loginusers", loginUsers);
+		ModelAndView modelAndView1 = homeController.processLogin(request, theJobSeekerUser);
+		Assert.assertEquals(modelAndView1.getViewName(), model.getViewName());
+		Assert.assertTrue(modelAndView1.getModel().get("loginusers") instanceof Users);
+		Assert.assertTrue(modelAndView1.getModel().containsKey("error"));
+		System.out.println("3");
+
+	}
+
+
 
 	@Test
-	public void processLoginTest() {
+	public void processLoginTestRightUser() {
 		Users theJobSeekerUser = new Users();
 		model = null;
 
@@ -76,17 +102,7 @@ public class HomeControllerTest {
 		when(request.getSession()).thenReturn(session);
 		JobSeeker jobSeeker = mock(JobSeeker.class);
 		when(loginUsers.getJobseeker()).thenReturn(jobSeeker);
-		if(jobSeeker==null) {
-			model = new ModelAndView("login-jobseeker");
-			model.addObject("error", "User name not exist");
-			model.addObject("loginusers", loginUsers);
-			ModelAndView modelAndView = homeController.processLogin(request, theJobSeekerUser);
-			Assert.assertEquals(modelAndView.getViewName(), model.getViewName());
-			Assert.assertTrue(modelAndView.getModel().containsKey("error"));
-			Assert.assertTrue(modelAndView.getModel().get("joblist") instanceof String);
-		}
-		else if(email.equalsIgnoreCase(theJobSeekerUser.getEmail())
-				&& password.equals(theJobSeekerUser.getPassword())) {
+		if (email.equalsIgnoreCase(theJobSeekerUser.getEmail()) && password.equals(theJobSeekerUser.getPassword())) {
 			session.setAttribute("userId", jobSeeker); // Session Created
 			List<Job> theJobList = new ArrayList<Job>();
 			Job mockJob1 = mock(Job.class);
@@ -99,30 +115,43 @@ public class HomeControllerTest {
 			theJobList.add(mockJob3);
 			theJobList.add(mockJob4);
 			theJobList.add(mockJob5);
-			model=new ModelAndView("welcome");
+			model = new ModelAndView("welcome");
 			model.addObject("loginusers", loginUsers);
-			model.addObject("joblist",theJobList);
+			model.addObject("joblist", theJobList);
 			ModelAndView modelAndView = homeController.processLogin(request, theJobSeekerUser);
 			Assert.assertEquals(modelAndView.getViewName(), model.getViewName());
 			Assert.assertTrue(modelAndView.getModel().containsKey("joblist"));
 			Assert.assertTrue(modelAndView.getModel().get("joblist") instanceof List);
 			Assert.assertTrue(modelAndView.getModel().containsKey("loginusers"));
-		
-			
+			System.out.println("2");
 		}
-		else {
-			 model=new
-					  ModelAndView("login-jobseeker"); model.addObject("error",
-					  "Invalid User Name Or Password"); model.addObject("loginusers",loginUsers);
-					  ModelAndView modelAndView1 = homeController.processLogin(request,
-					  theJobSeekerUser); Assert.assertEquals(modelAndView1.getViewName(),
-					  model.getViewName());
-					  Assert.assertTrue(modelAndView1.getModel().get("loginusers") instanceof
-					  Users); Assert.assertTrue(modelAndView1.getModel().containsKey("error"));
-					  Assert.assertTrue(modelAndView1.getModel().get("error") instanceof String);
+	}
+
+		@Test
+	public void processLoginEmailInvalidTest() {
+		Users theJobSeekerUser = mock(Users.class);
+		model = null;
+		String email = "nitesh123@gmail.com";
+		String password = "redhat";
+		theJobSeekerUser.setEmail(email);
+		theJobSeekerUser.setPassword(password);
+
+		when(request.getSession()).thenReturn(session);
+		session.setAttribute("userId", theJobSeekerUser);
+		when(usersService.findByEmail(email)).thenReturn(theJobSeekerUser);
+		Users loginUsers = null;
+		when(usersService.findByEmail(email)).thenReturn(loginUsers);
+		if (loginUsers == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("error", "User name not exist");
+			model.addObject("loginusers", loginUsers);
+			ModelAndView modelAndView = homeController.processLogin(request, theJobSeekerUser);
+			Assert.assertEquals(modelAndView.getViewName(), model.getViewName());
+			Assert.assertTrue(modelAndView.getModel().containsKey("error"));
+			Assert.assertTrue(modelAndView.getModel().get("loginusers") instanceof Users);
+			System.out.println("1");
 		}
-		
-		 
+
 	}
 
 	@Test

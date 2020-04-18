@@ -67,8 +67,10 @@ public class HomeController {
 	public ModelAndView processLogin(HttpServletRequest req, @ModelAttribute Users theJobSeekerUser) {
 
 		ModelAndView model = null;
-		StringTokenizer st = new StringTokenizer(theJobSeekerUser.getEmail(), "@");
-		String s2 = st.nextToken();
+		/*
+		 * StringTokenizer st = new StringTokenizer(theJobSeekerUser.getEmail(), "@");
+		 * String s2 = st.nextToken();
+		 */
 
 		Users loginUsers = usersService.findByEmail(theJobSeekerUser.getEmail());
 		if (loginUsers == null) {
@@ -103,7 +105,8 @@ public class HomeController {
 			 * 
 			 * System.out.println(job.getEmployerEmail() + "\t" + job.getDescription()); }
 			 * 
-			 */		} else {
+			 */		}
+		else {
 			// both credentials are incorrect
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("error", "Invalid User Name Or Password");
