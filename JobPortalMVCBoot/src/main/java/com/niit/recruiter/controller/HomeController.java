@@ -88,7 +88,7 @@ public class HomeController {
 			 * loginUsers.getJobseeker().getEducationList();
 			 * 
 			 */
-			req.getSession().setAttribute("username", loginUsers.getJobseeker().getFirstName());
+//			req.getSession().setAttribute("username", loginUsers.getJobseeker().getFirstName());
 			List<Job> jobList = jobService.getJobList();
 			model = new ModelAndView("welcome");
 			model.addObject("loginusers", loginUsers);
