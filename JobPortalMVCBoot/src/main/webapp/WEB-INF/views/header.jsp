@@ -56,7 +56,7 @@
 					class="fa fa-graduation-cap fa-lg mr-2"></i>JobBazar</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#nvbCollapse" aria-controls="nvbCollapse">
-					<span class="navbar-toggler-icon"></span>
+					<span class="fa fa-bars" style="color:#ffffff;"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="nvbCollapse">
 					<ul class="navbar-nav ml-auto">
