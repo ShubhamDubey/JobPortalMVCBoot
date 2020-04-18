@@ -15,7 +15,7 @@
         <div class="container-login100">
             <div class="wrap-login100">
               <div class="login100-pic js-tilt" data-tilt>
-                    <img alt="img" src="/JobBazar/resources/static/images/img-01.png"/>
+                    <img alt="img" src="/resources/static/images/img-01.png"/>
                 </div>
 					<form:form action="loginJobSeeker" cssClass="login100-form validate-form" modelAttribute="loginjobseeker">
 					<span class="login100-form-title" style="color: red">
