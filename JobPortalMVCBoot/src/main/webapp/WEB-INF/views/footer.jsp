@@ -160,8 +160,8 @@
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
 		
-		<script src="/resources/static/js/select2.min.js"></script>
-        <script src="/resources/static/js/tilt.jquery.min.js"></script>
+		<script src="/JobBazar/resources/static/js/select2.min.js"></script>
+        <script src="/JobBazar/resources/static/js/tilt.jquery.min.js"></script>
         <script>
             $('.js-tilt').tilt({
                 scale: 1.1

@@ -13,7 +13,7 @@ import com.niit.recruiter.model.Job;
 import com.niit.recruiter.model.Recruiter;
 import com.niit.recruiter.repository.JobRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200","http://localHost:8080"})
 @RestController
 @RequestMapping("/api/jobs")
 public class JobController {
@@ -21,10 +21,11 @@ public class JobController {
 	@Autowired
 	private JobRepository jobRepo;
 
-	@GetMapping
-	public List<Job> jobList(@RequestBody Recruiter recruiter) {
+	@GetMapping("")
+	public List<Job> jobListPostedByRecruiter(@RequestBody Recruiter recruiter) {
 		System.out.println(recruiter.getFirstName());
-		return jobRepo.findByRecruiter(recruiter);
+		List<Job> jobList=jobRepo.findByRecruiter(recruiter);
+		return jobList;
 	}
 
 }

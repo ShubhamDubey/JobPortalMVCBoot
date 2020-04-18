@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.model.Recruiter;
 import com.niit.recruiter.model.Users;
@@ -13,7 +14,7 @@ import com.niit.recruiter.repository.JobSeekerRepository;
 import com.niit.recruiter.repository.RecruiterRepository;
 import com.niit.recruiter.repository.UsersRepository;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200","http://localHost:8080"})
 @RestController
 @RequestMapping("/api/users")
 public class UsersController {
@@ -58,7 +59,7 @@ public class UsersController {
 	public Users userLogin(@RequestBody Users users) {
 
 		Users user = usersRepo.findByEmailAndPassword(users.getEmail(), users.getPassword());
-
+			System.out.println("Called");
 		return user;
 
 	}

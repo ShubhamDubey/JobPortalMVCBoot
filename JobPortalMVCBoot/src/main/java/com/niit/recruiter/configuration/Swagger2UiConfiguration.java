@@ -15,8 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class Swagger2UiConfiguration implements WebMvcConfigurer {
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.niit.recruiter.rest"))
-		        .build();
+		return new Docket(DocumentationType.SWAGGER_2);
 	}
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) 

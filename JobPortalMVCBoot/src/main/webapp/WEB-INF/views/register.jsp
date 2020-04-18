@@ -12,7 +12,7 @@
 	<div class="container-login100">
 		<div class="wrap-login100">
 			<div class="login100-pic js-tilt" data-tilt>
-				<img alt="img" src="/resources/static/images/img-01.png" />
+				<img alt="img" src="/JobBazar/resources/static/images/img-01.png" />
 			</div>
 			<form:form action="saveJobSeeker"
 				cssClass="login100-form validate-form" modelAttribute="jobseeker">
