@@ -73,7 +73,6 @@ public class HomeController {
 		Users loginUsers = usersService.findByEmail(theJobSeekerUser.getEmail());
 		if (loginUsers == null) {
 			// email invalid
-			System.out.println("Cont " + loginUsers);
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("error", "User name not exist");
 			model.addObject("loginusers", new Users());
@@ -83,12 +82,6 @@ public class HomeController {
 			//System.out.println("userId " + loginUsers.getJobseeker().getId());
 			HttpSession session=req.getSession();
 			session.setAttribute("userId", loginUsers.getJobseeker()); // Session Created
-			/**
-			 * loginUsers.getJobseeker().getResume();
-			 * loginUsers.getJobseeker().getEducationList();
-			 * 
-			 */
-			//session.setAttribute("username", loginUsers.getJobseeker().getFirstName());
 			List<Job> jobList = jobService.getJobList();
 			model = new ModelAndView("welcome");
 			model.addObject("loginusers", loginUsers);
