@@ -1,4 +1,4 @@
-package com.niit.recruiter;
+package com.niit.recruiter.controller;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
