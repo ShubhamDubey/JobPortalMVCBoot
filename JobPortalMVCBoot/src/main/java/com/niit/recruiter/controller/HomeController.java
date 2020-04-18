@@ -1,10 +1,9 @@
 package com.niit.recruiter.controller;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -77,18 +76,19 @@ public class HomeController {
 			System.out.println("Cont " + loginUsers);
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("error", "User name not exist");
-			model.addObject("loginusers", new LoginUsers());
+			model.addObject("loginusers", new Users());
 		} else if (loginUsers.getEmail().equalsIgnoreCase(theJobSeekerUser.getEmail())
 				&& loginUsers.getPassword().equals(theJobSeekerUser.getPassword())) {
 			// both are correct
-			System.out.println("userId " + loginUsers.getJobseeker().getId());
-			req.getSession().setAttribute("userId", loginUsers.getJobseeker()); // Session Created
+			//System.out.println("userId " + loginUsers.getJobseeker().getId());
+			HttpSession session=req.getSession();
+			session.setAttribute("userId", loginUsers.getJobseeker()); // Session Created
 			/**
 			 * loginUsers.getJobseeker().getResume();
 			 * loginUsers.getJobseeker().getEducationList();
 			 * 
 			 */
-//			req.getSession().setAttribute("username", loginUsers.getJobseeker().getFirstName());
+			//session.setAttribute("username", loginUsers.getJobseeker().getFirstName());
 			List<Job> jobList = jobService.getJobList();
 			model = new ModelAndView("welcome");
 			model.addObject("loginusers", loginUsers);
@@ -97,39 +97,24 @@ public class HomeController {
 			// jobSeeker=applicationService.findByJobSeekerJob(loginUsers.getJobseeker(),);
 			// model.addObject("appList", applicationService.findByJobSeeker(jobSeeker));
 
-			for (Job job : jobList) {
-				if (job.getApplicaionsList().isEmpty()) {
-					// not applied yet
-					System.out.println(" Apply1");
-				} else {
-					
-					//job
-					for (Application app : job.getApplicaionsList()) {
-
-						if (app.getJobSeeker().getId() == loginUsers.getJobseeker().getId()) {
-							if (app.getStatus() == false) {
-								System.out.println("Applied");
-							}  else {
-								//staus true
-								System.out.println(" Apply2");
-							}break;
-						}
-						else
-						{ //application not  available
-							System.out.println(" Apply3");
-							break;
-						}
-					}
-				}
-
-				System.out.println(job.getEmployerEmail() + "\t" + job.getDescription());
-			}
-
-		} else {
+			/*
+			 * for (Job job : jobList) { if (job.getApplicaionsList().isEmpty()) { // not
+			 * applied yet System.out.println(" Apply1"); } else {
+			 * 
+			 * //job for (Application app : job.getApplicaionsList()) {
+			 * 
+			 * if (app.getJobSeeker().getId() == loginUsers.getJobseeker().getId()) { if
+			 * (app.getStatus() == false) { System.out.println("Applied"); } else { //staus
+			 * true System.out.println(" Apply2"); }break; } else { //application not
+			 * available System.out.println(" Apply3"); break; } } }
+			 * 
+			 * System.out.println(job.getEmployerEmail() + "\t" + job.getDescription()); }
+			 * 
+			 */		} else {
 			// both credentials are incorrect
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("error", "Invalid User Name Or Password");
-			model.addObject("loginusers", new LoginUsers());
+			model.addObject("loginusers", new Users());
 
 		}
 		return model;
