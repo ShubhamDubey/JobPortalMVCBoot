@@ -77,8 +77,7 @@ ${message}
 					<td>${tempCertification.expireDate}</td>
 					<td>${tempCertification.issueDate}</td>
 
-					<td width=10px><a href="${tempCertification.url}">view
-							Certificate</a></td>
+					<td width=10px><a class="btn btn-info" target="_blank"  href="${tempCertification.url}">view</a></td>
 					<td><a href="${deleteLink }" class="btn btn-danger">Delete</a></td>
 
 				</tr>

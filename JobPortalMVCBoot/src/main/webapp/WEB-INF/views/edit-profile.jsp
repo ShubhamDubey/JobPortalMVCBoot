@@ -14,7 +14,7 @@ ${message}
 						<div class="form-group">
 							<label class="form-control-label" for="first_name">First
 								name </label> <input type="text" id="first_name" name="firstName"
-								class="form-control" placeholder="First name"
+								class="form-control" placeholder="First name" required="required"
 								value="${jobseeker.firstName}">
 						</div>
 					</div>
@@ -22,7 +22,7 @@ ${message}
 						<div class="form-group">
 							<label class="form-control-label" for="last_name">Last
 								name</label> <input type="text" id="last_name" name="lastName"
-								class="form-control" placeholder="Last name"
+								class="form-control" placeholder="Last name" required="required"
 								value="${jobseeker.lastName}">
 						</div>
 					</div>
@@ -32,7 +32,7 @@ ${message}
 						<div class="form-group">
 							<label class="form-control-label" for="email">Email
 								address</label> <input type="email" id="email" name="email"
-								class="form-control" placeholder="shubham@example.com"
+								class="form-control" placeholder="shubham@example.com" required="required"
 								value="${jobseeker.users.email}">
 						</div>
 					</div>

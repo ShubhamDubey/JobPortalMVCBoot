@@ -10,22 +10,22 @@ ${message}
 
 			<h6 class="heading-small text-muted mb-4">Password</h6>
 			<div class="pl-lg-4">
-				<div class="row">
+		<%-- 		<div class="row">
 					<div class="col-lg-6">
-						<%-- <div class="form-group">
+						<div class="form-group">
 							<label class="form-control-label" for="current_password">Current
 								Password</label> <input type="password" id="current_password"
 								name="current_password" class="form-control"
 								placeholder="Enter Current-Password"
 								value="${jobSeeker.users.password}">
-						</div> --%>
-					</div>
+						</div>
+					</div> --%>
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="form-control-label" for="n_password">New
-								Password</label> <input type="password" id="n_password"
+								Password</label> <input type="password" id="n_password" required="required"
 								name="n_password" class="form-control"
 								placeholder="Enter New Password" value="">
 						</div>
@@ -35,7 +35,7 @@ ${message}
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="form-control-label" for="re_password">Re-Enter
-								Password</label> <input type="password" id="re_password"
+								Password</label> <input type="password" id="re_password" required="required"
 								name="re_password" class="form-control"
 								placeholder="Re-Enter Password" value="">
 						</div>
@@ -45,7 +45,7 @@ ${message}
 			<div class="row">
 				<div class="col-lg-5"">
 					<div class="form-group">
-						<input type="submit" id="submit_password" name="submit_password"
+						<input type="submit" id="submit_password" name="submit_password" 
 							class="form-control btn-outline-primary" value="Update Password"
 							>
 					</div>

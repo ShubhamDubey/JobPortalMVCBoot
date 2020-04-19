@@ -25,6 +25,7 @@
 					<th>Job</th>
 					<th>Company Name</th>
 					<th>Description</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>

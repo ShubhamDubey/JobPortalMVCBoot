@@ -12,7 +12,7 @@ ${message}
 						<div class="form-group">
 							<label class="form-control-label" for="course_type">Education
 								Category</label> <select class="form-control"
-								name="educationCategory.educationCategoryName">
+								name="educationCategory.educationCategoryName" required="required">
 								<option value="">Select Education Category</option>
 								<c:forEach var="tempEduCat" items="${eduCat}">
 									<option value="${tempEduCat.educationCategoryName}">${tempEduCat.educationCategoryName}</option>
@@ -28,21 +28,21 @@ ${message}
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="course">Course</label> <input
-								type="text" id="course" name="course" class="form-control"
+								type="text" id="course" name="course" required="required" class="form-control"
 								placeholder="B.SC" value="">
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="university">University</label>
-							<input type="text" id="university" name="university"
+							<input type="text" id="university" name="university" required="required"
 								class="form-control" placeholder="University of Delhi" value="">
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="percentage">Percentage</label>
-							<input type="text" id="percentage" name="percentage"
+							<input type="text" id="percentage" name="percentage" required="required"
 								class="form-control" placeholder="CGPA / %" value="">
 						</div>
 					</div>
@@ -52,21 +52,21 @@ ${message}
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="specialization">Specialization</label>
-							<input type="text" id="specialization" name="specialisation"
+							<input type="text" id="specialization" name="specialisation" required="required"
 								class="form-control" placeholder="B.Sc (CS)" value="">
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="p_year">Passing
-								Year</label> <input type="number" id="p_year" name="passingYear"
+								Year</label> <input type="number" id="p_year" name="passingYear" required="required"
 								class="form-control" placeholder="2020" value="">
 						</div>
 					</div>
 					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="course_type">Course
-								Type</label> <select id="course_type" name="courseType"
+								Type</label> <select id="course_type" name="courseType" required="required"
 								class="form-control">
 								<option value="Full_time" selected>Full Time</option>
 								<option value="Part_time">Part Time</option>

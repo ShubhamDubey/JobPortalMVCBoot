@@ -13,7 +13,7 @@ ${message}
 							<label class="form-control-label" for="input-country">Skills
 							</label>
 							<textarea class="form-control" name="name" rows="5" cols="80"
-							placeholder="W	rite seprate by comma eg. skill1,skill2"></textarea>
+							placeholder="Write seprate by comma eg. skill1,skill2"></textarea>
 						</div>
 					</div>
 				</div>
