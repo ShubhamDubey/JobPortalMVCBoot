@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.niit.recruiter.model.Application;
 import com.niit.recruiter.model.EducationCategory;
 import com.niit.recruiter.model.Job;
 import com.niit.recruiter.model.JobSeeker;
@@ -145,12 +146,32 @@ public class JobSeekerController {
 		if (activeUser != null) {
 			activeUser.setFirstName(req.getParameter("firstName"));
 			activeUser.setLastName(req.getParameter("lastName"));
-			activeUser.getUsers().setEmail(req.getParameter("email"));
-			//activeUser.getUsers().setPassword(req.getParameter("password")); Change passwor for that
-			
+			activeUser.getUsers().setEmail(req.getParameter("email"));			
 			jobSeekerService.saveJobSeeker(activeUser);
 			modelView = new ModelAndView("welcome");
-			modelView.addObject("joblist", jobService.getJobList());	
+			List<Application> deletedApplications=null;
+			List<Job> jobList=jobService.getJobList();
+		
+			
+			for(Job job1:jobList)
+			{deletedApplications=new ArrayList<Application>();
+			
+				System.out.println("Job\t\t\t"+job1);
+				for(Application application:job1.getApplicaionsList())
+				{
+					System.out.println("Application of "+job1.getId()+"\t"+application);
+					if(application.getJobSeeker().getId()!=activeUser.getId())
+					{
+						System.out.println("Others Found"+"\t\t"+application);
+						deletedApplications.add(application);
+					}
+				}
+				job1.getApplicaionsList().removeAll(deletedApplications);
+			}
+	
+//			jobList.forEach(job1->job1.getApplicaionsList().forEach(application->System.out.println(application)));
+
+			modelView.addObject("joblist", jobList);	
 		}
 		
 		else if (loginUsersService.findByEmail(req.getParameter("email")) == null) {

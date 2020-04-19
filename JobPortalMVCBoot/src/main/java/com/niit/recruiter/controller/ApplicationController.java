@@ -1,5 +1,6 @@
 package com.niit.recruiter.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import com.niit.recruiter.service.ApplicationService;
 import com.niit.recruiter.service.JobSeekerService;
 import com.niit.recruiter.service.JobService;
 import com.niit.recruiter.service.LoginUsersService;
+
 @Controller
 public class ApplicationController {
 	@Autowired
@@ -37,85 +39,87 @@ public class ApplicationController {
 	@GetMapping("/appliedJob")
 	public ModelAndView appliedJob(HttpServletRequest request, @RequestParam("jobId") int theJobId) {
 		ModelAndView model = null;
-		try {
 
-			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-			if (activeUser == null) {
-				model = new ModelAndView("login-jobseeker");
-				model.addObject("loginusers", new LoginUsers());
-			} else {
-				Job job=jobService.findById(theJobId).get();
-				System.out.println(job.getName());
-				JobSeeker jobSeeker=jobSeekerService.findById(activeUser.getId());
-				System.out.println(jobSeeker.getFirstName());
-				List<Application> checkApp = applicationService.findByJobSeekerAndJobAndStatus(jobSeeker,job,false);
-				
-				/*
-				 * if (checkApp.isEmpty()) { // new Job model = new ModelAndView("welcome");
-				 * Application app = new Application();
-				 * System.out.println("Runningdalsjflkadsjflasd"); app.setJob(job);
-				 * app.setStatus(false); app.setAppliedDate(new Date());
-				 * 
-				 * app.setJobSeeker(jobSeeker); applicationService.saveApplication(app);
-				 * model.addObject("appliedJobmsg", "You Have Applied Job Successfully"); } else
-				 * {
-				 * 
-				 * model = new ModelAndView("welcome"); model.addObject("appliedJobmsg",
-				 * "You Have Already Applied This Job"); }
-				 */				model.addObject("joblist", jobService.getJobList());
+		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new LoginUsers());
+		} else {
+			model = new ModelAndView("welcome");
+			Job job = jobService.findById(theJobId).get();
+
+			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+			List<Application> deletedApplications = null;
+
+//				jobList.forEach(job1->job1.getApplicaionsList().forEach(application->System.out.println(application)));
+
+			List<Application> checkApplication = applicationService.findByJobSeekerAndJobAndStatus(jobSeeker, job,
+					true);
+			if (checkApplication.isEmpty()) {
+				Application app = new Application();
+				app.setJob(jobService.findById(job.getId()).get());
+				app.setJobSeeker(jobSeeker);
+				app.setAppliedDate(new Date());
+				app.setStatus(true);
+				applicationService.saveApplication(app);
 			}
-		} catch (Exception e) {
-				
+			model.addObject("appliedJobmsg", "You Have Applied Job Successfully");
+			List<Job> jobList = jobService.getJobList();
+
+			for (Job job1 : jobList) {
+				deletedApplications = new ArrayList<Application>();
+
+				System.out.println("Job\t\t\t" + job1);
+				for (Application application : job1.getApplicaionsList()) {
+					System.out.println("Application of " + job1.getId() + "\t" + application);
+					if (application.getJobSeeker().getId() != jobSeeker.getId()) {
+						System.out.println("Others Found" + "\t\t" + application);
+						deletedApplications.add(application);
+					}
+				}
+				job1.getApplicaionsList().removeAll(deletedApplications);
+			}
+			model.addObject("joblist", jobList);
 		}
+
 		return model;
 	}
-
 
 	@RequestMapping("/appliedJobListing")
-	public ModelAndView listAppliedJob(HttpServletRequest request)
-	{
-		ModelAndView model=null;
-		
-		JobSeeker activeUser=(JobSeeker)request.getSession().getAttribute("userId");
-		if(activeUser!=null)
-		{
-			model=new ModelAndView("applied-jobs");
+	public ModelAndView listAppliedJob(HttpServletRequest request) {
+		ModelAndView model = null;
+
+		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+		if (activeUser != null) {
+			model = new ModelAndView("applied-jobs");
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-			model.addObject("appliedJobList",applicationService.findByJobSeekerAndStatus(jobSeeker,false));
-		}
-		else
-		{
+			model.addObject("appliedJobList", applicationService.findByJobSeekerAndStatus(jobSeeker, true));
+		} else {
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("loginusers", new LoginUsers());
 		}
 		return model;
 	}
-	
-	@RequestMapping("deleteApplication")
-	public ModelAndView deleteApplication(HttpServletRequest request,@RequestParam("applicationId") Integer id)
-	{
 
-		ModelAndView model=null;
-		
-		JobSeeker activeUser=(JobSeeker)request.getSession().getAttribute("userId");
-		if(activeUser==null)
-		{
+	@RequestMapping("deleteApplication")
+	public ModelAndView deleteApplication(HttpServletRequest request, @RequestParam("applicationId") Integer id) {
+
+		ModelAndView model = null;
+
+		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+		if (activeUser == null) {
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("loginusers", new LoginUsers());
-		}
-		else
-		{
-			
-			model=new ModelAndView("applied-jobs");
-		JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-		
-		Application application=applicationService.findByJobSeekerAndStatus(jobSeeker,false).get(id);
-		application.setStatus(true);
-		System.out.println(application.getStatus()+"Status");
-		applicationService.saveApplication(application);
-		
-		model.addObject("appliedJobList",applicationService.findByJobSeekerAndStatus(jobSeeker,false));
-		
+		} else {
+
+			model = new ModelAndView("applied-jobs");
+			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+
+			Application application = applicationService.findByJobSeekerAndStatus(jobSeeker, true).get(id);
+			applicationService.deleteApplication(application);
+
+			model.addObject("appliedJobList", applicationService.findByJobSeekerAndStatus(jobSeeker, true));
+
 		}
 		return model;
 	}

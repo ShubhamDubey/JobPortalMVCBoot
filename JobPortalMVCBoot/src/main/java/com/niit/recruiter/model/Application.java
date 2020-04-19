@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="applied_job",uniqueConstraints= @UniqueConstraint(columnNames = {"job_id","job_seeker_id","status"}))
+@Table(name="applied_job",uniqueConstraints= @UniqueConstraint(columnNames = {"id","job_id","job_seeker_id","status"}))
 public class Application {
 	@Id
 	@Column(name = "id")

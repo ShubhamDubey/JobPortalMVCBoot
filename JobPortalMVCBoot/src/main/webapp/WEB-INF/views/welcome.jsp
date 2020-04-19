@@ -9,8 +9,8 @@
 
 <%
 	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
-response.setHeader("Pragma", "no-cache");//HTTP 1.0
-response.setHeader("Expires", "0");//Proxies
+	response.setHeader("Pragma", "no-cache");//HTTP 1.0
+	response.setHeader("Expires", "0");//Proxies
 %>
 
 <!-- <h2 align="center">Welcome To JobBazar</h2>  -->
@@ -45,11 +45,27 @@ response.setHeader("Expires", "0");//Proxies
 							class="text">${tempjoblist.description}</span> <br /> <i
 							class="fa fa-briefcase"></i> <span class="text font-size">${tempjoblist.vacancy}
 							Available Vacancy</span>
-						<p>id ${ appList.id }</p>
 						<c:choose>
 							<c:when test="${tempjoblist.applicaionsList.isEmpty()}">
 								<div class="float-right margin-top text-align-center">
-									<a href="${appliedJobLink}" class="part-full-time">APPLY1</a>
+									<a href="${appliedJobLink}" class="part-full-time">APPLY</a>
+									<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
+
+								</div>
+							</c:when>
+							
+							<c:otherwise>
+								<div class="float-right margin-top text-align-center">
+									<a href="#" class="part-full-time">Applied</a>
+									<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
+
+								</div>
+							</c:otherwise>
+						</c:choose>
+						<%-- 						<c:choose>
+							<c:when test="${tempjoblist.applicaionsList.isEmpty()}">
+								<div class="float-right margin-top text-align-center">
+									<a href="${appliedJobLink}" class="part-full-time">APPLY</a>
 									<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
 
 								</div>
@@ -97,8 +113,8 @@ response.setHeader("Expires", "0");//Proxies
 
 
 							</c:otherwise>
-						</c:choose>
-						<p class="date-time">Deadline: ${tempjoblist.expireDate}</p>
+						</c:choose> --%>
+						<%-- <p class="date-time">Deadline: ${tempjoblist.expireDate}</p> --%>
 
 					</div>
 				</div>
