@@ -10,6 +10,8 @@
 <section id="v2-resent-job-post">
 	<div class="vertical-space-85"></div>
 	<div class="container text-center">
+	<h3 class="text-center">Applied Jobs</h3>
+	<div class="vertical-space-30"></div>
 		<div class="row col-lg-2">
 			<a href="welcome" class="btn btn-block btn-outline-primary"
 				id="profile_id">Back</a>

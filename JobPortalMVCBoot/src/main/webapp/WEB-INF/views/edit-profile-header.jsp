@@ -10,7 +10,7 @@
 
 <%@include file="header.jsp"%>
 <section id="v2-resent-job-post">
-	<div class="vertical-space-85"></div>
+	<div class="vertical-space-50"></div>
 	<div class="container">
 		<h3 class="text-center">User Profile</h3>
 		

@@ -52,45 +52,44 @@ ${message}
 			</div>
 		</div>
 	</form:form>
-
 </div>
+<span
+	style="display: inline-block; border-left: 1px solid #ccc; margin: 0 -7px; height: 400px;"></span>
+
 <div class="col-lg-6">
-<table class="table table-striped">
-				<c:set var="count" value="0" scope="page" />
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Issue Date</th>
-						<th>Expire Date</th>
-						<th>Certification</th>
-						<th>Action</th>
-				
-				</thead>
-				<tbody>
-					<c:forEach var="tempCertification" items="${certificationList}">
-						<c:url var="deleteLink" value="deleteCertification">
-						<c:param name="educationId"
-							value="${count}" />
-					</c:url>
-						<tr>
-							<td>
-								${tempCertification.certificationName}</td>
-							<td>
-								${tempCertification.expireDate}</td>
-							<td>
-								${tempCertification.issueDate}</td>
-					
-							<td width=10px><a href="${tempCertification.url}">view Certificate</a></td>
-							<td><a href="${deleteLink }" class="btn btn-danger">Delete</a></td>
-				
-						</tr>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-					</c:forEach>
-				</tbody>
-			</table>
+	<table class="table table-striped">
+		<c:set var="count" value="0" scope="page" />
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Issue Date</th>
+				<th>Expire Date</th>
+				<th>Certification</th>
+				<th>Action</th>
+		</thead>
+		<tbody>
+			<c:forEach var="tempCertification" items="${certificationList}">
+				<c:url var="deleteLink" value="deleteCertification">
+					<c:param name="educationId" value="${count}" />
+				</c:url>
+				<tr>
+					<td>${tempCertification.certificationName}</td>
+					<td>${tempCertification.expireDate}</td>
+					<td>${tempCertification.issueDate}</td>
+
+					<td width=10px><a href="${tempCertification.url}">view
+							Certificate</a></td>
+					<td><a href="${deleteLink }" class="btn btn-danger">Delete</a></td>
+
+				</tr>
+				<c:set var="count" value="${count + 1}" scope="page" />
+			</c:forEach>
+		</tbody>
+	</table>
 </div>
 </div>
 </div>
 </div>
 </section>
+<div class="vertical-space-50"></div>
 <%@include file="footer.jsp"%>

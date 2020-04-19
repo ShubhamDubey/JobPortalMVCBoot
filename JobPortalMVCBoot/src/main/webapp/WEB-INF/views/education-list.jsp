@@ -43,6 +43,6 @@
 	</div>
 
 </section>
-<br/>
+<div class="vertical-space-50"></div>
 
 <%@ include file="footer.jsp"%>
