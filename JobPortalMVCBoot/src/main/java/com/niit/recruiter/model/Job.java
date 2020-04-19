@@ -142,6 +142,12 @@ public class Job {
 	public void setApplicaionsList(List<Application> applicaionsList) {
 		this.applicaionsList = applicaionsList;
 	}
+	@Override
+	public String toString() {
+		return "Job [id=" + id + ", employerEmail=" + employerEmail + ", name=" + name + ", salary=" + salary
+				+ ", type=" + type + ", description=" + description + ", vacancy=" + vacancy + ", advertiseDate="
+				+ advertiseDate + ", expireDate=" + expireDate + ", logo=" + logo + ", recruiter=" + recruiter + "]";
+	}
 	
 	
 	

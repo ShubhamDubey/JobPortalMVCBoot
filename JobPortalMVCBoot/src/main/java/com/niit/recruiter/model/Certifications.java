@@ -75,6 +75,12 @@ public class Certifications {
 	public void setJobSeeker(JobSeeker jobSeeker) {
 		this.jobSeeker = jobSeeker;
 	}
+
+	@Override
+	public String toString() {
+		return "Certifications [id=" + id + ", url=" + url + ", certificationName=" + certificationName + ", issueDate="
+				+ issueDate + ", expireDate=" + expireDate + "]";
+	}
 	
 	
 }

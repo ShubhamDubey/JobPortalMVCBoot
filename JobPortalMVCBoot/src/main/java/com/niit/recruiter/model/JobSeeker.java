@@ -126,6 +126,11 @@ public class JobSeeker {
 	public void setAppliedJobs(List<Application> appliedJobs) {
 		this.appliedJobs = appliedJobs;
 	}
+
+	@Override
+	public String toString() {
+		return "JobSeeker [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", users=" + users + "]";
+	}
 	
 	
 	

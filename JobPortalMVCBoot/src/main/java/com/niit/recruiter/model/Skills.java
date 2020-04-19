@@ -56,5 +56,10 @@ public class Skills {
 	public void setJobSeeker(JobSeeker jobSeeker) {
 		this.jobSeeker = jobSeeker;
 	}
+
+	@Override
+	public String toString() {
+		return "Skills [id=" + id + ", name=" + name + "]";
+	}
 	
 }
