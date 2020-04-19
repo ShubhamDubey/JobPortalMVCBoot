@@ -1,8 +1,8 @@
 package com.niit.recruiter.rest;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,25 +48,31 @@ public class JobRestController {
 	
 	
 	@PostMapping("/postjob")
-	public List<Job> postJob(@RequestBody Recruiter recruiter)
-	{System.out.println("postJob from JobRestController");
-		Recruiter recruiterData=recruiterRepo.findById(recruiter.getId()).get();
-		System.out.println(recruiter.getId());
-		List<Job> postedJobList=new ArrayList<Job>();
-		for(Job job:recruiter.getJobList())
-		{System.out.println("Hello");
-			System.out.println(job.getName());
-//			job.g
-//			job.setAdvertiseDate(new Date());
-			job.setRecruiter(recruiterData);
-			postedJobList.add(job);
-			
-		}
+	public List<Job> postJob(@RequestBody Map<String,String> job)
+	{
+		Integer recruiterId=Integer.parseInt(job.get("recruiter"));
+		Date advertiseDate=new Date(job.get("advertiseDate"));
+		Date expireDate =new Date(job.get("expireDate"));
+		String description=job.get("description");
+		String companyName=job.get("employerEmail");
+		String logoPath=job.get("log");
+		String title=job.get("name");
+		String salary=job.get("salary");
 		
-//		recruiter.getJobList().get(0).setRecruiter(recruiterData);
-		recruiterData.getJobList().addAll(jobRepo.saveAll(postedJobList));
-
-		return jobRepo.findByRecruiter(recruiterRepo.save(recruiterData));
+		Recruiter recruiter=recruiterRepo.findById(recruiterId).get();
+		System.out.println(recruiter);
+		Job postJob=new Job();
+		postJob.setDescription(description);
+		postJob.setAdvertiseDate(advertiseDate);
+		postJob.setEmployerEmail(companyName);
+		postJob.setExpireDate(expireDate);
+		postJob.setLogo(logoPath);
+		postJob.setName(title);
+		postJob.setSalary(salary);
+		postJob.setRecruiter(recruiter);
+		System.out.println(postJob);
+		recruiter.getJobList().add(jobRepo.save(postJob));
+		return jobRepo.findByRecruiter(recruiterRepo.save(recruiter));
 	}
 
 }
