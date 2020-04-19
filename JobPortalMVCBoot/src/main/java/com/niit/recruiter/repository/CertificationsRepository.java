@@ -11,4 +11,6 @@ public interface CertificationsRepository extends JpaRepository<Certifications, 
 
 	List<Certifications> findByJobSeeker(JobSeeker activeUser);
 
+	Certifications findByUrl(String url);
+
 }

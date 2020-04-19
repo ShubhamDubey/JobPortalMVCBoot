@@ -30,6 +30,11 @@ public class CertificationsService {
 		certRepo.deleteById(id);
 	}
 
+	public Certifications findByUrl(String url) {
+		// TODO Auto-generated method stub
+		return certRepo.findByUrl(url);
+	}
+
 	
 
 }

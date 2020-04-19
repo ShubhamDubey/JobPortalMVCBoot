@@ -31,17 +31,18 @@ public class CertificationsController {
 	public ModelAndView certifications(HttpServletRequest request) {
 		ModelAndView model = null;
 		HttpSession session=request.getSession();
-		JobSeeker activeUser = (JobSeeker) session.getAttribute("userId");
-		
+		JobSeeker activeUser = (JobSeeker) session.getAttribute("userId");		
 		if (activeUser != null) {
 			model = new ModelAndView("certification");
 			model.addObject("certification", new Certifications());
-			if (activeUser.getCertificationsList() == null) 
+			
+			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+			if (jobSeeker.getCertificationsList().isEmpty()) 
 			{
 				model.addObject("certificationList", null);
 			} else 
 			{
-				JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+				System.out.println("jobSeeker: "+jobSeeker.getCertificationsList());
 				model.addObject("certificationList", jobSeeker.getCertificationsList());
 			}
 		} else {
@@ -52,22 +53,32 @@ public class CertificationsController {
 	}
 
 	@RequestMapping("/addCertification")
-	public ModelAndView certifications(HttpServletRequest request,
+	public ModelAndView addCertifications(HttpServletRequest request,
 			@ModelAttribute("certification") Certifications certificate) {
 		ModelAndView model = null;
 		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
 		
 		if (activeUser != null) {
+			System.out.println(certificate.getUrl());
+			model = new ModelAndView("certification");
+			
+			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
+			Certifications certification=certificationService.findByUrl(certificate.getUrl());
+			
+			if(certification==null)
+			{jobSeeker.getCertificationsList().add(certificate);
+				model.addObject("msg", certificate.getCertificationName() + " sucessfully Added");
+				jobSeekerService.saveJobSeeker(jobSeeker);	
+			}
+			else
+			{
+				model.addObject("msg", "Already Added");
+
+			}
 			
 		
-			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-			
-			jobSeeker.getCertificationsList().add(certificate);
-			jobSeekerService.saveJobSeeker(jobSeeker);
-			model = new ModelAndView("certification");
-			model.addObject("msg", certificate.getCertificationName() + " sucessfully Added");
 			model.addObject("certification", new Certifications());
-			if (activeUser.getCertificationsList() == null) {
+			if (jobSeeker.getCertificationsList().isEmpty()) {
 				model.addObject("certificationList", null);
 			} else {
 				 jobSeeker = jobSeekerService.findById(activeUser.getId());
@@ -80,15 +91,15 @@ public class CertificationsController {
 		return model;
 	}
 	@RequestMapping("/deleteCertification")
-	public ModelAndView deleteEducation(HttpServletRequest request,@RequestParam("educationId") Integer Id)
+	public ModelAndView deleteCertification(HttpServletRequest request,@RequestParam("educationId") Integer Id)
 	{
 		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
 		ModelAndView model = null;
-		try {
+		
 			
 			if (activeUser == null) {
 				model = new ModelAndView("login-jobseeker");
-				model.addObject("loginusers", new LoginUsers());
+				model.addObject("loginusers", new Users());
 
 			} else {
 				model = new ModelAndView("certification");
@@ -96,22 +107,18 @@ public class CertificationsController {
 				List<Certifications> certificationsList=certificationService.findByJobSeeker(activeUser);
 				
 				Certifications certificate=certificationsList.get(Id);
-				if(certificationsList.remove(Id))
-				{
-					System.out.println("Updated List Set");
+				/*if(certificationsList.remove(Id))
+				{*/
+					//System.out.println("Updated List Set");
+					certificationsList.remove(certificationsList.get(Id));
 					jobSeeker.setCertificationsList(certificationsList);
-				}
+				//}
 				certificationService.deleteById(certificate.getId());
 				
 				jobSeekerService.saveJobSeeker(jobSeeker);
 				model.addObject("certificationList", jobSeeker.getCertificationsList());
 			}
-		} catch (Exception e) {
-			model = new ModelAndView("certification");
-			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-			jobSeeker = jobSeekerService.findById(activeUser.getId());
-			model.addObject("certificationList", jobSeeker.getCertificationsList());		}
-
+		
 		return model;
 		
 	}
