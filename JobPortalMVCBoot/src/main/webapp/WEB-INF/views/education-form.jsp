@@ -39,7 +39,7 @@ ${message}
 								class="form-control" placeholder="University of Delhi" value="">
 						</div>
 					</div>
-						<div class="col-lg-4">
+					<div class="col-lg-4">
 						<div class="form-group">
 							<label class="form-control-label" for="percentage">Percentage</label>
 							<input type="text" id="percentage" name="percentage"
@@ -86,50 +86,50 @@ ${message}
 			</div>
 		</div>
 	</form:form>
-
 </div>
-<div class="col-lg-6">
-	<table class="table table-striped">
+<span
+	style="display: inline-block; border-left: 1px solid #ccc; margin: 0 -7px; height: 400px;"></span>
+<div class="col col-lg-6">
+	<table class="table table-striped" style="font-family: proxima nova;">
 		<thead>
 			<tr>
 				<th>Category</th>
 				<th>Degree</th>
 				<th>Course Type</th>
-
 				<th>University</th>
 				<th>Percentage</th>
-				<th>passing year</th>
+				<th>Passing Year</th>
 				<th colspan=2>Action</th>
+			</tr>
 		</thead>
 		<tbody>
-		
+
 			<c:set var="count" value="0" scope="page" />
-				<c:forEach var="tempEducationList" items="${educationList}">
-					<c:url var="deleteLink" value="deleteEducation">
-						<c:param name="educationId"
-							value="${count}" />
-					</c:url>
-			
-					<tr id="${tempEducationList.educationId}1">
-						<td>
-							${tempEducationList.educationCategory.educationCategoryName}</td>
-						<td>${tempEducationList.course}</td>
-						
+			<c:forEach var="tempEducationList" items="${educationList}">
+				<c:url var="deleteLink" value="deleteEducation">
+					<c:param name="educationId" value="${count}" />
+				</c:url>
 
-						<td>${tempEducationList.courseType}</td>
-
-						<td>${tempEducationList.university}  </td>
-						<td>${tempEducationList.percentage }</td>
-						<td>${tempEducationList.passingYear}</td>
-				<%-- 	<td><button id="${count}" type="button" onclick="buttonClick(this.id)" class="btn btn-primary"   name="selectedRow">Update</button></td>  --%>
-						<td><a href="${deleteLink }" class="btn btn-danger">Delete</a></td>
-					</tr>
-					
+				<tr id="${tempEducationList.educationId}1">
+					<td>
+						${tempEducationList.educationCategory.educationCategoryName}</td>
+					<td>${tempEducationList.course}</td>
 
 
-		<c:set var="count" value="${count + 1}" scope="page"/>
-				</c:forEach>
-	
+					<td>${tempEducationList.courseType}</td>
+
+					<td>${tempEducationList.university}</td>
+					<td>${tempEducationList.percentage }</td>
+					<td>${tempEducationList.passingYear}</td>
+					<%-- 	<td><button id="${count}" type="button" onclick="buttonClick(this.id)" class="btn btn-primary"   name="selectedRow">Update</button></td>  --%>
+					<td><a href="${deleteLink }" class="btn btn-danger">Delete</a></td>
+				</tr>
+
+
+
+				<c:set var="count" value="${count + 1}" scope="page" />
+			</c:forEach>
+
 		</tbody>
 	</table>
 </div>
@@ -137,6 +137,7 @@ ${message}
 
 </div>
 </section>
+<div class="vertical-space-50"></div>
 
 
 
