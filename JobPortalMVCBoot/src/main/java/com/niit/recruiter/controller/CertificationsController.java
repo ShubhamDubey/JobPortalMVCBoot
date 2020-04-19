@@ -59,7 +59,6 @@ public class CertificationsController {
 		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
 		
 		if (activeUser != null) {
-			System.out.println(certificate.getUrl());
 			model = new ModelAndView("certification");
 			
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());

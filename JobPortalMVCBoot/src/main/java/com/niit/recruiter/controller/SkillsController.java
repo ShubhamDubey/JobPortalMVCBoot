@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.model.LoginUsers;
 import com.niit.recruiter.model.Skills;
+import com.niit.recruiter.model.Users;
 import com.niit.recruiter.service.JobSeekerService;
 import com.niit.recruiter.service.SkillsService;
 
@@ -36,16 +37,16 @@ public class SkillsController {
 			JobSeeker jobSeeker=jobSeekerService.findById(activeUser.getId());
 			model=new ModelAndView("jobseeker-skills");
 			model.addObject("theSkills", new Skills());
-			if(activeUser.getSkillList()!=null) {
-				model.addObject("skillsList", jobSeeker.getSkillList());
+			if(jobSeeker.getSkillList().isEmpty()) {
+				model.addObject("skillsList", null);
 			}
 			else {
-				model.addObject("skillsList",null);
+				model.addObject("skillsList",jobSeeker.getSkillList());
 			}
 		}
 		else {
 			model = new ModelAndView("login-jobseeker");
-			model.addObject("loginusers", new LoginUsers());
+			model.addObject("loginusers", new Users());
 		}
 
 		return model;
@@ -60,9 +61,11 @@ public class SkillsController {
 			String skiillsArrays[] =skillsName.split(",");
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
 			List <Skills> skillsList=new ArrayList<Skills>();
+			System.out.println(jobSeeker.getSkillList());
 			if(jobSeeker.getSkillList()!=null)
 			{
 				
+				System.out.println("Inside if");
 				skillService.deleteAll(skillService.findByJobSeeker(jobSeeker));
 				
 			}
@@ -78,7 +81,7 @@ public class SkillsController {
 		}
 		else {
 			model = new ModelAndView("login-jobseeker");
-			model.addObject("loginusers", new LoginUsers());
+			model.addObject("loginusers", new Users());
 		}
 				return model;
 	}

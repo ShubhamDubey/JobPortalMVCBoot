@@ -122,12 +122,12 @@ public class CertificationsControllerTest {
 		when(jobSeekerService.findById(activeUser.getId())).thenReturn(jobSeeker);
 		jobSeeker.setCertificationsList(new ArrayList<Certifications>());
 		model.addObject("certificationList", jobSeeker.getCertificationsList());
-		//System.out.println("certificationList2" + jobSeeker.getCertificationsList());
+		// System.out.println("certificationList2" + jobSeeker.getCertificationsList());
 		// System.out.println("certificationList1"+ activeUser.getCertificationsList());
 		if (jobSeeker.getCertificationsList().isEmpty()) {
-			System.out.println("certificationList2" + jobSeeker.getCertificationsList());
+
 			ModelAndView modelAndView = certificationsController.certifications(request);
-			System.out.println("activeUser: " + activeUser);
+
 			Assert.assertEquals(modelAndView.getViewName(), model.getViewName());
 			Assert.assertTrue(modelAndView.getModel().containsKey("certification"));
 			Assert.assertTrue(modelAndView.getModel().get("certification") instanceof Certifications);
@@ -167,11 +167,9 @@ public class CertificationsControllerTest {
 			certificationsList.add(new Certifications());
 		}
 		when(certificationsService.findByJobSeeker(activeUser)).thenReturn(certificationsList);
-		
+
 		Certifications certificate = new Certifications();
 		certificate = certificationsList.get(Id);
-		System.out.println("jobSeekerDel "+jobSeeker);
-
 		jobSeeker.setCertificationsList(certificationsList);
 
 		certificationsService.deleteById(certificate.getId());
@@ -186,10 +184,11 @@ public class CertificationsControllerTest {
 		// Assert.assertTrue(modelAndView.getModel().get("loginusers") instanceof List);
 
 	}
+
 	@Test
 	public void addCertificationSessionNullTest() {
 		model = null;
-		Certifications certificate=new Certifications();
+		Certifications certificate = new Certifications();
 		when(request.getSession()).thenReturn(session);
 		JobSeeker activeUser = null;
 		when(session.getAttribute("userId")).thenReturn(activeUser);
@@ -199,6 +198,7 @@ public class CertificationsControllerTest {
 		Assert.assertEquals(modelAndView.getViewName(), model.getViewName());
 		Assert.assertTrue(modelAndView.getModel().containsKey("loginusers"));
 	}
+
 	@Test
 	public void addCertificationSessionNotNullAndCertificationAddedSuccessTest() {
 		model = new ModelAndView("certification");
@@ -207,38 +207,37 @@ public class CertificationsControllerTest {
 		when(session.getAttribute("userId")).thenReturn(activeUser);
 		JobSeeker jobSeeker = new JobSeeker();
 		when(jobSeekerService.findById(activeUser.getId())).thenReturn(jobSeeker);
-		Integer id=1;
-		String certificationName="Java";
-		Date issueDate=new Date(id);
-		Date expireDate=new Date(id);
-		String url="github.com";
-		List<Certifications> certificationsList=new ArrayList<Certifications>();
+		Integer id = 1;
+		String certificationName = "Java";
+		Date issueDate = new Date(id);
+		Date expireDate = new Date(id);
+		String url = "github.com";
+		List<Certifications> certificationsList = new ArrayList<Certifications>();
 		for (int i = 0; i < 5; i++) {
 			certificationsList.add(new Certifications());
-			
+
 		}
 		jobSeeker.setCertificationsList(certificationsList);
-		Certifications certificate=new Certifications();
+		Certifications certificate = new Certifications();
 		certificate.setId(id);
 		certificate.setCertificationName(certificationName);
 		certificate.setIssueDate(issueDate);
 		certificate.setExpireDate(expireDate);
 		certificate.setUrl(url);
 		certificate.setJobSeeker(jobSeeker);
-		Certifications certification=new Certifications();
-		certification=certificationsService.findByUrl(certificate.getUrl());
+		Certifications certification = new Certifications();
+		certification = certificationsService.findByUrl(certificate.getUrl());
 		when(certificationsService.findByUrl(url)).thenReturn(certification);
-		System.out.println("Certification: "+certification);
-		System.out.println("list: "+jobSeeker.getCertificationsList());
 		jobSeeker.getCertificationsList().add(certificate);
 		model.addObject("msg", certificate.getCertificationName() + " sucessfully Added");
 		jobSeekerService.saveJobSeeker(jobSeeker);
-		verify(jobSeekerService,times(1)).saveJobSeeker(jobSeeker);
+		verify(jobSeekerService, times(1)).saveJobSeeker(jobSeeker);
 		ModelAndView modelAndView = certificationsController.addCertifications(request, certificate);
 		Assert.assertEquals(modelAndView.getViewName(), model.getViewName());
 		Assert.assertTrue(modelAndView.getModel().containsKey("certificationList"));
-		Assert.assertTrue(modelAndView.getModel().containsKey("msg"));	
+		Assert.assertTrue(modelAndView.getModel().containsKey("msg"));
 	}
+
 	@Test
 	public void addCertificationSessionNotNullAndCertificationExistTest() {
 		model = new ModelAndView("certification");
@@ -247,37 +246,35 @@ public class CertificationsControllerTest {
 		when(session.getAttribute("userId")).thenReturn(activeUser);
 		JobSeeker jobSeeker = new JobSeeker();
 		when(jobSeekerService.findById(activeUser.getId())).thenReturn(jobSeeker);
-		Integer id=1;
-		String certificationName="Java";
-		Date issueDate=new Date(id);
-		Date expireDate=new Date(id);
-		String url="github.com";
-		List<Certifications> certificationsList=new ArrayList<Certifications>();
+		Integer id = 1;
+		String certificationName = "Java";
+		Date issueDate = new Date(id);
+		Date expireDate = new Date(id);
+		String url = "github.com";
+		List<Certifications> certificationsList = new ArrayList<Certifications>();
 		for (int i = 0; i < 5; i++) {
 			certificationsList.add(new Certifications());
-			
+
 		}
 		jobSeeker.setCertificationsList(certificationsList);
-		Certifications certificate=new Certifications();
+		Certifications certificate = new Certifications();
 		certificate.setId(id);
 		certificate.setCertificationName(certificationName);
 		certificate.setIssueDate(issueDate);
 		certificate.setExpireDate(expireDate);
 		certificate.setUrl(url);
 		certificate.setJobSeeker(jobSeeker);
-		Certifications certification=new Certifications();
+		Certifications certification = new Certifications();
 		when(certificationsService.findByUrl(url)).thenReturn(certification);
-		System.out.println("certification: "+certification);
-		System.out.println("Certification: "+certification);
-		System.out.println("list: "+jobSeeker.getCertificationsList());
 		jobSeeker.getCertificationsList().add(certificate);
 		model.addObject("msg", "Already Added");
 		jobSeekerService.saveJobSeeker(jobSeeker);
-		verify(jobSeekerService,times(1)).saveJobSeeker(jobSeeker);
+		verify(jobSeekerService, times(1)).saveJobSeeker(jobSeeker);
 		ModelAndView modelAndView = certificationsController.addCertifications(request, certificate);
 		Assert.assertEquals(modelAndView.getViewName(), model.getViewName());
 		Assert.assertTrue(modelAndView.getModel().containsKey("certificationList"));
-		Assert.assertTrue(modelAndView.getModel().containsKey("msg"));	
+		Assert.assertTrue(modelAndView.getModel().containsKey("msg"));
 	}
+
 	
 }
