@@ -32,13 +32,13 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/static/css/util.css"/>">
 <link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/static/css/jobliststyle.css"/>">
+<link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/static/css/main.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/static/css/matrialize.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/static/css/navstyle.css"/>">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/static/css/jobliststyle.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/static/css/custom.css"/>">
 </head>
@@ -95,21 +95,22 @@
 							href="appliedJobListing"><i class="fa fa-th-list fa-fw mr-1"></i>View
 								applied Job</a></li>
 						<li class="nav-item pl-1 dropdown">
-								<button class="nav-link dropdown-toggle"
-									style="font-family: Poppins-Regular;" type="button"
-									id="dropdownMenuButton" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">
-									<i class="fa fa-user fa-fw mr-1"></i>${userId.firstName}</button>
-								<div class="dropdown-menu">
-									<a class="nav-link" href="editProfile"> <i
-										class="fa fa-user fa-fw mr-1"> </i>Edit Profile
-									</a> <a class="nav-link" href="logout"> <i
-										class="fa fa-sign-out fa-fw mr-1"> </i>Logout
-									</a>
-								</div>
-							</div></li>
-					</ul>
+							<button class="nav-link dropdown-toggle"
+								style="font-family: Poppins-Regular;" type="button"
+								id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								<i class="fa fa-user fa-fw mr-1"></i>${userId.firstName}</button>
+							<div class="dropdown-menu">
+								<a class="nav-link" href="editProfile"> <i
+									class="fa fa-user fa-fw mr-1"> </i>Edit Profile
+								</a> <a class="nav-link" href="logout"> <i
+									class="fa fa-sign-out fa-fw mr-1"> </i>Logout
+								</a>
+							</div>
 				</div>
+				</li>
+				</ul>
+			</div>
 			</div>
 		</nav>
 		<!--# Navbar #-->
