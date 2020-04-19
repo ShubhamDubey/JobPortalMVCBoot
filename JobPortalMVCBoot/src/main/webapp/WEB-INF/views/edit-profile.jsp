@@ -38,7 +38,7 @@ ${message}
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-5">
+					<div class="col-lg-6">
 						<div class="form-group">
 							<input type="submit" id="submit_education"
 								name="submit_education" class="form-control btn-outline-primary"

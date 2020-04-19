@@ -10,7 +10,7 @@ ${message}
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="form-control-label" for="input-city">Title</label>
-							<input type="text" id="input-city" name="certificationName"
+							<input type="text" id="input-city" name="certificationName" required="required"
 								class="form-control" placeholder="Google Cloud Developer"
 								value="">
 						</div>
@@ -18,7 +18,7 @@ ${message}
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="form-control-label" for="input-country">Url</label>
-							<input type="url" id="input-country" name="url"
+							<input type="url" id="input-country" name="url"  required="required"
 								class="form-control" placeholder="Enter Url" value="">
 						</div>
 					</div>
@@ -27,20 +27,20 @@ ${message}
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="form-control-label" for="input-city">Issue
-								Date</label> <input type="date" id="input-city" class="form-control"
+								Date</label> <input type="date" id="input-city" class="form-control" required="required"
 								placeholder="Google Cloud Developer" name="issueDate" value="">
 						</div>
 					</div>
 					<div class="col-lg-6">
 						<div class="form-group">
 							<label class="form-control-label" for="input-country">Expiry
-								Date</label> <input type="date" id="input-country" class="form-control"
+								Date</label> <input type="date" id="input-country" class="form-control" required="required"
 								name="expireDate" placeholder="Enter Url" value="">
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-5">
+					<div class="col-lg-12">
 						<div class="form-group">
 							<input type="submit" id="submit_certificatons"
 								name="submit_certificatons"

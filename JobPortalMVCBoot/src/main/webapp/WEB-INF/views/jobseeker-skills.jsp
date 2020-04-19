@@ -12,7 +12,7 @@ ${message}
 						<div class="form-group">
 							<label class="form-control-label" for="input-country">Skills
 							</label>
-							<textarea class="form-control" name="name" rows="5" cols="80"
+							<textarea class="form-control" name="name" rows="5" cols="80" required="required"
 							placeholder="Write seprate by comma eg. skill1,skill2"></textarea>
 						</div>
 					</div>
