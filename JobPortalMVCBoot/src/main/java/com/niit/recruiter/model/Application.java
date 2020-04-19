@@ -31,7 +31,6 @@ public class Application {
 	private Job job;
 
 	@ManyToOne()
-	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 	private Boolean status;

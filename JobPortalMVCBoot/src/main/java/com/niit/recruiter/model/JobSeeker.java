@@ -54,6 +54,7 @@ public class JobSeeker {
 
 	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="job_seeker_id")
+	@JsonIgnore
 	private List<Application> appliedJobs;
 	public Integer getId() {
 		return id;
