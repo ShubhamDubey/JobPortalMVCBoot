@@ -89,8 +89,7 @@ public class Resume {
 
 	@Override
 	public String toString() {
-		return "Resume [id=" + id + ", fileName=" + fileName + ", fileType=" + fileType + ", data="
-				+ Arrays.toString(data) + "]";
+		return "Resume [id=" + id + ", fileName=" + fileName + ", fileType=" + fileType + "]";
 	}
 	
 	
