@@ -31,7 +31,6 @@ public class Application {
 	private Job job;
 
 	@ManyToOne()
-	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 	private Boolean status;
@@ -68,6 +67,10 @@ public class Application {
 	}
 	public void setAppliedDate(Date appliedDate) {
 		this.appliedDate = appliedDate;
+	}
+	@Override
+	public String toString() {
+		return "Application [id=" + id + ", appliedDate=" + appliedDate + ", status=" + status + "]";
 	}
 	
 	

@@ -62,6 +62,10 @@ public class Users {
 	public void setJobseeker(JobSeeker jobseeker) {
 		this.jobseeker = jobseeker;
 	}
+	@Override
+	public String toString() {
+		return "Users [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + "]";
+	}
 	
 	
 }

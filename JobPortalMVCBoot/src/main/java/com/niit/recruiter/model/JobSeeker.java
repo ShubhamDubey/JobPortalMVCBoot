@@ -54,6 +54,7 @@ public class JobSeeker {
 
 	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="job_seeker_id")
+	@JsonIgnore
 	private List<Application> appliedJobs;
 	public Integer getId() {
 		return id;
@@ -125,6 +126,11 @@ public class JobSeeker {
 
 	public void setAppliedJobs(List<Application> appliedJobs) {
 		this.appliedJobs = appliedJobs;
+	}
+
+	@Override
+	public String toString() {
+		return "JobSeeker [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", users=" + users + "]";
 	}
 	
 	

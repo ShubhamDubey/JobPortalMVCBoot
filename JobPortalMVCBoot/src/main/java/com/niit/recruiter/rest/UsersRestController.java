@@ -17,7 +17,7 @@ import com.niit.recruiter.repository.UsersRepository;
 @CrossOrigin(origins = {"http://localhost:4200","http://localHost:8080"})
 @RestController
 @RequestMapping("/api/users")
-public class UsersController {
+public class UsersRestController {
 
 	@Autowired
 	private JobSeekerRepository jobSeekerRepo;
@@ -59,7 +59,7 @@ public class UsersController {
 	public Users userLogin(@RequestBody Users users) {
 
 		Users user = usersRepo.findByEmailAndPassword(users.getEmail(), users.getPassword());
-			System.out.println("Called");
+			System.out.println("userLoginCalled");
 		return user;
 
 	}

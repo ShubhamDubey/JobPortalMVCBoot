@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -140,7 +139,7 @@ public class EducationController {
 	}
 	
 	@RequestMapping("/update")
-	public ModelAndView updateEducation(@RequestBody Education education,HttpServletRequest request)
+	public ModelAndView updateEducation(HttpServletRequest request)
 	{
 		ModelAndView model=null;
 		JobSeeker jobSeeker=(JobSeeker)request.getSession().getAttribute("userId");
@@ -153,7 +152,12 @@ public class EducationController {
 		else
 		{
 			model=new ModelAndView("education-form");
-			System.out.println(education.getPassingYear());
+//			System.out.println(education.getPassingYear());
+			String [] row=request.getParameterValues("course");
+			for(String row1:row)
+				System.out.println(row1);
+			
+			//System.out.println("Printed Data"+request.getParameter(value));
 		}			
 		return model;
 	}

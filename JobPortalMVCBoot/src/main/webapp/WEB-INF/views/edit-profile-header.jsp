@@ -32,29 +32,29 @@
 					<div class="row ">
 						<a href="editProfile" class="btn btn-block btn-outline-primary"
 							 id="profile_id">Profile</a>
-					</div>
+					</div><br>
 					<div class="row">
 						<a href="changePassword"
 							class="btn btn-block btn-outline-primary"
 							 id="password_id">Change
 							Password</a>
-					</div>
+					</div><br>
 					<div class="row ">
 						<a href="showResumeForm1" class="btn btn-block btn-outline-primary"
 							>Resume</a>
-					</div>
+					</div><br>
 					<div class="row ">
 						<a href="showEducationForm" class="btn btn-block btn-outline-primary"
 							>Education</a>
-					</div>
+					</div><br>
 					<div class="row ">
 						<a href="certification" class="btn btn-block btn-outline-primary"
 							 id="certification_id">Certifications</a>
-					</div>
+					</div><br>
 					<div class="row ">
 						<a href="showSkillsForm" class="btn btn-block btn-outline-primary"
 							 id="skill_id">Skills</a>
-					</div>
+					</div><br>
 				</div>
 			</div>
 

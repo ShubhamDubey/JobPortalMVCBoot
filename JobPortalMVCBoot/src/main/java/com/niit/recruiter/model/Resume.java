@@ -1,5 +1,7 @@
 package com.niit.recruiter.model;
 
+import java.util.Arrays;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -83,6 +85,12 @@ public class Resume {
 
 	public void setData(byte[] data) {
 		this.data = data;
+	}
+
+	@Override
+	public String toString() {
+		return "Resume [id=" + id + ", fileName=" + fileName + ", fileType=" + fileType + ", data="
+				+ Arrays.toString(data) + "]";
 	}
 	
 	

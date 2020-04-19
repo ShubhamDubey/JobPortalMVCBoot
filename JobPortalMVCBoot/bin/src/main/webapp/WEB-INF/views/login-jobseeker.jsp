@@ -17,12 +17,14 @@
               <div class="login100-pic js-tilt" data-tilt>
                     <img alt="img" src="/resources/static/images/img-01.png"/>
                 </div>
-					<form:form action="loginJobSeeker" cssClass="login100-form validate-form" modelAttribute="loginusers">
-					<span class="login100-form-title">
-                       <div style="color: red"> ${error} </div>
-                        Member Login
+					<form:form action="loginJobSeeker" cssClass="login100-form validate-form" modelAttribute="loginjobseeker">
+					<span class="login100-form-title" style="color: red">
+                        ${error} 
+                        
                     </span>
-
+                    <span class="login100-form-title">
+						Member Login
+					</span>
                     
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                         <input class="input100" type="text" name="email" placeholder="Email">

@@ -72,6 +72,11 @@ public class Recruiter {
 	public void setJobList(List<Job> jobList) {
 		this.jobList = jobList;
 	}
+
+	@Override
+	public String toString() {
+		return "Recruiter [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", users=" + users + "]";
+	}
 	
 	
 }

@@ -25,6 +25,12 @@ public class LoginUsers {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	@Override
+	public String toString() {
+		return "LoginUsers [id=" + id + ", email=" + email + ", password=" + password + "]";
+	}
+
 	@Id
 	private int id;
 	private String email;

@@ -44,7 +44,7 @@ public class Job {
 	private Date expireDate;
 	@Column(name = "logo")
 	private String logo;
-	@ManyToOne()
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Recruiter recruiter;
 	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
@@ -141,6 +141,12 @@ public class Job {
 	}
 	public void setApplicaionsList(List<Application> applicaionsList) {
 		this.applicaionsList = applicaionsList;
+	}
+	@Override
+	public String toString() {
+		return "Job [id=" + id + ", employerEmail=" + employerEmail + ", name=" + name + ", salary=" + salary
+				+ ", type=" + type + ", description=" + description + ", vacancy=" + vacancy + ", advertiseDate="
+				+ advertiseDate + ", expireDate=" + expireDate + ", logo=" + logo + ", recruiter=" + recruiter + "]";
 	}
 	
 	
