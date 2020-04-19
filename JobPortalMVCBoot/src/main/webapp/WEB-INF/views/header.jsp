@@ -56,7 +56,7 @@
 					class="fa fa-graduation-cap fa-lg mr-2"></i>JobBazar</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#nvbCollapse" aria-controls="nvbCollapse">
-					<span class="fa fa-bars" style="color:#ffffff;"></span>
+					<span class="fa fa-bars" style="color: #ffffff;"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="nvbCollapse">
 					<ul class="navbar-nav ml-auto">
@@ -91,13 +91,15 @@
 						<li class="nav-item pl-1"><a class="nav-link"
 							href="about.html"><i class="fa fa-th-list fa-fw mr-1"></i>About</a>
 						</li>
-					<li class="nav-item pl-1"><a class="nav-link"
-							href="appliedJobListing"><i class="fa fa-th-list fa-fw mr-1"></i>View applied Job</a>
-						</li>
-						<li class="nav-item pl-1"><div class="dropdown">
-								<button class=" nav-link dropdown-toggle" type="button"
+						<li class="nav-item pl-1"><a class="nav-link"
+							href="appliedJobListing"><i class="fa fa-th-list fa-fw mr-1"></i>View
+								applied Job</a></li>
+						<li class="nav-item pl-1 dropdown">
+								<button class="nav-link dropdown-toggle"
+									style="font-family: Poppins-Regular;" type="button"
 									id="dropdownMenuButton" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false">${userId.firstName}</button>
+									aria-haspopup="true" aria-expanded="false">
+									<i class="fa fa-user fa-fw mr-1"></i>${userId.firstName}</button>
 								<div class="dropdown-menu">
 									<a class="nav-link" href="editProfile"> <i
 										class="fa fa-user fa-fw mr-1"> </i>Edit Profile
