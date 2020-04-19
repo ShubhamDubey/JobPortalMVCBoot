@@ -59,7 +59,7 @@ public class UsersRestController {
 	public Users userLogin(@RequestBody Users users) {
 
 		Users user = usersRepo.findByEmailAndPassword(users.getEmail(), users.getPassword());
-			System.out.println("Called");
+			System.out.println("userLoginCalled");
 		return user;
 
 	}

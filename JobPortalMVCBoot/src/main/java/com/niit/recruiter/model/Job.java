@@ -44,7 +44,7 @@ public class Job {
 	private Date expireDate;
 	@Column(name = "logo")
 	private String logo;
-	@ManyToOne()
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JsonIgnore
 	private Recruiter recruiter;
 	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
