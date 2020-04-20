@@ -1,6 +1,7 @@
 package com.niit.recruiter.rest;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,16 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.recruiter.model.Job;
 import com.niit.recruiter.model.Recruiter;
+import com.niit.recruiter.model.Users;
 import com.niit.recruiter.repository.ApplicationRepository;
 import com.niit.recruiter.repository.JobRepository;
 import com.niit.recruiter.repository.JobSeekerRepository;
 import com.niit.recruiter.repository.RecruiterRepository;
+import com.niit.recruiter.repository.UsersRepository;
 
 @CrossOrigin(origins = {"http://localhost:4200","http://localHost:8080"})
 @RestController
 @RequestMapping("/api/jobs")
 public class JobRestController {
-
+	@Autowired
+	private UsersRepository usersRepo;
 	@Autowired
 	private JobRepository jobRepo;
 	@Autowired
@@ -39,10 +43,18 @@ public class JobRestController {
 		return jobRepo.findAll();
 	}
 	@PostMapping("/showPostedJobs")
-	public List<Job> jobListPostedByRecruiter(@RequestBody Recruiter recruiter) {
-		System.out.println(recruiter.getFirstName());
-		List<Job> jobList=jobRepo.findByRecruiterOrderByAdvertiseDateAsc(recruiter);
-		return jobList;
+	public /* Map<String, */List<Job>/* > */ jobListPostedByRecruiter(@RequestBody Users recruiter) {
+		Map<String,List<Job>> jobList=new HashMap<String,List<Job>>();
+		System.out.println(recruiter.getId());
+		recruiter=usersRepo.findById(recruiter.getId()).get();
+		List<Job> jobListValues=jobRepo.findByRecruiterOrderByAdvertiseDateAsc(recruiter.getRecruiter());
+		for(Job job:jobListValues)
+		{System.out.println(job);
+			job.setRecruiter(null);
+			job.setApplicaionsList(null);
+		}
+		jobList.put("list",jobListValues);
+		return jobListValues ;
 	}
 	
 	
@@ -50,16 +62,19 @@ public class JobRestController {
 	@PostMapping("/postjob")
 	public List<Job> postJob(@RequestBody Map<String,String> job)
 	{
-		Integer recruiterId=Integer.parseInt(job.get("recruiter"));
+		Integer userId=Integer.parseInt(job.get("recruiter"));
 		Date advertiseDate=new Date(job.get("advertiseDate"));
-		Date expireDate =new Date(job.get("expireDate"));
+		String [] expireDateWithoutFormat=job.get("expireDate").split("-");
+		Date expireDate =new Date(expireDateWithoutFormat[1]+"/"+expireDateWithoutFormat[2]+"/"+expireDateWithoutFormat[0]);
 		String description=job.get("description");
 		String companyName=job.get("employerEmail");
 		String logoPath=job.get("log");
 		String title=job.get("name");
 		String salary=job.get("salary");
-		
-		Recruiter recruiter=recruiterRepo.findById(recruiterId).get();
+		String type=job.get("type");
+		String vacancy=job.get("vacancy");
+		Users user=usersRepo.findById(userId).get();
+		Recruiter recruiter=recruiterRepo.findById(user.getRecruiter().getId()).get();
 		System.out.println(recruiter);
 		Job postJob=new Job();
 		postJob.setDescription(description);
@@ -68,11 +83,19 @@ public class JobRestController {
 		postJob.setExpireDate(expireDate);
 		postJob.setLogo(logoPath);
 		postJob.setName(title);
+		postJob.setType(type);
+		postJob.setVacancy(vacancy);
 		postJob.setSalary(salary);
 		postJob.setRecruiter(recruiter);
 		System.out.println(postJob);
 		recruiter.getJobList().add(jobRepo.save(postJob));
-		return jobRepo.findByRecruiter(recruiterRepo.save(recruiter));
+		List<Job> jobListValues=jobRepo.findByRecruiterOrderByAdvertiseDateAsc(recruiter);
+		for(Job job1:jobListValues)
+		{System.out.println(job1);
+			job1.setRecruiter(null);
+			job1.setApplicaionsList(null);
+		}
+		return jobListValues;
 	}
 
 }
