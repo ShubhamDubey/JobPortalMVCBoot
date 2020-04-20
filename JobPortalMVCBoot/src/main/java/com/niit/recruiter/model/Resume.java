@@ -96,8 +96,8 @@ public class Resume {
 		this.fileName = fileName;
 		this.fileType = fileType;
 	}
-	
-	
+
+
 	
 	
 	

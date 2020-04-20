@@ -37,6 +37,10 @@ public class LoginUsers {
 		this.password = password;
 	}
 
+	public LoginUsers() {
+		super();
+	}
+
 	@Id
 	private int id;
 	private String email;

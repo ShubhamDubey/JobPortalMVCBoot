@@ -88,6 +88,10 @@ public class Certifications {
 		this.issueDate = issueDate;
 		this.expireDate = expireDate;
 	}
+
+	public Certifications() {
+		super();
+	}
 	
 	
 }

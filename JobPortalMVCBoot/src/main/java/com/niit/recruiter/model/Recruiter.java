@@ -82,6 +82,10 @@ public class Recruiter {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+
+	public Recruiter() {
+		super();
+	}
 	
 	
 }

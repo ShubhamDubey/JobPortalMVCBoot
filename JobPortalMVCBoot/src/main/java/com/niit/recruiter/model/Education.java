@@ -141,5 +141,7 @@ public class Education {
 		this.passingYear = passingYear;
 		this.percentage = percentage;
 	}
+
+
 	
 }

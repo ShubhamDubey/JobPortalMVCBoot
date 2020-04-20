@@ -72,6 +72,9 @@ public class Users {
 		this.password = password;
 		this.role = role;
 	}
+	public Users() {
+		super();
+	}
 	
 	
 }

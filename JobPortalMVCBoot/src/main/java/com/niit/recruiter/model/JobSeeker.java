@@ -137,6 +137,10 @@ public class JobSeeker {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+
+	public JobSeeker() {
+		super();
+	}
 	
 	
 	
