@@ -36,11 +36,21 @@ public class JobRestController {
 	private JobSeekerRepository jobSeekerRepo;
 	@Autowired
 	private ApplicationRepository applicationRepo;
-	
+	 List<Job> removeMapping(List<Job> jobList)
+	 {
+		 
+			for(Job job:jobList)
+			{System.out.println(job);
+				job.setRecruiter(null);
+				job.setApplicaionsList(null);
+			}
+			return jobList;
+			
+	 }
 	@GetMapping("")
 	public List<Job> jobListing()
 	{
-		return jobRepo.findAll();
+		return removeMapping(jobRepo.findAll());
 	}
 	@PostMapping("/showPostedJobs")
 	public /* Map<String, */List<Job>/* > */ jobListPostedByRecruiter(@RequestBody Users recruiter) {
