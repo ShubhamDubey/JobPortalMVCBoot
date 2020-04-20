@@ -32,7 +32,6 @@ public class Resume {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "jobSeeker")
-	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 

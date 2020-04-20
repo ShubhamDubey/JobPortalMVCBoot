@@ -27,7 +27,6 @@ public class Recruiter {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "users_id")
-	@JsonIgnore
 	private Users users;
 
 	@OneToMany()

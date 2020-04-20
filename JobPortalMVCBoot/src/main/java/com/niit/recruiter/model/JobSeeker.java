@@ -32,7 +32,6 @@ public class JobSeeker {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "users_id")
-	@JsonIgnore
 	private Users users;
 	// cascade = CascadeType.ALL we can't use this because if we use and user delete
 	// Education details Delete our record delete

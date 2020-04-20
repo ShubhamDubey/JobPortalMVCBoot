@@ -25,7 +25,6 @@ public class Certifications {
 	private Date expireDate;
 	
 	@ManyToOne
-	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 	public String getUrl() {

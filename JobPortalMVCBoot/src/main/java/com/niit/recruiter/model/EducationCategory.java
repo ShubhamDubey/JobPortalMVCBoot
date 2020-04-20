@@ -27,7 +27,7 @@ public class EducationCategory {
 
 	private String educationCategoryName;
 	@OneToMany(targetEntity=Education.class)
-	@JsonIgnore
+
 	@JoinColumn(name="education_category_education_category_id")
 	private List<Education> educationList;
 	

@@ -27,7 +27,6 @@ public class Application {
 	private Date appliedDate;
 	
 	@ManyToOne()
-	@JsonIgnore
 	private Job job;
 
 	@ManyToOne()

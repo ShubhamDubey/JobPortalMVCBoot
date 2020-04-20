@@ -29,7 +29,7 @@ public class Education {
 	private EducationCategory educationCategory;
 	
 	@ManyToOne()
-	@JsonIgnore
+	
 	private JobSeeker jobSeeker;
 	
 

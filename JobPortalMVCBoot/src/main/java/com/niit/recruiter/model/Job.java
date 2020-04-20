@@ -45,7 +45,6 @@ public class Job {
 	@Column(name = "logo")
 	private String logo;
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JsonIgnore
 	private Recruiter recruiter;
 	@OneToMany(targetEntity=Application.class,cascade=CascadeType.ALL)
 	@JoinColumn(name="job_id")

@@ -20,7 +20,6 @@ public class Skills {
 	private String name;
 	
 	@ManyToOne
-	@JsonIgnore
 	private JobSeeker jobSeeker;
 
 	
