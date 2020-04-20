@@ -66,6 +66,12 @@ public class Users {
 	public String toString() {
 		return "Users [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + "]";
 	}
+	public Users(String email, String password, String role) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
 	
 	
 }

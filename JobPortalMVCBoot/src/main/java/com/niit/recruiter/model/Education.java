@@ -130,5 +130,16 @@ public class Education {
 	public void setPassingYear(String passingYear) {
 		this.passingYear = passingYear;
 	}
+
+	public Education(String course, String courseType, String specialisation, String university, String passingYear,
+			Float percentage) {
+		super();
+		this.course = course;
+		this.courseType = courseType;
+		this.specialisation = specialisation;
+		this.university = university;
+		this.passingYear = passingYear;
+		this.percentage = percentage;
+	}
 	
 }

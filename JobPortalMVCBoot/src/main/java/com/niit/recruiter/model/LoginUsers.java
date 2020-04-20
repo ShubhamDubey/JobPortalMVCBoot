@@ -31,6 +31,12 @@ public class LoginUsers {
 		return "LoginUsers [id=" + id + ", email=" + email + ", password=" + password + "]";
 	}
 
+	public LoginUsers(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+
 	@Id
 	private int id;
 	private String email;

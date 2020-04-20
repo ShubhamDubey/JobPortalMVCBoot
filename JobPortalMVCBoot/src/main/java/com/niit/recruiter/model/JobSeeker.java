@@ -131,6 +131,12 @@ public class JobSeeker {
 	public String toString() {
 		return "JobSeeker [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", users=" + users + "]";
 	}
+
+	public JobSeeker(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 	
 	

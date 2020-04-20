@@ -71,6 +71,11 @@ public class Application {
 	public String toString() {
 		return "Application [id=" + id + ", appliedDate=" + appliedDate + ", status=" + status + "]";
 	}
+	public Application(Date appliedDate, Boolean status) {
+		super();
+		this.appliedDate = appliedDate;
+		this.status = status;
+	}
 	
 	
 	

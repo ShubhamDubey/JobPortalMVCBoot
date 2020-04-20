@@ -80,6 +80,14 @@ public class Certifications {
 		return "Certifications [id=" + id + ", url=" + url + ", certificationName=" + certificationName + ", issueDate="
 				+ issueDate + ", expireDate=" + expireDate + "]";
 	}
+
+	public Certifications(String url, String certificationName, Date issueDate, Date expireDate) {
+		super();
+		this.url = url;
+		this.certificationName = certificationName;
+		this.issueDate = issueDate;
+		this.expireDate = expireDate;
+	}
 	
 	
 }

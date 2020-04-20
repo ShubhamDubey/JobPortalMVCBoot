@@ -90,6 +90,12 @@ public class Resume {
 	public String toString() {
 		return "Resume [id=" + id + ", fileName=" + fileName + ", fileType=" + fileType + "]";
 	}
+
+	public Resume(String fileName, String fileType) {
+		super();
+		this.fileName = fileName;
+		this.fileType = fileType;
+	}
 	
 	
 	

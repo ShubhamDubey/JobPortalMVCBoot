@@ -147,6 +147,19 @@ public class Job {
 				+ ", type=" + type + ", description=" + description + ", vacancy=" + vacancy + ", advertiseDate="
 				+ advertiseDate + ", expireDate=" + expireDate + ", logo=" + logo + ", recruiter=" + recruiter + "]";
 	}
+	public Job(String employerEmail, String name, String salary, String type, String description, String vacancy,
+			Date advertiseDate, Date expireDate, String logo) {
+		super();
+		this.employerEmail = employerEmail;
+		this.name = name;
+		this.salary = salary;
+		this.type = type;
+		this.description = description;
+		this.vacancy = vacancy;
+		this.advertiseDate = advertiseDate;
+		this.expireDate = expireDate;
+		this.logo = logo;
+	}
 	
 	
 	

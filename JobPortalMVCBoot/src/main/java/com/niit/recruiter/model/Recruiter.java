@@ -76,6 +76,12 @@ public class Recruiter {
 	public String toString() {
 		return "Recruiter [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", users=" + users + "]";
 	}
+
+	public Recruiter(String firstName, String lastName) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 	
 }
