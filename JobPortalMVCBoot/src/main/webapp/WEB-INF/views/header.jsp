@@ -60,11 +60,11 @@
 				</button>
 				<div class="collapse navbar-collapse" id="nvbCollapse">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active pl-1"><a class="nav-link"
-							href="showRegisterForm"><i class="fa fa-user-plus fa-fw mr-1"></i>Register</a></li>
 						<li class="nav-item pl-1"><a class="nav-link"
+							href="showRegisterForm"><i class="fa fa-user-plus fa-fw mr-1"></i>Register</a></li>
+						<!--  	<li class="nav-item pl-1"><a class="nav-link"
 							href="about.html"><i class="fa fa-th-list fa-fw mr-1"></i>About</a>
-						</li>
+						</li> -->
 						<li class="nav-item pl-1"><a class="nav-link"
 							href="showLoginForm"><i class="fa fa-sign-in fa-fw mr-1"></i>Login</a></li>
 					</ul>
@@ -88,9 +88,9 @@
 				</button>
 				<div class="collapse navbar-collapse" id="nvbCollapse">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item pl-1"><a class="nav-link"
+						<!-- <li class="nav-item pl-1"><a class="nav-link"
 							href="about.html"><i class="fa fa-th-list fa-fw mr-1"></i>About</a>
-						</li>
+						</li>  -->
 						<li class="nav-item pl-1"><a class="nav-link"
 							href="appliedJobListing"><i class="fa fa-th-list fa-fw mr-1"></i>View
 								applied Job</a></li>
@@ -108,9 +108,6 @@
 								</a>
 							</div>
 				</div>
-				</li>
-				</ul>
-			</div>
 			</div>
 		</nav>
 		<!--# Navbar #-->

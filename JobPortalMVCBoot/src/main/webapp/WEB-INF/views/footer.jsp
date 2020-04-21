@@ -59,8 +59,7 @@
 				<h6 class="text-dark text-uppercase font-weight-bold">JobBazar</h6>
 				<hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto"
 					style="width: 60px;">
-				<p>Here you can use rows and columns to organize your footer
-					content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+				<p>We Provide Latest Jobs available worldwide.</p>
 
 			</div>
 			<!-- Grid column -->
@@ -73,10 +72,10 @@
 				<hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto"
 					style="width: 60px;">
 				<p>
-					<a href="#!">MDBootstrap</a>
+					<a href="#!">Coming Soon</a>
 				</p>
 				<p>
-					<a href="#!">MDWordPress</a>
+					<a href="#!">Coming Soon</a>
 				</p>
 				<p>
 					<a href="#!">BrandFlow</a>
@@ -120,10 +119,10 @@
 				<hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto"
 					style="width: 60px;">
 				<p>
-					<i class="fa fa-home mr-3"></i> New York, NY 10012, US
+					<i class="fa fa-home mr-3"></i> New Delhi, South 10012, IN
 				</p>
 				<p>
-					<i class="fa fa-envelope mr-3"></i> info@example.com
+					<i class="fa fa-envelope mr-3"></i> support@jobbazar.com
 				</p>
 				<p>
 					<i class="fa fa-phone mr-3"></i> + 01 234 567 88
