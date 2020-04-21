@@ -39,13 +39,6 @@ public class UsersRestController {
 		String email = user.get("email");
 		String password = user.get("password");
 		System.out.println(firstName + "\t" + lastName + "\t" + email + "\t" + password);
-//		JobSeeker jobSeeker = user.getJobseeker();
-//		jobSeeker.setUsers(user);
-//		user.setJobseeker(jobSeeker);
-////			System.out.println(jobSeeker.);
-////			return new JobSeeker();
-//
-//		jobSeekerRepo.save(jobSeeker);
 		return user;
 	}
 
@@ -78,13 +71,16 @@ public class UsersRestController {
 		Users user = usersRepo.findByEmailAndPassword(users.get("email"), users.get("password"));
 		System.out.println("userLoginCalled");
 		System.out.println(user);
-		if(user!=null) {
-		response.put("id", user.getId() + "");
-		response.put("role", user.getRole());
-		}
-		else
-		{
-			response.put("userId",null);
+		if (user != null) {
+
+			response.put("id", user.getId() + "");
+			if (user.getRecruiter() != null)
+				response.put("firstname", user.getRecruiter().getFirstName() + "");
+			else
+				response.put("firstname", user.getJobseeker().getFirstName() + "");
+			response.put("role", user.getRole());
+		} else {
+			response.put("userId", null);
 		}
 		return response;
 
