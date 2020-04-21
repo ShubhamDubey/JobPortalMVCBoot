@@ -107,6 +107,7 @@
 									class="fa fa-sign-out fa-fw mr-1"> </i>Logout
 								</a>
 							</div>
+						</li>
 				</div>
 			</div>
 		</nav>
