@@ -20,12 +20,11 @@
 <hr color="pink" size="3" />
 
 <section id="v2-resent-job-post">
-	<div class="vertical-space-85"></div>
+	<div class="vertical-space-50"></div>
 	<div class="container text-center">
 		<h3 class="text-center">Recent Job Post</h3>
 		<div class="vertical-space-30"></div>
 		<p class="max-width"></p>
-		<div class="vertical-space-60"></div>
 
 		<c:forEach var="tempjoblist" items="${joblist}">
 			<!-- construct an "update" link with customer id -->
