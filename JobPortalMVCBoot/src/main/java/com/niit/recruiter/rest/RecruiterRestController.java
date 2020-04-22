@@ -36,12 +36,12 @@ public class RecruiterRestController {
 			profileResponse.put("lastname",userObj.getRecruiter().getLastName());
 			profileResponse.put("password",userObj.getPassword());
 			profileResponse.put("email",userObj.getEmail());
-
+			profileResponse.put("id",userObj.getId()+"");
 		}
 		return profileResponse;
 	}	
 	
-	@PostMapping("/updateprofile")
+	@PostMapping(value="/updateprofile")
 	public Map<String,String> updateProfile(@RequestBody Map<String,String> users)
 	{
 		System.out.println("Recruiter Update Profile Called");
@@ -49,8 +49,20 @@ public class RecruiterRestController {
 		System.out.println("DATA"+users.get("firstname"));
 		if(users!=null)
 		{		
-			users.put("ABC", "REPO");
-
+			Integer id=Integer.parseInt(users.get("id"));
+			String firstName=users.get("firstname");
+			String lastName=users.get("lastname");
+			String email=users.get("email");
+			Users user=usersRepo.findById(id).get();
+			
+			user.setEmail(email);
+			user.getRecruiter().setFirstName(firstName);
+			user.getRecruiter().setLastName(lastName);
+			usersRepo.save(user);
+		}
+		else
+		{
+			users=null;
 		}
 		return users;
 	}	
@@ -62,8 +74,18 @@ public class RecruiterRestController {
 		System.out.println("DATA"+users.get("firstname"));
 		if(users!=null)
 		{		
-			users.put("ABC", "REPO");
-
+			Integer id=Integer.parseInt(users.get("id"));
+		
+			String password=users.get("updatedpassword");
+			Users user=usersRepo.findById(id).get();
+			user.setPassword(password);
+			usersRepo.save(user);
+			users=users;
+			
+		}
+		else
+		{
+			users=null;
 		}
 		return users;
 	}	

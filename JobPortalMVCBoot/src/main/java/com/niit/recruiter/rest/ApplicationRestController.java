@@ -24,15 +24,13 @@ public class ApplicationRestController {
 	@Autowired
 	private JobRepository jobRepo;
 	@Autowired
-	private JobSeekerRepository jobSeekerRepo;
-	@Autowired
 	private ApplicationRepository applicationRepo;
 	
-	@PostMapping("/applyJob")
-	public List<Application> applyJob(@RequestBody JobSeeker jobSeeker) {
-		System.out.println(jobSeeker.getFirstName());
-			
-		return applicationRepo.findByJobSeeker(jobSeekerRepo.save(jobSeeker));
-	}
+//	@PostMapping("/applicantDetails")
+//	public List<Application> applicantDetails(@RequestBody Map<String,String> jobId) {
+////		System.out.println(jobSeeker.getFirstName());
+////			
+////		return applicationRepo.findByJobSeeker(jobSeekerRepo.save(jobSeeker));
+//	}
 
 }
