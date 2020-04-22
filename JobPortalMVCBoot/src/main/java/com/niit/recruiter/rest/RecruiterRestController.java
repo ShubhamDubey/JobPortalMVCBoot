@@ -40,22 +40,31 @@ public class RecruiterRestController {
 		}
 		return profileResponse;
 	}	
+	
+	@PostMapping("/updateprofile")
 	public Map<String,String> updateProfile(@RequestBody Map<String,String> users)
 	{
-		System.out.println("Recruiter Profile Called");
+		System.out.println("Recruiter Update Profile Called");
 		Map<String,String> profileResponse=new HashMap<String,String>();
+		System.out.println("DATA"+users.get("firstname"));
 		if(users!=null)
-		{
-			Integer id=Integer.parseInt(users.get("id"));
-			
-			Users userObj=usersRepo.findById(id).get();
-			profileResponse.put("firstname",userObj.getRecruiter().getFirstName());
-			profileResponse.put("lastname",userObj.getRecruiter().getLastName());
-			profileResponse.put("password",userObj.getPassword());
-			profileResponse.put("email",userObj.getEmail());
+		{		
+			users.put("ABC", "REPO");
 
 		}
-		return profileResponse;
+		return users;
 	}	
-		
+	@PostMapping("/changepassword")
+	public Map<String,String> changePassword(@RequestBody Map<String,String> users)
+	{
+		System.out.println("Recruiter Update Profile Called");
+		Map<String,String> profileResponse=new HashMap<String,String>();
+		System.out.println("DATA"+users.get("firstname"));
+		if(users!=null)
+		{		
+			users.put("ABC", "REPO");
+
+		}
+		return users;
+	}	
 }
