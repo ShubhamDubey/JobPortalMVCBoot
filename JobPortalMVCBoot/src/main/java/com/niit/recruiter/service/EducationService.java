@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.niit.recruiter.model.Education;
+import com.niit.recruiter.model.EducationCategory;
 import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.repository.EducationRepo;
 
@@ -34,5 +35,9 @@ public class EducationService {
 	public void deleteById(int educationId) {
 		// TODO Auto-generated method stub
 		 educationRepo.deleteById(educationId);
+	}
+	public Education findByEducationCategoryAndJobSeeker(EducationCategory educationCategory, JobSeeker activeUser) {
+		// TODO Auto-generated method stub
+		return educationRepo.findByEducationCategoryAndJobSeeker(educationCategory,activeUser);
 	}
 }
