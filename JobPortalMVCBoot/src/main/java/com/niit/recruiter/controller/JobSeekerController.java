@@ -33,14 +33,11 @@ import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.model.LoginUsers;
 import com.niit.recruiter.model.Resume;
 import com.niit.recruiter.model.Users;
-import com.niit.recruiter.service.ApplicationService;
 import com.niit.recruiter.service.EducationCategoryService;
-import com.niit.recruiter.service.EducationService;
 import com.niit.recruiter.service.JobSeekerService;
 import com.niit.recruiter.service.JobService;
 import com.niit.recruiter.service.LoginUsersService;
 import com.niit.recruiter.service.ResumeService;
-import com.niit.recruiter.service.UsersService;
 
 @Controller
 public class JobSeekerController {
@@ -56,15 +53,6 @@ public class JobSeekerController {
 
 	@Autowired
 	private JobService jobService;
-
-	@Autowired
-	private ApplicationService applicationService;
-
-	@Autowired
-	private UsersService usersService;
-
-	@Autowired
-	private EducationService educationService;
 	@Autowired
 	private EducationCategoryService educationCategoryService;
 
@@ -168,8 +156,6 @@ public class JobSeekerController {
 				}
 				job1.getApplicaionsList().removeAll(deletedApplications);
 			}
-	
-//			jobList.forEach(job1->job1.getApplicaionsList().forEach(application->System.out.println(application)));
 
 			modelView.addObject("joblist", jobList);	
 		}
@@ -191,38 +177,6 @@ public class JobSeekerController {
 	}
 
 
-//	@GetMapping("/appliedJob")
-//	public ModelAndView appliedJob(HttpServletRequest request, @RequestParam("jobId") int theJobId) {
-//		ModelAndView model = null;
-//		try {
-//
-//			JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-//			if (activeUser == null) {
-//				model = new ModelAndView("login-jobseeker");
-//				model.addObject("loginusers", new LoginUsers());
-//			} else {
-//
-//				Application checkApp = applicationService.findByJobSeekerAndJob(activeUser.getId(), theJobId);
-//				if (checkApp == null) {
-//					model = new ModelAndView("welcome");
-//					Application app = new Application();
-//					app.setJobId(theJobId);
-//					app.setJobseekerId(activeUser.getId());
-//					applicationService.saveApplication(app);
-//					model.addObject("appliedJobmsg", "You Have Applied Job Successfully");
-//				} else {
-//
-//					model = new ModelAndView("welcome");
-//					model.addObject("appliedJobmsg", "You Have Already Applied This Job");
-//				}
-//				model.addObject("joblist", jobService.getJobList());
-//			}
-//		} catch (Exception e) {
-//
-//		}
-//		return model;
-//	}
-//
 
 
 	private String encryptPass(String pass) {
@@ -233,45 +187,6 @@ public class JobSeekerController {
 	}
 
 
-
-	@PostMapping("/uploadResume")
-	public ModelAndView uploadResume(HttpServletRequest request, @RequestParam("file") MultipartFile file) {
-		ModelAndView model = null;
-		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
-		JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
-		try {
-			
-			if (activeUser == null) {
-				model = new ModelAndView("login-jobseeker");
-				model.addObject("loginusers", new LoginUsers());
-				return model;
-			}
-			
-			model = new ModelAndView("resume-upload");
-			jobSeeker.setResume(resumeService.storeFile(file, resumeService.getFile(jobSeeker.getResume().getId())));
-			jobSeekerService.saveJobSeeker(jobSeeker);
-			model.addObject("msg", "Resume Updated Successfully");
-			model.addObject("resumeId", jobSeeker.getResume().getId());
-			model.addObject("resumeName", jobSeeker.getResume().getFileName());
-		} catch (Exception e) {
-			System.out.println("Error: " + e.getMessage());
-			jobSeeker.setResume(resumeService.storeFile(file, new Resume()));
-			jobSeekerService.saveJobSeeker(jobSeeker);
-			model.addObject("msg", "Resume Uploaded Successfully");
-			model.addObject("resumeId", jobSeeker.getResume().getId());
-			model.addObject("resumeName", jobSeeker.getResume().getFileName());
-		}
-		return model;
-	}
-
-	@GetMapping("/downloadResume/{fileName:.+}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable int fileName, HttpServletRequest request) {
-		// Load file as Resource
-		Resume resumeFile = resumeService.getFile(fileName);
-		return ResponseEntity.ok().contentType(MediaType.parseMediaType(resumeFile.getFileType()))
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resumeFile.getFileName() + "\"")
-				.body(new ByteArrayResource(resumeFile.getData()));
-	}
 
 
 
@@ -321,7 +236,7 @@ public class JobSeekerController {
 			activeUser=jobSeekerService.findById(activeUser.getId());
 			model.addObject("jobSeeker", activeUser);
 			
-			if(activeUser.getUsers().getPassword().equals(request.getParameter("current_password")) && request.getParameter("n_password").equals(request.getParameter("re_password")))
+			if( request.getParameter("n_password").equals(request.getParameter("re_password")))
 			{
 				activeUser.getUsers().setPassword(request.getParameter("n_password"));
 			jobSeekerService.saveJobSeeker(activeUser);
@@ -350,7 +265,11 @@ public class JobSeekerController {
 			model.addObject("joblist", jobList);
 		}
 		else
-		{}
+		{
+			model = new ModelAndView("login-jobseeker");
+			model.addObject("loginusers", new Users());
+			
+		}
 		return model;
 	}
 }
