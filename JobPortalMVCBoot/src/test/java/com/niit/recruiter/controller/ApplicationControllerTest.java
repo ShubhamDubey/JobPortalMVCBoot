@@ -1,10 +1,9 @@
 package com.niit.recruiter.controller;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.hamcrest.CoreMatchers.any;
-import static org.mockito.Matchers.anyInt;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -110,7 +108,7 @@ public class ApplicationControllerTest {
 				deletedApplication=mock(List.class);
 			for(Application application:job3.getApplicaionsList())
 			{
-				if(application.getJobSeeker().getId()==jobSeeker.getId())
+				if(application.getJobSeeker().getId()!=jobSeeker.getId())
 				{
 					deletedApplication.add(application);
 				}
