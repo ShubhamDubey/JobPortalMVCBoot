@@ -36,7 +36,7 @@ ${message}
 					<div class="form-group">
 						<c:if test="${resumeId!=null}">
 							<a class="part-full-time btn btn-outline-primary"
-								href="downloadResume/${resumeId}">Download: ${resumeName}</a>
+								href="downloadResume1/${resumeId}">Download: ${resumeName}</a>
 						</c:if>
 					</div>
 				</div>

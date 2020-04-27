@@ -17,7 +17,7 @@
 			<div class="detail">
 				<div class="media display-inline text-align-center">
 					<img class="mr-3" style="width: 75px; height: 75px;"
-						alt="company_logo"
+						alt="/resources/static/images/google-icon.png"
 						src="/resources/static/images/${tempjoblist.logo}">
 					<div class="media-body text-left  text-align-center">
 						<h6 class="large material-icon ">

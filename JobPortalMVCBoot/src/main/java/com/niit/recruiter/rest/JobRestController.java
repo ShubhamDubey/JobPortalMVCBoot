@@ -91,7 +91,7 @@ public class JobRestController {
 		postJob.setAdvertiseDate(advertiseDate);
 		postJob.setEmployerEmail(companyName);
 		postJob.setExpireDate(expireDate);
-		postJob.setLogo(logoPath);
+		postJob.setLogo("niit-icone.png");
 		postJob.setName(title);
 		postJob.setType(type);
 		postJob.setVacancy(vacancy);
