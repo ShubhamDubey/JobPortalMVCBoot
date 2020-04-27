@@ -150,7 +150,8 @@ public class JobSeekerController {
 			theJobSeeker.setLastName(req.getParameter("lastName"));
 			theJobSeeker.setUsers(theUsers);
 			jobSeekerService.saveJobSeeker(theJobSeeker);
-			modelView = new ModelAndView("success");
+			modelView = new ModelAndView("login-jobseeker");
+			modelView.addObject("loginusers", new Users());
 		} else {
 			//if Already Exists
 			modelView = new ModelAndView("register");
