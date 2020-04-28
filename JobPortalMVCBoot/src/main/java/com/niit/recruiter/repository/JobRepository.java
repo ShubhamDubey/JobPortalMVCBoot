@@ -13,4 +13,6 @@ public interface JobRepository extends JpaRepository<Job,Integer > {
 
 	List<Job> findByRecruiterOrderByAdvertiseDateAsc(Recruiter recruiter);
 
+	List<Job> findAllByOrderByIdDesc();
+
 }
