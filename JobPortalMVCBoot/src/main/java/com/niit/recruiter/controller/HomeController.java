@@ -1,7 +1,7 @@
 package com.niit.recruiter.controller;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.niit.recruiter.model.Application;
 import com.niit.recruiter.model.Job;
-import com.niit.recruiter.model.LoginUsers;
+import com.niit.recruiter.model.JobSeeker;
 import com.niit.recruiter.model.Users;
 import com.niit.recruiter.service.ApplicationService;
 import com.niit.recruiter.service.JobSeekerService;
@@ -41,9 +41,12 @@ public class HomeController {
 	ApplicationService applicationService;
 
 	@GetMapping("/")
-	public String indexView(ModelMap model) {
+	public String indexView(ModelMap model, HttpServletRequest request) {
 
 		List<Job> jobList = jobService.getJobList();
+		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
+	
+
 		model.addAttribute("joblist", jobList);
 		return "index";
 	}
@@ -82,7 +85,7 @@ public class HomeController {
 		} else if (loginUsers.getEmail().equalsIgnoreCase(theJobSeekerUser.getEmail())
 				&& loginUsers.getPassword().equals(theJobSeekerUser.getPassword())) {
 			// both are correct
-			//System.out.println("userId " + loginUsers.getJobseeker().getId());
+			// System.out.println("userId " + loginUsers.getJobseeker().getId());
 			HttpSession session = req.getSession();
 			session.setAttribute("userId", loginUsers.getJobseeker()); // Session Created
 			List<Job> jobList = jobService.getJobList();
@@ -90,7 +93,7 @@ public class HomeController {
 			model.addObject("loginusers", loginUsers);
 
 			List<Application> deletedApplications = null;
-			
+
 			for (Job job1 : jobList) {
 				deletedApplications = new ArrayList<Application>();
 
@@ -101,10 +104,9 @@ public class HomeController {
 				}
 				job1.getApplicaionsList().removeAll(deletedApplications);
 			}
-			
+
 			model.addObject("joblist", jobList);
-	}
-		else {
+		} else {
 			// both credentials are incorrect
 			model = new ModelAndView("login-jobseeker");
 			model.addObject("error", "Invalid User Name Or Password");
