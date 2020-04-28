@@ -11,7 +11,7 @@
 
 <!--===============================================================================================-->
 <link rel="icon" type="image/png"
-	href="/JobBazar/resources/static/images/favicon.png" />
+	href="/resources/static/images/favicon.png" />
 <!--===============================================================================================-->
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
