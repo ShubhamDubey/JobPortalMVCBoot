@@ -2,7 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-
+<head>
+<title>Register | JobBazar</title>
+</head>
 <%@include file="header.jsp"%>
 
 
@@ -19,10 +21,10 @@
 				<span class="login100-form-title" style="color: red">
 					${alreadyEmailIdExistsError} </span>
 				<span class="login100-form-title"> Member Registration </span>
-			
+
 				<div class="wrap-input100 validate-input"
 					data-validate="Name is required">
-					<input class="input100" type="text" name="firstName" 
+					<input class="input100" type="text" name="firstName"
 						placeholder="First Name"> <span class="focus-input100"></span>
 					<span class="symbol-input100"> <i class="fa fa-user"
 						aria-hidden="true"></i>
