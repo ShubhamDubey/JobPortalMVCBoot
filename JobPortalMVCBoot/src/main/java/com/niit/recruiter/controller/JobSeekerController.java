@@ -56,9 +56,9 @@ public class JobSeekerController {
 
 		// Adding Jobs
 		List<Job> jobListDb = new ArrayList<Job>();
-		jobListDb.add(new Job("NIIT", "niit-icone.png", "Java Developer", "35000", "15", "IT", "DevOps",
-				new SimpleDateFormat("dd/MM/yyyy").parse("31/03/2020"),
-				new SimpleDateFormat("dd/MM/yyyy").parse("22/04/2020")));
+//		jobListDb.add(new Job("NIIT", "niit-icone.png", "Java Developer", "35000", "15", "IT", "DevOps",
+//				new SimpleDateFormat("dd/MM/yyyy").parse("31/03/2020"),
+//				new SimpleDateFormat("dd/MM/yyyy").parse("22/04/2020")));
 		jobListDb.add(new Job("GOOGLE", "google-icon.png", "Dot NET Developer", "25000", "25", "IT",
 				"Full Stack Developer", new SimpleDateFormat("dd/MM/yyyy").parse("31/03/2020"),
 				new SimpleDateFormat("dd/MM/yyyy").parse("18/04/2020")));
@@ -116,8 +116,9 @@ public class JobSeekerController {
 	public ModelAndView saveJobSeeker(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
 		ModelAndView modelView = null;
 		JobSeeker activeUser = (JobSeeker) req.getSession().getAttribute("userId");
+		//update profile
 		if (activeUser != null) {
-			//update profile
+			
 			activeUser.setFirstName(req.getParameter("firstName"));
 			activeUser.setLastName(req.getParameter("lastName"));
 			Users user=activeUser.getUsers();
@@ -141,7 +142,7 @@ public class JobSeekerController {
 
 			modelView.addObject("joblist", jobList);
 		}
-
+		//Register - S
 		else if (loginUsersService.findByEmail(req.getParameter("email")) == null) {
 			//Registration.
 			theUsers.setRole("JobSeeeker");
