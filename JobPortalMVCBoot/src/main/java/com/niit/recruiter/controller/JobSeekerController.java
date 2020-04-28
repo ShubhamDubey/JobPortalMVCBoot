@@ -116,12 +116,12 @@ public class JobSeekerController {
 	public ModelAndView saveJobSeeker(HttpServletRequest req, @ModelAttribute("jobseeker") Users theUsers) {
 		ModelAndView modelView = null;
 		JobSeeker activeUser = (JobSeeker) req.getSession().getAttribute("userId");
-		//update profile
+		// update profile
 		if (activeUser != null) {
-			
+
 			activeUser.setFirstName(req.getParameter("firstName"));
 			activeUser.setLastName(req.getParameter("lastName"));
-			Users user=activeUser.getUsers();
+			Users user = activeUser.getUsers();
 			user.setEmail(req.getParameter("email"));
 			activeUser.setUsers(user);
 			jobSeekerService.saveJobSeeker(activeUser);
@@ -142,9 +142,9 @@ public class JobSeekerController {
 
 			modelView.addObject("joblist", jobList);
 		}
-		//Register - S
+		// Register - S
 		else if (loginUsersService.findByEmail(req.getParameter("email")) == null) {
-			//Registration.
+			// Registration.
 			theUsers.setRole("JobSeeeker");
 			JobSeeker theJobSeeker = new JobSeeker();
 			theJobSeeker.setFirstName(req.getParameter("firstName"));
@@ -154,7 +154,7 @@ public class JobSeekerController {
 			modelView = new ModelAndView("login-jobseeker");
 			modelView.addObject("loginusers", new Users());
 		} else {
-			//if Already Exists
+			// if Already Exists
 			modelView = new ModelAndView("register");
 			modelView.addObject("jobseeker", new Users());
 			modelView.addObject("alreadyEmailIdExistsError", "Email Id already Exists");
@@ -231,10 +231,22 @@ public class JobSeekerController {
 	public ModelAndView welcomePage(HttpServletRequest request) {
 		ModelAndView model = null;
 
+		List<Application> deletedApplications = null;
 		JobSeeker activeUser = (JobSeeker) request.getSession().getAttribute("userId");
 		if (activeUser != null) {
 			JobSeeker jobSeeker = jobSeekerService.findById(activeUser.getId());
 			List<Job> jobList = jobService.getJobList();
+			for (Job job1 : jobList) {
+				deletedApplications = new ArrayList<Application>();
+
+				for (Application application : job1.getApplicaionsList()) {
+					if (application.getJobSeeker().getId() != activeUser.getId()) {
+						deletedApplications.add(application);
+					}
+				}
+				job1.getApplicaionsList().removeAll(deletedApplications);
+			}
+
 			model = new ModelAndView("welcome");
 			Users user = jobSeeker.getUsers();
 			model.addObject("loginusers", user);
