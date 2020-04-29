@@ -156,7 +156,7 @@ public class HomeControllerTest {
 
 	@Test
 	public void indexViewTest() {
-		Assert.assertEquals(homeController.indexView(modelMap), "index");
+		Assert.assertEquals(homeController.indexView(modelMap,request), "index");
 	}
 
 	@Test
